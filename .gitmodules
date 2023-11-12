@@ -1,6 +1,6 @@
 [submodule "client"]
 	path = client
-	url = ./client
+	url = https://github.com/katsisaac50/socialApp/client.git
 [submodule "server"]
 	path = server
 	url = ./server
