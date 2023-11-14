@@ -1,5 +1,5 @@
 import React from "react";
-import { Navbar, Nav, Container } from "react-bootstrap";
+import Link from "next/link";
 
 interface NavBarProps {
   // Define your props here
@@ -7,19 +7,18 @@ interface NavBarProps {
 
 function NavBar(props: NavBarProps) {
   return (
-    <Navbar bg="light" expand="lg">
-      <Container>
-        <Navbar.Brand href="#home">My Website</Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="me-auto">
-            <Nav.Link href="/">Home</Nav.Link>
-            <Nav.Link href="#about">About</Nav.Link>
-            <Nav.Link href="/login">Login</Nav.Link>
-          </Nav>
-        </Navbar.Collapse>
-      </Container>
-    </Navbar>
+    <nav className="nav bg-dark d-flex justify-content-between">
+        
+          <Link className=" nav-link text-light" href="/" passHref>
+            Home 
+          </Link>
+          <Link className="nav-link text-light" href="/login" passHref>
+            Login
+          </Link>
+          <Link className=" nav-link text-light" href="/register" passHref>
+            Register
+          </Link>
+    </nav>
   );
 }
 
