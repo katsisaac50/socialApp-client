@@ -4,10 +4,16 @@ import React from 'react';
 import "bootstrap/dist/css/bootstrap.min.css";
 import Navbar from'../components/Nav';
 
-function MyApp({ Component, pageProps }) {
+interface MyAppProps {
+  // Define your component props here
+  pageProps: any;
+  Component: any;
+}
+
+function MyApp({ Component, pageProps } : MyAppProps) {
   return (
     <div>
-      <Navbar bg="black" expand="lg"/>
+      <Navbar />
       <Component {...pageProps} />
     </div>
   );

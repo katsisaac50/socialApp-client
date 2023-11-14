@@ -1,7 +1,11 @@
 import React from "react";
 import { Navbar, Nav, Container } from "react-bootstrap";
 
-function NavBar() {
+interface NavBarProps {
+  // Define your props here
+}
+
+function NavBar(props: NavBarProps) {
   return (
     <Navbar bg="light" expand="lg">
       <Container>
