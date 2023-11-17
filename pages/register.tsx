@@ -33,20 +33,22 @@ const Register = () => {
                           </div>
     
                           <div className="form-outline mb-4">
-                            <label className="form-label" htmlFor="form3Example4cg">Pick a question</label>
-                            <small className="form-text text-muted">We'll never share your email with anyone else.</small>
-                            <select id="form3Example5cg" className="form-select form-select-lg mb-3" aria-label="Default select example"> 
+                            {/* <small className="form-text text-muted">We'll never share your email with anyone else.</small> */}
+                            <select id="form3Example5cg" className="form-select form-select-lg" aria-label="Default select example"> 
                               <option selected>Open this select menu</option>
                               <option value="1">What is your favourite color?</option>
                               <option value="2">What is your favourite food?</option>
                               <option value="3">What is your favourite book?</option>
                             </select>
-                            <input type="text" id="form3Example4cg" className="form-control form-control-lg" />
+                            <small>
+                                <label className="form-label" htmlFor="form3Example4cg">Pick a question</label>
+                            </small>
+                            <input type="text" id="form3Example4cg" className="mt-2 form-control form-control-lg" />
                           </div>
     
                           <div className="form-outline mb-4">
                             <input type="password" id="form3Example4cdg" className="form-control form-control-lg" />
-                            <label className="form-label" htmlFor="form3Example4cdg">Repeat your password</label>
+                            <label className="form-label" htmlFor="form3Example4cdg">password</label>
                           </div>
                           <div className="form-outline mb-4">
                             <input type="password" id="form3Example4cdg" className="form-control form-control-lg" />
