@@ -7,7 +7,7 @@ interface NavBarProps {
 
 function NavBar(props: NavBarProps) {
   return (
-    <nav className="nav bg-dark d-flex justify-content-between">
+    <nav className="nav bg-primary d-flex justify-content-between">
         
           <Link className=" nav-link text-light" href="/" passHref>
             Home 
