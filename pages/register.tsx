@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from "axios";
 
 const Register = () => {
   const [name, setName] = useState('');
@@ -16,6 +17,21 @@ const Register = () => {
     console.log('Custom Question:', customQuestion);
     console.log('Password:', password);
     console.log('Repeat Password:', repeatPassword);
+
+    axios.post("https://localhost:8000/api/register", 
+    { name, 
+      email, 
+      selectedQuestion, 
+      customQuestion, 
+      password, 
+      repeatPassword 
+    }).then(res => {
+      console.log(res);
+    }).catch(err => {
+      console.log(err);
+    });
+
+
   };
 
   return (
@@ -70,7 +86,7 @@ const Register = () => {
             value={selectedQuestion}
             onChange={(e) => setSelectedQuestion(e.target.value)}
           >
-            <option  disabled>Open this select menu</option>
+            <option  disabled>Pick a question</option>
                               <option value="1">What is your favourite color?</option>
                               <option value="2">What is your favourite food?</option>
                               <option value="3">What is your favourite book?</option>
