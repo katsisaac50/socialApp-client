@@ -87,7 +87,13 @@ const Register = () => {
             value={customQuestion}
             onChange={(e) => setCustomQuestion(e.target.value)}
           />
+          <small>
+            <label className="form-label" htmlFor="form3Example4cg">
+              You can use this to reset your password if forgotten.
+            </label>
+          </small>
         </div>
+        
 
         <div className="form-outline mb-4">
           <input
@@ -115,7 +121,12 @@ const Register = () => {
           </label>
         </div>
 
-        {/* ... existing form fields ... */}
+        <div className="form-check d-flex justify-content-center mb-5">
+                            <input className="form-check-input me-2" type="checkbox" value="" id="form2Example3cg" />
+                            <label className="form-check-label" htmlFor="form2Example3g">
+                              I agree all statements in <a href="#!" className="text-body"><u>Terms of service</u></a>
+                            </label>
+                          </div>
 
         <div className="d-flex justify-content-center">
           <button
@@ -127,7 +138,8 @@ const Register = () => {
           </button>
         </div>
 
-        {/* ... existing form fields ... */}
+        <p className="text-center text-muted mt-5 mb-0">Have already an account? <a href="#!"
+                            className="fw-bold text-body"><u>Login here</u></a></p>
       </form>
       </div>
                     </div>
