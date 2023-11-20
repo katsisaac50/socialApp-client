@@ -9,29 +9,31 @@ const Register = () => {
   const [password, setPassword] = useState('');
   const [repeatPassword, setRepeatPassword] = useState('');
 
-  const handleRegister = () => {
-    // Handle the registration logic using the state values
-    console.log('Name:', name);
-    console.log('Email:', email);
-    console.log('Selected Question:', selectedQuestion);
-    console.log('Custom Question:', customQuestion);
-    console.log('Password:', password);
-    console.log('Repeat Password:', repeatPassword);
-
-    axios.post("https://localhost:8000/api/register", 
-    { name, 
-      email, 
-      selectedQuestion, 
-      customQuestion, 
-      password, 
-      repeatPassword 
-    }).then(res => {
-      console.log(res);
-    }).catch(err => {
-      console.log(err);
-    });
-
-
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+  
+    const postData = {
+      name,
+      email,
+      selectedQuestion,
+      customQuestion,
+      password,
+      repeatPassword,
+    };
+  
+    try {
+      const response = await axios.post(
+        'http://localhost:8000/api/register',
+        postData, {
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+          }
+      }
+      );
+      console.log(response.data);
+    } catch (error) {
+      console.error('Error making request:', error);
+    }
   };
 
   return (
@@ -50,7 +52,7 @@ const Register = () => {
                     <div className="card mt-5 mb-5" style={{ borderRadius: "15px" }}>
                       <div className="card-body p-5">
                         <h2 className="text-uppercase text-center mb-5">Create an account</h2>
-      <form>
+      <form onSubmit={handleSubmit}>
         {/* ... existing form fields ... */}
         <div className="form-outline mb-4">
           <input
@@ -146,9 +148,8 @@ const Register = () => {
 
         <div className="d-flex justify-content-center">
           <button
-            type="button"
+            type="submit"
             className="btn btn-success btn-block btn-lg gradient-custom-4 text-body"
-            onClick={handleRegister}
           >
             Register
           </button>
