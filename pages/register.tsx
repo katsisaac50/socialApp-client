@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 import axios from "axios";
+import {toast} from 'react-toastify';
 
 const Register = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [selectedQuestion, setSelectedQuestion] = useState('');
-  const [customQuestion, setCustomQuestion] = useState('');
+  const [secretAnswer, setSecretAnswer] = useState('');
   const [password, setPassword] = useState('');
   const [repeatPassword, setRepeatPassword] = useState('');
+  const [success, setSuccess] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -16,7 +18,7 @@ const Register = () => {
       name,
       email,
       selectedQuestion,
-      customQuestion,
+      secretAnswer,
       password,
       repeatPassword,
     };
@@ -30,8 +32,10 @@ const Register = () => {
           }
       }
       );
+      setSuccess(response.data.success);
       console.log(response.data);
     } catch (error) {
+      toast.error(error.response.data.message);
       console.error('Error making request:', error);
     }
   };
@@ -102,8 +106,8 @@ const Register = () => {
             type="text"
             id="form3Example4cg"
             className="mt-2 form-control form-control-lg"
-            value={customQuestion}
-            onChange={(e) => setCustomQuestion(e.target.value)}
+            value={secretAnswer}
+            onChange={(e) => setSecretAnswer(e.target.value)}
           />
           <small>
             <label className="form-label" htmlFor="form3Example4cg">
