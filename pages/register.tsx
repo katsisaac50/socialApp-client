@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import axios from "axios";
 import {toast} from 'react-toastify';
+import { Modal, Button } from 'antd';
+import Link from 'next/link';
 
 const Register = () => {
   const [name, setName] = useState('');
@@ -38,6 +40,10 @@ const Register = () => {
       toast.error(error.response.data.message);
       console.error('Error making request:', error);
     }
+  };
+
+  const handleSuccessClose = () => {
+    setSuccess(false);
   };
 
   return (
@@ -169,6 +175,27 @@ const Register = () => {
               </div>
             </div>
           </section>
+          <div className="row">
+            <div className="col">
+            <Modal
+      title="Success"
+      visible={success}
+      onCancel={handleSuccessClose}
+      footer={[
+        <Link href="/login" key="login">
+          <Button>
+            Go to Login
+          </Button>
+        </Link>,
+        <Button key="close" onClick={handleSuccessClose}>
+          Close
+        </Button>
+      ]}
+    >
+      <p>Account created successfully. Please login.</p>
+    </Modal>
+            </div>
+          </div>
     </div>
   );
 };
