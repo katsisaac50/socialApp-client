@@ -186,10 +186,7 @@ const Register = () => {
           <Button>
             Go to Login
           </Button>
-        </Link>,
-        <Button key="close" onClick={handleSuccessClose}>
-          Close
-        </Button>
+        </Link>
       ]}
     >
       <p>Account created successfully. Please login.</p>
