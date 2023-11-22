@@ -7,6 +7,7 @@ import Head from 'next/head';
 import {ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { StyleProvider } from '@ant-design/cssinjs';
+import '../public/globalcss/styles.css';
 
 interface MyAppProps {
   // Define your component props here

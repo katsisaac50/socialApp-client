@@ -66,13 +66,13 @@ const Register = () => {
   };
 
   return (
-    <div>
-      <div className='row bg-info text-light'>
-        <div className='col'>
-          <h1 className='display-1 text-center py-2'>Register Page</h1>
+    <div className='container-fluid p-0'>
+      <div className='row py-5 bg-default-image text-light'>
+        <div className='col text-center '>
+          <h1 className="display-3">Register Page</h1>
         </div>
       </div>
-      <section className=" vh-200 bg-image"
+      <section className="vh-200"
             style={{ backgroundImage: "url('https://mdbcdn.b-cdn.net/img/Photos/new-templates/search-box/img4.webp')" }}>
             <div className="mask d-flex align-items-center h-100 gradient-custom-3">
               <div className="container h-100">
