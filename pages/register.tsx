@@ -12,10 +12,13 @@ const Register = () => {
   const [password, setPassword] = useState('');
   const [repeatPassword, setRepeatPassword] = useState('');
   const [success, setSuccess] = useState(false);
+  const [consent, setConsent] = useState(false);
+
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     const postData = {
       name,
       email,
@@ -27,7 +30,7 @@ const Register = () => {
   
     try {
       const response = await axios.post(
-        'http://localhost:8000/api/register',
+        `${process.env.NEXT_PUBLIC_API}/register`,
         postData, {
           headers: {
             'Content-Type': 'application/x-www-form-urlencoded'
@@ -37,7 +40,9 @@ const Register = () => {
       setSuccess(response.data.success);
       console.log(response.data);
     } catch (error) {
-      toast.error(error.response.data.message);
+      toast.error(error.response.data.message, {
+        theme: 'colored',
+      });
       console.error('Error making request:', error);
     }
   };
@@ -150,15 +155,21 @@ const Register = () => {
         </div>
 
         <div className="form-check d-flex justify-content-center mb-5">
-                            <input className="form-check-input me-2" type="checkbox" value="" id="form2Example3cg" />
+                            <input 
+                            className="form-check-input me-2" 
+                            type="checkbox" 
+                            value={consent}
+                            onChange={() => setConsent(!consent)} 
+                            id="form2Example3cg" />
                             <label className="form-check-label" htmlFor="form2Example3g">
                               I agree all statements in <a href="#!" className="text-body"><u>Terms of service</u></a>
                             </label>
                           </div>
 
         <div className="d-flex justify-content-center">
-          <button
+          <button 
             type="submit"
+            disabled={!(name && email && selectedQuestion && secretAnswer && password && repeatPassword && !consent)}
             className="btn btn-success btn-block btn-lg gradient-custom-4 text-body"
           >
             Register
