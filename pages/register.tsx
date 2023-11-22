@@ -3,6 +3,7 @@ import axios from "axios";
 import {toast} from 'react-toastify';
 import { Modal, Button } from 'antd';
 import Link from 'next/link';
+import { SyncOutlined } from '@ant-design/icons';
 
 const Register = () => {
   const [name, setName] = useState('');
@@ -13,6 +14,7 @@ const Register = () => {
   const [repeatPassword, setRepeatPassword] = useState('');
   const [success, setSuccess] = useState(false);
   const [consent, setConsent] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   
 
@@ -29,6 +31,7 @@ const Register = () => {
     };
   
     try {
+      setLoading(true);
       const response = await axios.post(
         `${process.env.NEXT_PUBLIC_API}/register`,
         postData, {
@@ -37,13 +40,24 @@ const Register = () => {
           }
       }
       );
+      setName('');
+      setEmail('');
+      setSelectedQuestion('');
+      setSecretAnswer('');
+      setPassword('');
+      setRepeatPassword('');
+      setLoading(false);
+      toast.success(response.data.message, {
+        theme: 'colored',
+      })
       setSuccess(response.data.success);
-      console.log(response.data);
+      // console.log(response.data);
     } catch (error) {
       toast.error(error.response.data.message, {
         theme: 'colored',
       });
       console.error('Error making request:', error);
+      setLoading(false);
     }
   };
 
@@ -103,7 +117,7 @@ const Register = () => {
             value={selectedQuestion}
             onChange={(e) => setSelectedQuestion(e.target.value)}
           >
-            <option  disabled>Pick a question</option>
+                              <option  value="" disabled>Pick a question</option>
                               <option value="1">What is your favourite color?</option>
                               <option value="2">What is your favourite food?</option>
                               <option value="3">What is your favourite book?</option>
@@ -172,7 +186,7 @@ const Register = () => {
             disabled={!(name && email && selectedQuestion && secretAnswer && password && repeatPassword && consent)}
             className="btn btn-success btn-block btn-lg gradient-custom-4 text-body"
           >
-            Register
+            {loading ? <SyncOutlined spin className='py-1'/> : 'Register'}
           </button>
         </div>
 
