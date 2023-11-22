@@ -26,18 +26,14 @@ const LoginPage = () => {
       e.preventDefault();
   
       const postData = {
-        name,
         email,
-        selectedQuestion,
-        secretAnswer,
         password,
-        repeatPassword,
       };
     
       try {
         setLoading(true);
         const response = await axios.post(
-          `${process.env.NEXT_PUBLIC_API}/register`,
+          `${process.env.NEXT_PUBLIC_API}/login`,
           postData, {
             headers: {
               'Content-Type': 'application/x-www-form-urlencoded'
