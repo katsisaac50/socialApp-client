@@ -158,7 +158,7 @@ const Register = () => {
                             <input 
                             className="form-check-input me-2" 
                             type="checkbox" 
-                            value={consent}
+                            value=""
                             onChange={() => setConsent(!consent)} 
                             id="form2Example3cg" />
                             <label className="form-check-label" htmlFor="form2Example3g">
@@ -169,7 +169,7 @@ const Register = () => {
         <div className="d-flex justify-content-center">
           <button 
             type="submit"
-            disabled={!(name && email && selectedQuestion && secretAnswer && password && repeatPassword && !consent)}
+            disabled={!(name && email && selectedQuestion && secretAnswer && password && repeatPassword && consent)}
             className="btn btn-success btn-block btn-lg gradient-custom-4 text-body"
           >
             Register
