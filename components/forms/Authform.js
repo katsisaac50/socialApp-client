@@ -15,13 +15,14 @@ const AuthForm = ({
     repeatPassword,
     setRepeatPassword,
     consent,
-    setConsent
+    setConsent,
+    page,
 }) => {
 
     return (
         <form onSubmit={handleSubmit}>
-  {/* ... existing form fields ... */}
-  <div className="form-outline mb-4">
+
+  {page!='login' && <div className="form-outline mb-4">
     <input
       type="text"
       id="form3Example1cg"
@@ -32,7 +33,7 @@ const AuthForm = ({
     <label className="form-label" htmlFor="form3Example1cg">
       Your Name
     </label>
-  </div>
+  </div>}
 
   <div className="form-outline mb-4">
     <input
@@ -47,7 +48,7 @@ const AuthForm = ({
     </label>
   </div>
 
-  <div className="form-outline mb-4">
+  { page!='login' && <div className="form-outline mb-4">
     <select
       id="form3Example5cg"
       className="form-select form-select-lg"
@@ -77,7 +78,7 @@ const AuthForm = ({
         You can use this to reset your password if forgotten.
       </label>
     </small>
-  </div>
+  </div>}
 
   <div className="form-outline mb-4">
     <input
@@ -92,7 +93,7 @@ const AuthForm = ({
     </label>
   </div>
 
-  <div className="form-outline mb-4">
+  { page!='login' && <><div className="form-outline mb-4">
     <input
       type="password"
       id="form3Example4cdg"
@@ -117,20 +118,18 @@ const AuthForm = ({
       I agree all statements in <a href="#!" className="text-body"><u>Terms of service</u></a>
     </label>
   </div>
+      </>
+  }
 
   <div className="d-flex justify-content-center">
     <button
       type="submit"
-      disabled={!(name && email && selectedQuestion && secretAnswer && password && repeatPassword && !consent)}
+      disabled={ page==='login'? !(email && password):!(name && email && selectedQuestion && secretAnswer && password && repeatPassword && consent)}
       className="btn btn-success btn-block btn-lg gradient-custom-4 text-body"
     >
-      {loading ? <SyncOutlined spin className='py-1' /> : 'Register'}
+      {loading ? <SyncOutlined spin className='py-1' /> : page==='login'? 'Login':'Register'}
     </button>
   </div>
-
-  <p className="text-center text-muted mt-5 mb-0">
-    Have already an account? <a href="#!" className="fw-bold text-body"><u>Login here</u></a>
-  </p>
 </form>
     )
 };

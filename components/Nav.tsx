@@ -9,7 +9,7 @@ function NavBar(props: NavBarProps) {
   return (
     <nav className="nav bg-primary d-flex justify-content-between">
         
-          <Link className=" nav-link text-light" href="/" passHref>
+          <Link className=" nav-link text-light logo" href="/" passHref>
             Home 
           </Link>
           <Link className="nav-link text-light" href="/login" passHref>

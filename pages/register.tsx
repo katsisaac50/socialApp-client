@@ -100,8 +100,16 @@ const Register = () => {
       setConsent={setConsent}
       loading={loading}
       />
+      <div className="row">
+                      <div className="col">
+                      <p className="text-center text-muted mt-5 mb-0">
+    Have already an account? <a href="/login" className="fw-bold text-body"><u>Login here</u></a>
+  </p>
+                      </div>
+                    </div>
       </div>
                     </div>
+                    
                   </div>
                 </div>
               </div>
