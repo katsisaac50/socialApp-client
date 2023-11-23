@@ -37,9 +37,12 @@ const LoginPage = () => {
         }
         );
         setState({ ...state, user: response.data.existingUser, token: response.data.token });
+
+        // save user and token in local storage and redirect
         localStorage.setItem('auth', JSON.stringify(response.data));
         console.log(state)
         router.push('/');
+        
         // console.log(response.data);
       } catch (error) {
         toast.error(error.response.data.message, {
