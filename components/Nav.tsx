@@ -13,6 +13,8 @@ function NavBar(props: NavBarProps) {
   const [state, setState] = useContext(UserContext);
   const router = useRouter();
 
+  console.log(state);
+
   const logout = () => {
     setState({ ...state, user: null, token: '' });
     localStorage.removeItem('auth');
@@ -25,13 +27,20 @@ function NavBar(props: NavBarProps) {
           <Link className=" nav-link text-light logo" href="/" passHref>
             Home 
           </Link>
-          <Link className="nav-link text-light" href="/login" passHref>
+          {state.user === null ? (
+            <>
+            <Link className="nav-link text-light" href="/login" passHref>
             Login
           </Link>
           <Link className=" nav-link text-light" href="/register" passHref>
             Register
           </Link>
-          <button className="btn btn-outline-light" onClick={logout}>Logout</button>
+            </>
+          ) : (
+            <a className="btn nav-link text-light " onClick={logout}>Logout</a>
+          )}
+          
+          
     </nav>
   );
 }
