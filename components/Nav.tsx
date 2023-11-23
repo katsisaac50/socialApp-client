@@ -37,7 +37,12 @@ function NavBar(props: NavBarProps) {
           </Link>
             </>
           ) : (
+            <>
+            <Link className="nav-link text-light" href="/user/dashboard" passHref>
+            {state && state.existingUser && state.existingUser.username}
+            </Link>
             <a className="btn nav-link text-light " onClick={logout}>Logout</a>
+            </>
           )}
           
           
