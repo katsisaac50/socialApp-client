@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 import { useContext } from "react";
 import { UserContext } from "../context";
+import { useRouter } from "next/router";
 
 interface NavBarProps {
   // Define your props here
@@ -10,10 +11,12 @@ interface NavBarProps {
 function NavBar(props: NavBarProps) {
 
   const [state, setState] = useContext(UserContext);
+  const router = useRouter();
 
   const logout = () => {
     setState({ ...state, user: null, token: '' });
     localStorage.removeItem('auth');
+    router.push('/login');
   }
 
   return (
