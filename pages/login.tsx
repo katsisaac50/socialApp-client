@@ -2,23 +2,19 @@
 import React, { useState } from 'react';
 import axios from "axios";
 import {toast} from 'react-toastify';
-import { Modal, Button } from 'antd';
 import Link from 'next/link';
 import AuthForm from '../components/forms/Authform';
 import { useRouter } from 'next/router';
+import { useContext } from 'react';
+import { UserContext } from '../context';
 
 const LoginPage = () => {
-    const [name, setName] = useState('');
     const [email, setEmail] = useState('');
-    const [selectedQuestion, setSelectedQuestion] = useState('');
-    const [secretAnswer, setSecretAnswer] = useState('');
     const [password, setPassword] = useState('');
-    const [repeatPassword, setRepeatPassword] = useState('');
-    const [success, setSuccess] = useState(false);
-    const [consent, setConsent] = useState(false);
     const [loading, setLoading] = useState(false);
 
     const router = useRouter();
+    const [state, setState] = useContext(UserContext);
   
     
   
@@ -40,11 +36,10 @@ const LoginPage = () => {
             }
         }
         );
+        setState({ ...state, user: response.data.existingUser, token: response.data.token });
+        localStorage.setItem('auth', JSON.stringify(response.data));
+        console.log(state)
         router.push('/');
-        toast.success(response.data.message, {
-          theme: 'colored',
-        })
-        setSuccess(response.data.success);
         // console.log(response.data);
       } catch (error) {
         toast.error(error.response.data.message, {
@@ -84,7 +79,7 @@ const LoginPage = () => {
         <div className="row">
                       <div className="col">
                       <p className="text-center text-muted mt-5 mb-0">
-    Not registered? <a href="/register" className="fw-bold text-body"><u>Register</u></a>
+    Not registered? <Link href="/register" className="fw-bold text-body"><u>Register</u></Link>
   </p>
                       </div>
                     </div>

@@ -1,7 +1,11 @@
 import React from 'react';
-
+import { useContext } from 'react';
+import { UserContext } from '../context';
 
 function HomePage() {
+
+  const [ state, setState ] = useContext(UserContext);
+  console.log(state);
   return (
     <div className='col'>
         <div className='row'>

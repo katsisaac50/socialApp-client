@@ -1,5 +1,6 @@
 // client/pages/_app.js
 
+import {UserProvider} from '../context';
 import React from 'react';
 import "bootstrap/dist/css/bootstrap.min.css";
 import Navbar from'../components/Nav';
@@ -17,6 +18,7 @@ interface MyAppProps {
 
 function MyApp({ Component, pageProps } : MyAppProps) {
   return (
+    <UserProvider>
     <StyleProvider hashPriority='high'>
     <Head>
       <title>My socialApp</title>
@@ -27,6 +29,7 @@ function MyApp({ Component, pageProps } : MyAppProps) {
       <ToastContainer position='top-center'/>
       <Component {...pageProps} />
     </StyleProvider>
+    </UserProvider>
   );
 }
 
