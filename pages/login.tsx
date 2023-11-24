@@ -52,6 +52,10 @@ const LoginPage = () => {
         setLoading(false);
       }
     };
+
+    if(state && state.token) {
+      router.push('/');
+    }
   
     return (
       <div className='container-fluid p-0'>
