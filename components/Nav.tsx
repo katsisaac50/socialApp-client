@@ -33,7 +33,7 @@ function NavBar(props: NavBarProps) {
           <Link className={`nav-link text-light ${current === '/' ? 'active' : ''}`} href="/" passHref>
             Home 
           </Link>
-          {state.user === null ? (
+          {state && state.user === null ? (
             <>
             <Link className={`nav-link text-light ${current === '/login' ? 'active' : ''}`} href="/login" passHref>
             Login
