@@ -1,5 +1,6 @@
 
 import {useContext} from "react";
+import { useRouter } from "next/router";
 import { UserContext } from "../../context";
 import UserRoute from "../../components/routes/UserRoute";
 
@@ -7,8 +8,13 @@ import UserRoute from "../../components/routes/UserRoute";
 const Dashboard = () => {
 
     const [state, setState] = useContext(UserContext);
+    const router = useRouter();
+console.log(state);
+    if (state === null) {
+        router.push('/login');
+      }
     const { existingUser, token } = state;
-    console.log(state);
+    
     return (
         <UserRoute> 
         <div>

@@ -8,7 +8,6 @@ function UserRoute({ children }) {
   const [ok, setOk] = useState(false);
   const [state] = useContext(UserContext);
   const router = useRouter();
-  console.log(state.token);
 
   useEffect(() => {
     if(state && state.token) fetchUser();
@@ -28,7 +27,9 @@ function UserRoute({ children }) {
       setOk(false);
       router.push('/login');
     }
-  }
+  };
+
+  typeof window !== 'undefined' && state === null && setTimeout(() => fetchUser(), 1000);
 
   return !ok ? (
     <SyncOutlined spin className="d-flex justify-content-center display-1 text-primary p-5" />
