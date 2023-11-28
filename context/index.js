@@ -9,7 +9,7 @@ const UserProvider = ({ children }) => {
     });
 
     useEffect(() => {
-        setState(JSON.parse(localStorage.getItem('auth')));
+        setState(JSON.parse(window.localStorage.getItem('auth')));
     }, [])
     return (
         <UserContext.Provider value={[ state, setState ]}>
