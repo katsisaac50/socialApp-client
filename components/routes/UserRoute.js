@@ -15,12 +15,7 @@ function UserRoute({ children }) {
 
   async function fetchUser() {
     try {
-      const { data } = await axios.get(
-        `${process.env.NEXT_PUBLIC_API}/current-user`, {
-            headers: {
-                Authorization: `Bearer ${state.token}`,
-            },
-        });
+      const { data } = await axios.get(`/current-user`);
       if (data.success) setOk(true);
     } catch (err) {
       console.log(err);
