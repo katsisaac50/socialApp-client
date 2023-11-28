@@ -11,7 +11,7 @@ function UserRoute({ children }) {
   console.log(state.token);
 
   useEffect(() => {
-    fetchUser();
+    if(state && state.token) fetchUser();
   }, [state, state.token]);
 
   async function fetchUser() {
@@ -22,7 +22,7 @@ function UserRoute({ children }) {
                 Authorization: `Bearer ${state.token}`,
             },
         });
-      if (data.ok) setOk(true);
+      if (data.success) setOk(true);
     } catch (err) {
       console.log(err);
       setOk(false);
