@@ -6,14 +6,22 @@ const UserContext = createContext();
 
 const UserProvider = ({ children }) => {
     const [state, setState] = useState({
-        user: {},
+        existingUser: {},
         token: '',
     });
 
     const router = useRouter();
 
     useEffect(() => {
-        setState(JSON.parse(window.localStorage.getItem('auth')));
+        setState(prevState => ({ ...prevState, ...JSON.parse(window.localStorage.getItem('auth')) }));
+
+        // Cleanup interceptors
+    return () => {
+        // Remove the interceptor when the component is unmounted
+        axios.interceptors.response.eject(myInterceptor);
+
+    };
+    
     }, []);
 
     const token = state && state.token ? state.token : '';
@@ -35,8 +43,14 @@ const UserProvider = ({ children }) => {
         if(res.status === 401 && res.config && !res.config.__isRetryRequest){
             setState(null);
             window.localStorage.removeItem('auth');
-            Router.push('/login');
+            router.push('/login');
         }
+
+        // Handle errors here
+        console.error('Axios error:', error);
+
+        // Throw the error again to propagate it
+        return Promise.reject(error);
     });
 
     return (

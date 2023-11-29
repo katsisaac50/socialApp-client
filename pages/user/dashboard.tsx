@@ -12,6 +12,7 @@ const Dashboard = () => {
 console.log(state);
     if (state === null) {
         router.push('/login');
+        return null;
       }
     const { existingUser, token } = state;
     
