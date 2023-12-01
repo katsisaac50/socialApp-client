@@ -12,6 +12,7 @@ function NavBar(props: NavBarProps) {
   const [current, setCurrent] = useState("");
   const [loading, setLoading] = useState(true); // Added loading state
 
+
   useEffect(() => {
     process.browser && setCurrent(window.location.pathname);
   }, [process.browser && window.location.pathname]);
@@ -73,7 +74,7 @@ function NavBar(props: NavBarProps) {
             href="/user/dashboard"
             passHref
           >
-            {state && state.existingUser && state.existingUser.username}
+            {state && state.user && state.user.username}
           </Link>
           <a className="btn nav-link text-light " onClick={logout}>
             Logout
