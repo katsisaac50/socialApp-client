@@ -31,6 +31,8 @@ export default function ForgotPassword() {
   
       try {
         setLoading(true);
+        console.log(loading);
+        // Send POST request to server
         const response = await axios.post(
           `${process.env.NEXT_PUBLIC_API}/forgot-password`,
           postData,
@@ -52,7 +54,7 @@ export default function ForgotPassword() {
       } finally {
         setLoading(false);
         // Reset form fields
-        resetForm();
+        // resetForm();
       }
     };
   
