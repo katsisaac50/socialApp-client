@@ -3,19 +3,17 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import { Modal, Button } from 'antd';
 import Link from 'next/link';
-import AuthForm from '../components/forms/Authform';
+import ForgotPasswordForm from '../components/forms/ForgotPasswordForm';
 import { UserContext } from '../context';
 import { useRouter } from 'next/router';
 
 export default function ForgotPassword() {
-    const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [selectedQuestion, setSelectedQuestion] = useState('');
     const [secretAnswer, setSecretAnswer] = useState('');
-    const [password, setPassword] = useState('');
+    const [newPassword, setNewPassword] = useState('');
     const [repeatPassword, setRepeatPassword] = useState('');
     const [success, setSuccess] = useState(false);
-    const [consent, setConsent] = useState(false);
     const [loading, setLoading] = useState(false);
     const [state] = useContext(UserContext);
     const router = useRouter();
@@ -24,18 +22,17 @@ export default function ForgotPassword() {
       e.preventDefault();
   
       const postData = {
-        name,
         email,
         selectedQuestion,
         secretAnswer,
-        password,
+        newPassword,
         repeatPassword,
       };
   
       try {
         setLoading(true);
         const response = await axios.post(
-          `${process.env.NEXT_PUBLIC_API}/register`,
+          `${process.env.NEXT_PUBLIC_API}/forgot-password`,
           postData,
           {
             headers: {
@@ -60,11 +57,10 @@ export default function ForgotPassword() {
     };
   
     const resetForm = () => {
-      setName('');
       setEmail('');
       setSelectedQuestion('');
       setSecretAnswer('');
-      setPassword('');
+      setNewPassword('');
       setRepeatPassword('');
     };
   
@@ -80,7 +76,7 @@ export default function ForgotPassword() {
       <div className="container-fluid p-0">
         <div className="row py-5 bg-default-image text-light">
           <div className="col text-center">
-            <h1 className="display-3">Register Page</h1>
+            <h1 className="display-3">Forgot Password</h1>
           </div>
         </div>
         <section
@@ -100,39 +96,23 @@ export default function ForgotPassword() {
                   >
                     <div className="card-body p-5">
                       <h2 className="text-uppercase text-center mb-5">
-                        Create an account
+                        Create new password
                       </h2>
   
-                      <AuthForm
+                      <ForgotPasswordForm
                         handleSubmit={handleSubmit}
-                        name={name}
-                        setName={setName}
                         email={email}
                         setEmail={setEmail}
                         selectedQuestion={selectedQuestion}
                         setSelectedQuestion={setSelectedQuestion}
                         secretAnswer={secretAnswer}
                         setSecretAnswer={setSecretAnswer}
-                        password={password}
-                        setPassword={setPassword}
+                        newPassword={newPassword}
+                        setNewPassword={setNewPassword}
                         repeatPassword={repeatPassword}
                         setRepeatPassword={setRepeatPassword}
-                        consent={consent}
-                        setConsent={setConsent}
                         loading={loading}
                       />
-                      <div className="row">
-                        <div className="col">
-                          <p className="text-center text-muted mt-5 mb-0">
-                            Have already an account?{' '}
-                            <Link href="/login" passHref>
-    
-                                <u>Login here</u>
-                              
-                            </Link>
-                          </p>
-                        </div>
-                      </div>
                     </div>
                   </div>
                 </div>
@@ -152,7 +132,7 @@ export default function ForgotPassword() {
                 </Link>,
               ]}
             >
-              <p>Account created successfully. Please login.</p>
+              <p>Congrats! You can now login with your new password.</p>
             </Modal>
           </div>
         </div>
