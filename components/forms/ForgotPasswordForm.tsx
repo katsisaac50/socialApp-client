@@ -37,9 +37,9 @@ const ForgotPasswordForm = ({
       onChange={(e) => setSelectedQuestion(e.target.value)}
     >
       <option value="" disabled>Pick a question</option>
-      <option value="1">What is your favourite color?</option>
-      <option value="2">What is your favourite food?</option>
-      <option value="3">What is your favourite book?</option>
+      <option value="What is your favourite color?">What is your favourite color?</option>
+      <option value="What is your favourite food?">What is your favourite food?</option>
+      <option value="What is your favourite book?">What is your favourite book?</option>
     </select>
     <small>
       <label className="form-label" htmlFor="form3Example4cg">
