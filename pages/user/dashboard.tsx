@@ -20,7 +20,7 @@ console.log(state);
         <UserRoute> 
         <div>
             <h1>Dashboard</h1>
-            <h2>Hello {existingUser && existingUser.username}</h2>
+            <h2>Hello {existingUser && existingUser.name}</h2>
             <h3>Your token is {token}</h3>
         </div>
         </UserRoute>

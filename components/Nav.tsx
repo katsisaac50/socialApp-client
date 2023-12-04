@@ -32,6 +32,8 @@ function NavBar(props: NavBarProps) {
     router.push("/login");
   };
 
+  console.log(state);
+
   return (
     <nav className="nav bg-primary d-flex justify-content-between">
       <Link
@@ -74,7 +76,7 @@ function NavBar(props: NavBarProps) {
             href="/user/dashboard"
             passHref
           >
-            {state && state.user && state.user.username}
+            {state && state.user && state.user.name}
           </Link>
           <a className="btn nav-link text-light " onClick={logout}>
             Logout
