@@ -33,6 +33,7 @@ const AuthForm = ({
             className="form-control form-control-lg"
             value={name}
             onChange={(e) => setName(e.target.value)}
+            autoComplete="name"
           />
         </div>
       )}
@@ -47,6 +48,7 @@ const AuthForm = ({
           className="form-control form-control-lg"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          autoComplete="email"
         />
       </div>
 
@@ -61,6 +63,7 @@ const AuthForm = ({
             aria-label="Default select example"
             value={selectedQuestion}
             onChange={(e) => setSelectedQuestion(e.target.value)}
+            autoComplete="question"
           >
             <option value="" disabled>
               Pick a question
@@ -80,6 +83,7 @@ const AuthForm = ({
             className="mt-2 form-control form-control-lg"
             value={secretAnswer}
             onChange={(e) => setSecretAnswer(e.target.value)}
+            autoComplete="off"
           />
         </div>
       )}
@@ -94,6 +98,7 @@ const AuthForm = ({
           className="form-control form-control-lg"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          autoComplete="new-password"
         />
       </div>
 
@@ -109,6 +114,7 @@ const AuthForm = ({
               className="form-control form-control-lg"
               value={repeatPassword}
               onChange={(e) => setRepeatPassword(e.target.value)}
+              autoComplete="new-password"
             />
           </div>
 

@@ -89,7 +89,13 @@ const ForgotPasswordForm = ({
   <div className="d-flex justify-content-center">
     <button
       type="submit"
-      disabled={!(email && selectedQuestion && secretAnswer && newPassword && repeatPassword)}
+      disabled={!(
+        email && 
+        selectedQuestion && 
+        secretAnswer && 
+        newPassword && 
+        repeatPassword
+        )}
       className="btn btn-success btn-block btn-lg gradient-custom-4 text-body"
     >
       {loading ? <SyncOutlined spin className='py-1' /> : 'Submit'}
