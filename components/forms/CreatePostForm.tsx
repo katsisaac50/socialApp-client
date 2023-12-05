@@ -4,10 +4,10 @@ import { useContext, useState } from "react";
 import { UserContext } from "../../context";
 
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
-
+import { CameraOutlined } from "@ant-design/icons";
 import "react-quill/dist/quill.snow.css";
 
-const CreatePostForm = ({content, handleQuillChange, postSubmit}) => {
+const CreatePostForm = ({content, handleQuillChange, postSubmit, handleImageUpload}) => {
     // const [state] = useContext(UserContext);
     // const [content, setContent] = useState("");
     // const [title, setTitle] = useState("");
@@ -26,7 +26,9 @@ const CreatePostForm = ({content, handleQuillChange, postSubmit}) => {
                 </form>
             </div>
 
-            <div className="card-footer">
+            
+
+            <div className="card-footer d-flex justify-content-between text-muted">
                 <button
                     disabled={!content}
                     className="btn btn-primary"
@@ -34,6 +36,10 @@ const CreatePostForm = ({content, handleQuillChange, postSubmit}) => {
                 >
                     Post
                 </button>
+                <label className="form-label">
+                    <CameraOutlined className="text-primary me-2 mb-1"/>
+                    <input  onChange={handleImageUpload} type="file" accept="image/*" hidden/>
+                </label>
             </div>
         </div>
     )
