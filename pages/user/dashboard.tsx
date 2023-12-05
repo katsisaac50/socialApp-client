@@ -29,6 +29,7 @@ console.log(content);
                 postSubmit={() => {}}
             />
         </div>
+        <div>{content}</div>
         </UserRoute>
     );
 };

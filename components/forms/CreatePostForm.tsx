@@ -7,7 +7,7 @@ const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
 import "react-quill/dist/quill.snow.css";
 
-const CreatePostForm = ({content, setContent, postSubmit}) => {
+const CreatePostForm = ({content, handleQuillChange, postSubmit}) => {
     // const [state] = useContext(UserContext);
     // const [content, setContent] = useState("");
     // const [title, setTitle] = useState("");
@@ -19,7 +19,7 @@ const CreatePostForm = ({content, setContent, postSubmit}) => {
                     <ReactQuill
                         theme="snow"
                         value={content}
-                        onChange={setContent}
+                        onChange={handleQuillChange}
                         className="form-control"
                         placeholder="Write something..."
                     />
