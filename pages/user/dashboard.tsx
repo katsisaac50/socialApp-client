@@ -25,10 +25,15 @@ const Dashboard = () => {
 
       const postSubmit = async () => {
         try {
-          const response = await axios.post(`${process.env.NEXT_PUBLIC_API}/create-post`, {content});
+          const response = await axios.post(`${process.env.NEXT_PUBLIC_API}/create-post`, {content, image}, {
+            headers: {
+              Authorization: `Bearer ${state.token}`
+            }
+          });
           console.log(response);
           if(response.data.success) {
             setContent("");
+            setImage({});
             toast.success(response.data.message, {
               theme: 'colored',
             });
@@ -50,8 +55,12 @@ const Dashboard = () => {
         const formData = new FormData();
         formData.append('image', file);
 
+        setUploading(true);
+
         try {
           const response = await axios.post(`${process.env.NEXT_PUBLIC_API}/upload-image`, formData);
+
+          setUploading(false);
 
           setImage({
             url: response.data.result.secure_url,
@@ -67,8 +76,12 @@ const Dashboard = () => {
               theme: 'colored',
             });
           }
+
         } catch (err) {
+
           console.log(err);
+          setUploading(false);
+
         }
         
       }
@@ -89,6 +102,8 @@ const Dashboard = () => {
                 handleQuillChange = {handleQuillChange}
                 postSubmit={postSubmit}
                 handleImageUpload={handleImageUpload}
+                uploading={uploading}
+                image={image}
             />
         </div>
         <div>{content}</div>
