@@ -11,6 +11,8 @@ const Dashboard = () => {
 
     const [state, setState] = useContext(UserContext);
     const [content, setContent] = useState("");
+    const [uploading, setUploading] = useState(false);
+    const [image, setImage] = useState({});
     const router = useRouter();
 
     const handleQuillChange = (value) => {
@@ -42,13 +44,20 @@ const Dashboard = () => {
 
       const handleImageUpload = async (e) => {
         e.preventDefault();
-
-        console.log("helloe")
+        
         const file = e.target.files[0];
+
         const formData = new FormData();
         formData.append('image', file);
+
         try {
           const response = await axios.post(`${process.env.NEXT_PUBLIC_API}/upload-image`, formData);
+
+          setImage({
+            url: response.data.result.secure_url,
+            public_id: response.data.result.public_id
+          });
+
           if(response.data.success) {
             toast.success(response.data.message, {
               theme: 'colored',
