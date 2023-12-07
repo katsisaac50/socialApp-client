@@ -33,10 +33,19 @@ const PostList = ({posts}) => {
                     </div>
                     <div className="card-body">
                     {ReactHtmlParser(p.content)}
-
-                        {p.content}
                     </div>
                     <div className="card-footer">
+                        <img 
+                        className="card-img-top" 
+                        src={p.image&&p.image.url} 
+                        alt={p.user.name} 
+                        />
+
+                        <div>
+                            <span className="text-primary">Likes: {p.likes && p.likes.length}</span>
+                            <span className="text-primary">Dislikes: {p.dislikes && p.dislikes.length}</span>
+                            <span className="text-primary">Comments: {p.comments && p.comments.length}</span>
+                        </div>
 
                     </div>
                     
