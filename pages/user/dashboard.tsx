@@ -37,7 +37,7 @@ const Dashboard = () => {
         const contentWithoutPTags = value.replace(/<\/?p>/gi, '');
     
         // Set the modified content to state
-        setContent(contentWithoutPTags);
+        setContent(value);
       };
 
       const postSubmit = async () => {

@@ -1,5 +1,7 @@
-import Link from "next/link";
+
+import React from "react";
 import { renderToHTML } from "react-render-html";
+import ReactHtmlParser from 'react-html-parser';     
 import moment from "moment";
 import { Avatar } from "antd";
 const PostList = ({posts}) => {
@@ -16,14 +18,22 @@ const PostList = ({posts}) => {
                 <div key={p._id} className="card-body">
                     <div className="card-header">
                         <div>
-                            <Avatar src={p.image&&p.image.url} size={"large"} />
+                            <Avatar src={p.image&&p.image.url} size={"large"}  alt={p.user.name}>
+                                {p.user.name[0]}
+                            </Avatar>{" "}
                         </div>
-                        <span>Posted by {p.user.name}</span>
+                        <span className="pt-2 ml-3">
+                            Posted by {p.user.name}
+                        </span>
                         <span>{" "}</span>
-                        <span>{moment(p.createdAt).fromNow()}</span>
+                        <span className="pt-2 ml-3">
+                            {moment(p.createdAt).fromNow()}
+                        </span>
                         {/* {p.image&&p.image.url && <img src={p.image.url} alt="" />} */}
                     </div>
                     <div className="card-body">
+                    {ReactHtmlParser(p.content)}
+
                         {p.content}
                     </div>
                     <div className="card-footer">
