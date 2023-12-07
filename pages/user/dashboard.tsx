@@ -1,11 +1,12 @@
 
-import {useContext, useState} from "react";
+import {useContext, useState, useEffect} from "react";
 import { useRouter } from "next/router";
 import { UserContext } from "../../context";
 import UserRoute from "../../components/routes/UserRoute";
 import CreatePostForm from '../../components/forms/CreatePostForm';
 import axios from "axios";
 import { toast } from "react-toastify";
+import PostList from "../../components/cards/PostList";
 
 const Dashboard = () => {
 
@@ -13,7 +14,23 @@ const Dashboard = () => {
     const [content, setContent] = useState("");
     const [uploading, setUploading] = useState(false);
     const [image, setImage] = useState({});
+    const [posts, setPosts] = useState([]);
     const router = useRouter();
+
+    useEffect(() => {
+        if(state && state.token) fetchPosts();
+    }, [state && state.token]);
+
+    const fetchPosts = async () => {
+        try {
+          const { data } = await axios.get(`${process.env.NEXT_PUBLIC_API}/user-posts`);
+          
+          setPosts(data.posts);
+          console.log(data);
+        } catch (err) {
+          console.log(err);
+        }
+    }
 
     const handleQuillChange = (value) => {
         // Remove <p> tags from the HTML content
@@ -107,6 +124,15 @@ const Dashboard = () => {
             />
         </div>
         <div>{content}</div>
+        <PostList posts={posts} />
+        {/* <div>{JSON.stringify(posts, null, 4)}</div> */}
+        {/* <div>
+            {posts && posts.map((p) => (
+                <div key={p._id}>
+                    {p.content}
+                </div>
+            ))}
+        </div> */}
         </UserRoute>
     );
 };
