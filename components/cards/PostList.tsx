@@ -1,4 +1,7 @@
 import Link from "next/link";
+import { renderToHTML } from "react-render-html";
+import moment from "moment";
+import { Avatar } from "antd";
 const PostList = ({posts}) => {
 
     return (
@@ -10,8 +13,23 @@ const PostList = ({posts}) => {
             </div> */}
         <div>
             {posts && posts.map((p) => (
-                <div key={p._id}>
-                    {p.content}
+                <div key={p._id} className="card-body">
+                    <div className="card-header">
+                        <div>
+                            <Avatar src={p.image&&p.image.url} size={"large"} />
+                        </div>
+                        <span>Posted by {p.user.name}</span>
+                        <span>{" "}</span>
+                        <span>{moment(p.createdAt).fromNow()}</span>
+                        {/* {p.image&&p.image.url && <img src={p.image.url} alt="" />} */}
+                    </div>
+                    <div className="card-body">
+                        {p.content}
+                    </div>
+                    <div className="card-footer">
+
+                    </div>
+                    
                 </div>
             ))}
         </div>

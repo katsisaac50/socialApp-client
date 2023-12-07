@@ -110,8 +110,8 @@ const Dashboard = () => {
     const { existingUser} = state;
     
     return (
-        <UserRoute> 
-        <div>
+        <UserRoute>
+        <div className="row py-3"><div className="col-md-8">
             <h1>Dashboard</h1>
             <h2>Hello {existingUser && existingUser.name}</h2>
             <CreatePostForm 
@@ -122,17 +122,12 @@ const Dashboard = () => {
                 uploading={uploading}
                 image={image}
             />
+            <br />
+        <PostList posts={posts} />    
         </div>
-        <div>{content}</div>
-        <PostList posts={posts} />
+        </div>
+        
         {/* <div>{JSON.stringify(posts, null, 4)}</div> */}
-        {/* <div>
-            {posts && posts.map((p) => (
-                <div key={p._id}>
-                    {p.content}
-                </div>
-            ))}
-        </div> */}
         </UserRoute>
     );
 };
