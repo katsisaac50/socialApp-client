@@ -4,6 +4,8 @@ import { renderToHTML } from "react-render-html";
 import ReactHtmlParser from 'react-html-parser';     
 import moment from "moment";
 import { Avatar } from "antd";
+import { UpSquareOutlined, DownSquareOutlined } from "@ant-design/icons";
+
 const PostList = ({posts}) => {
 
     return (
@@ -42,8 +44,8 @@ const PostList = ({posts}) => {
                         />
 
                         <div>
-                            <span className="text-primary">Likes: {p.likes && p.likes.length}</span>
-                            <span className="text-primary">Dislikes: {p.dislikes && p.dislikes.length}</span>
+                            <span className="text-primary"><UpSquareOutlined />: {p.likes && p.likes.length}</span>
+                            <span className="text-primary"><DownSquareOutlined />: {p.dislikes && p.dislikes.length}</span>
                             <span className="text-primary">Comments: {p.comments && p.comments.length}</span>
                         </div>
 
