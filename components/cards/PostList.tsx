@@ -4,7 +4,7 @@ import { renderToHTML } from "react-render-html";
 import ReactHtmlParser from 'react-html-parser';     
 import moment from "moment";
 import { Avatar } from "antd";
-import { UpSquareOutlined, DownSquareOutlined } from "@ant-design/icons";
+import { HeartOutlined, CommentOutlined} from "@ant-design/icons";
 
 const PostList = ({posts}) => {
 
@@ -37,16 +37,24 @@ const PostList = ({posts}) => {
                     {ReactHtmlParser(p.content)}
                     </div>
                     <div className="card-footer">
-                        <img 
+                        {/* <img 
                         className="card-img-top" 
                         src={p.image&&p.image.url} 
                         alt={p.user.name} 
-                        />
+                        /> */}
+                        <div style={{
+                            backgroundImage: `url(${p.image&&p.image.url})`,
+                            backgroundSize: "cover",
+                            backgroundPosition: "center center",
+                            backgroundRepeat: "no-repeat",
+                            height: "300px",
+                        }}>
+
+                        </div>
 
                         <div>
-                            <span className="text-primary"><UpSquareOutlined />: {p.likes && p.likes.length}</span>
-                            <span className="text-primary"><DownSquareOutlined />: {p.dislikes && p.dislikes.length}</span>
-                            <span className="text-primary">Comments: {p.comments && p.comments.length}</span>
+                            <span className="text-primary p-2"><HeartOutlined />{ " "} {p.likes && p.likes.length} likes</span>
+                            <span className="text-primary p-2"><CommentOutlined />{ " "} {p.comments && p.comments.length} comments </span>
                         </div>
 
                     </div>

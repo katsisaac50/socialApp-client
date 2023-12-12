@@ -24,7 +24,9 @@ const LoginPage = () => {
     };
 
     try {
+      // Send POST request to server
       setLoading(true);
+
       const response = await axios.post(`${process.env.NEXT_PUBLIC_API}/login`, postData, {
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
