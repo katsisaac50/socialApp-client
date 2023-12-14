@@ -4,7 +4,7 @@ import { renderToHTML } from "react-render-html";
 import ReactHtmlParser from 'react-html-parser';     
 import moment from "moment";
 import { Avatar } from "antd";
-import { HeartOutlined, CommentOutlined} from "@ant-design/icons";
+import { HeartOutlined, CommentOutlined, EditOutlined, DeleteOutlined} from "@ant-design/icons";
 
 const PostList = ({posts}) => {
 
@@ -56,7 +56,8 @@ const PostList = ({posts}) => {
                             <span className="text-primary p-2"><HeartOutlined />{ " "} {p.likes && p.likes.length} likes</span>
                             <span className="text-primary p-2"><CommentOutlined />{ " "} {p.comments && p.comments.length} comments </span>
                         </div>
-
+                        <EditOutlined/>
+                        <DeleteOutlined/>
                     </div>
                     
                 </div>
