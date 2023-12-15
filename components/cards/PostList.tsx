@@ -1,13 +1,20 @@
 
 import React from "react";
+import { useContext } from "react";
 import { renderToHTML } from "react-render-html";
 import ReactHtmlParser from 'react-html-parser';     
 import moment from "moment";
 import { Avatar } from "antd";
 import { HeartOutlined, CommentOutlined, EditOutlined, DeleteOutlined} from "@ant-design/icons";
+import { UserContext } from "../../context";
+
 
 const PostList = ({posts}) => {
 
+    const [state] = useContext(UserContext);
+
+    console.log(state);
+    console.log(posts)
     return (
         <div className="card">
             {/* <div className="card-body">
@@ -54,11 +61,14 @@ const PostList = ({posts}) => {
 
                         
                         <div className="d-flex pt-2">
-                        
                         <span className="text-primary pt-2 h5 px-2"><HeartOutlined />{ " "} {p.likes && p.likes.length} likes</span>
                         <span className="text-primary pt-2 h5 px-2"><CommentOutlined />{ " "} {p.comments && p.comments.length} comments </span>
-                        <EditOutlined className="text-danger pt-2 h5 px-2 mx-auto"/>
-                         <DeleteOutlined className="text-danger pt-2 h5 px-2"/>   
+                          {state && state.existingUser && state.existingUser._id === p.user._id && (
+                            <>
+                            <EditOutlined className="text-danger pt-2 h5 px-2 mx-auto"/>
+                            <DeleteOutlined className="text-danger pt-2 h5 px-2"/> 
+                            </>
+                         )}
                         </div>
                         
                     </div>
