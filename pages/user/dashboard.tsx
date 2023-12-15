@@ -47,8 +47,9 @@ const Dashboard = () => {
               Authorization: `Bearer ${state.token}`
             }
           });
-          console.log(response);
+
           if(response.data.success) {
+            fetchPosts();
             setContent("");
             setImage({});
             toast.success(response.data.message, {

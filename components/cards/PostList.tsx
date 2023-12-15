@@ -7,11 +7,13 @@ import moment from "moment";
 import { Avatar } from "antd";
 import { HeartOutlined, CommentOutlined, EditOutlined, DeleteOutlined} from "@ant-design/icons";
 import { UserContext } from "../../context";
+import { useRouter } from "next/router";
 
 
 const PostList = ({posts}) => {
 
     const [state] = useContext(UserContext);
+    const router = useRouter()
 
     console.log(state);
     console.log(posts)
@@ -65,7 +67,7 @@ const PostList = ({posts}) => {
                         <span className="text-primary pt-2 h5 px-2"><CommentOutlined />{ " "} {p.comments && p.comments.length} comments </span>
                           {state && state.existingUser && state.existingUser._id === p.user._id && (
                             <>
-                            <EditOutlined className="text-danger pt-2 h5 px-2 mx-auto"/>
+                            <EditOutlined onClick={()=>router.push(`/user/post/${p._id}`)} className="text-danger pt-2 h5 px-2 mx-auto"/>
                             <DeleteOutlined className="text-danger pt-2 h5 px-2"/> 
                             </>
                          )}
