@@ -52,12 +52,15 @@ const PostList = ({posts}) => {
 
                         </div>
 
-                        <div>
-                            <span className="text-primary p-2"><HeartOutlined />{ " "} {p.likes && p.likes.length} likes</span>
-                            <span className="text-primary p-2"><CommentOutlined />{ " "} {p.comments && p.comments.length} comments </span>
+                        
+                        <div className="d-flex pt-2">
+                        
+                        <span className="text-primary pt-2 h5 px-2"><HeartOutlined />{ " "} {p.likes && p.likes.length} likes</span>
+                        <span className="text-primary pt-2 h5 px-2"><CommentOutlined />{ " "} {p.comments && p.comments.length} comments </span>
+                        <EditOutlined className="text-danger pt-2 h5 px-2 mx-auto"/>
+                         <DeleteOutlined className="text-danger pt-2 h5 px-2"/>   
                         </div>
-                        <EditOutlined/>
-                        <DeleteOutlined/>
+                        
                     </div>
                     
                 </div>
