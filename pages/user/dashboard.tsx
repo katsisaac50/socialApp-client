@@ -3,7 +3,7 @@ import {useContext, useState, useEffect} from "react";
 import { useRouter } from "next/router";
 import { UserContext } from "../../context";
 import UserRoute from "../../components/routes/UserRoute";
-import CreatePostForm from '../../components/forms/CreatePostForm';
+import PostForm from '../../components/forms/PostForm';
 import axios from "axios";
 import { toast } from "react-toastify";
 import PostList from "../../components/cards/PostList";
@@ -108,14 +108,16 @@ const Dashboard = () => {
         router.push('/login');
         return null;
       }
-    const { existingUser} = state;
+
+      console.log(state)
+    const { user} = state;
     
     return (
         <UserRoute>
         <div className="row py-3"><div className="col-md-8">
             <h1>Dashboard</h1>
-            <h2>Hello {existingUser && existingUser.name}</h2>
-            <CreatePostForm 
+            <h2>Hello {user && user.name}</h2>
+            <PostForm 
                 content = {content}
                 handleQuillChange = {handleQuillChange}
                 postSubmit={postSubmit}

@@ -15,8 +15,6 @@ const PostList = ({posts}) => {
     const [state] = useContext(UserContext);
     const router = useRouter()
 
-    console.log(state);
-    console.log(posts)
     return (
         <div className="card">
             {/* <div className="card-body">
@@ -65,7 +63,7 @@ const PostList = ({posts}) => {
                         <div className="d-flex pt-2">
                         <span className="text-primary pt-2 h5 px-2"><HeartOutlined />{ " "} {p.likes && p.likes.length} likes</span>
                         <span className="text-primary pt-2 h5 px-2"><CommentOutlined />{ " "} {p.comments && p.comments.length} comments </span>
-                          {state && state.existingUser && state.existingUser._id === p.user._id && (
+                          {state && state.user && state.user._id === p.user._id && (
                             <>
                             <EditOutlined onClick={()=>router.push(`/user/post/${p._id}`)} className="text-danger pt-2 h5 px-2 mx-auto"/>
                             <DeleteOutlined className="text-danger pt-2 h5 px-2"/> 
