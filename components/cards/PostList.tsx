@@ -8,12 +8,20 @@ import { Avatar } from "antd";
 import { HeartOutlined, CommentOutlined, EditOutlined, DeleteOutlined} from "@ant-design/icons";
 import { UserContext } from "../../context";
 import { useRouter } from "next/router";
+import axios from "axios";
 
 
 const PostList = ({posts}) => {
 
     const [state] = useContext(UserContext);
     const router = useRouter()
+    const _id = router.query._id;
+
+
+    const deletePost = async ()=>{
+        const response = await axios.delete(`${process.env.NEXT_PUBLIC_API}/delete-post/${_id}`);
+        console.log(response);
+    }
 
     return (
         <div className="card">
@@ -66,7 +74,7 @@ const PostList = ({posts}) => {
                           {state && state.user && state.user._id === p.user._id && (
                             <>
                             <EditOutlined onClick={()=>router.push(`/user/post/${p._id}`)} className="text-danger pt-2 h5 px-2 mx-auto"/>
-                            <DeleteOutlined className="text-danger pt-2 h5 px-2"/> 
+                            <DeleteOutlined onClick={deletePost} className="text-danger pt-2 h5 px-2"/> 
                             </>
                          )}
                         </div>
