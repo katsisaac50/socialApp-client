@@ -23,13 +23,17 @@ const EditPost = ()=> {
 
     const postSubmit = async (e) => {
         e.preventDefault();
-        console.log(state)
+        console.log("state", content, image)
         try {
             
             const {data} = await axios.put(`/update-post/${_id}`, {content, image});
             console.log(data)
+            
             if(data.error){
-                toast.success("Post created");
+                toast.error("Post creation failed");
+                
+            }else{
+              toast.success("Post created");
                 router.push("/user/dashboard");
             }
         } catch (error) {
