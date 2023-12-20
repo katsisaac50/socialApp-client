@@ -65,6 +65,18 @@ const Dashboard = () => {
         }
       }
 
+      const handleDelete = async (post) => {
+        try {
+          const answer = window.confirm("Are you sure?");
+          if(!answer) return;
+          const {data} = await axios.delete(`/delete-post/${post._id}`);
+          toast.error('Post deleted')
+          fetchPosts();
+        } catch (error) {
+          console.log(error);
+        }
+      }
+
       const handleImageUpload = async (e) => {
         e.preventDefault();
         
@@ -126,7 +138,7 @@ const Dashboard = () => {
                 image={image}
             />
             <br />
-        <PostList posts={posts} />    
+        <PostList posts={posts} handleDelete={handleDelete} />    
         </div>
         </div>
         

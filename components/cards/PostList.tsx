@@ -11,17 +11,11 @@ import { useRouter } from "next/router";
 import axios from "axios";
 
 
-const PostList = ({posts}) => {
+const PostList = ({posts, handleDelete}) => {
 
     const [state] = useContext(UserContext);
     const router = useRouter()
-    const _id = router.query._id;
-
-
-    const deletePost = async ()=>{
-        const response = await axios.delete(`${process.env.NEXT_PUBLIC_API}/delete-post/${_id}`);
-        console.log(response);
-    }
+    // const _id = router.query._id;
 
     return (
         <div className="card">
@@ -74,7 +68,7 @@ const PostList = ({posts}) => {
                           {state && state.user && state.user._id === p.user._id && (
                             <>
                             <EditOutlined onClick={()=>router.push(`/user/post/${p._id}`)} className="text-danger pt-2 h5 px-2 mx-auto"/>
-                            <DeleteOutlined onClick={deletePost} className="text-danger pt-2 h5 px-2"/> 
+                            <DeleteOutlined onClick={() => handleDelete()} className="text-danger pt-2 h5 px-2"/> 
                             </>
                          )}
                         </div>
