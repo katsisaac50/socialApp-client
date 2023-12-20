@@ -66,6 +66,7 @@ const Dashboard = () => {
       }
 
       const handleDelete = async (post) => {
+        console.log(post)
         try {
           const answer = window.confirm("Are you sure?");
           if(!answer) return;

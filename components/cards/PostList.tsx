@@ -68,7 +68,7 @@ const PostList = ({posts, handleDelete}) => {
                           {state && state.user && state.user._id === p.user._id && (
                             <>
                             <EditOutlined onClick={()=>router.push(`/user/post/${p._id}`)} className="text-danger pt-2 h5 px-2 mx-auto"/>
-                            <DeleteOutlined onClick={() => handleDelete()} className="text-danger pt-2 h5 px-2"/> 
+                            <DeleteOutlined onClick={() => handleDelete(p)} className="text-danger pt-2 h5 px-2"/> 
                             </>
                          )}
                         </div>
