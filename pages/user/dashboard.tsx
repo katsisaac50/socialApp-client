@@ -15,6 +15,7 @@ const Dashboard = () => {
     const [uploading, setUploading] = useState(false);
     const [image, setImage] = useState({});
     const [posts, setPosts] = useState([]);
+    const [like, setLike] = useState(false);
     const router = useRouter();
 
     useEffect(() => {
@@ -78,6 +79,27 @@ const Dashboard = () => {
         }
       }
 
+      const handleLikes = async(post)=>{
+
+        console.log("wawawa", like)
+        try {
+          if(!like){
+            setLike(true);
+            console.log("ger")
+            const {data} = await axios.post(`/like-post/${post._id}`);
+            
+            
+          } else {
+            console.log("dislike")
+            const {data} = await axios.post(`/dislike-post/${post._id}`)
+          }
+          // const {data} = await axios.post(`/like-post/${post._id}`)
+        } catch (error) {
+          console.log(error)
+        }
+
+      }
+
       const handleImageUpload = async (e) => {
         e.preventDefault();
         
@@ -139,7 +161,7 @@ const Dashboard = () => {
                 image={image}
             />
             <br />
-        <PostList posts={posts} handleDelete={handleDelete} />    
+        <PostList posts={posts} handleDelete={handleDelete} handleLikes={handleLikes}/>    
         </div>
         </div>
         

@@ -11,7 +11,7 @@ import { useRouter } from "next/router";
 import axios from "axios";
 
 
-const PostList = ({posts, handleDelete}) => {
+const PostList = ({posts, handleDelete, handleLikes}) => {
 
     const [state] = useContext(UserContext);
     const router = useRouter()
@@ -63,7 +63,7 @@ const PostList = ({posts, handleDelete}) => {
 
                         
                         <div className="d-flex pt-2">
-                        <span className="text-primary pt-2 h5 px-2"><HeartOutlined />{ " "} {p.likes && p.likes.length} likes</span>
+                        <span className="text-primary pt-2 h5 px-2"><HeartOutlined onClick={()=>handleLikes(p)} />{ " "} {p.likes && p.likes.length} likes</span>
                         <span className="text-primary pt-2 h5 px-2"><CommentOutlined />{ " "} {p.comments && p.comments.length} comments </span>
                           {state && state.user && state.user._id === p.user._id && (
                             <>
