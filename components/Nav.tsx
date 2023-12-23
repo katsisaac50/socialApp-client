@@ -48,7 +48,14 @@ function NavBar(props: NavBarProps) {
     Offset
   </button>
   <div className="dropdown-menu" aria-labelledby="dropdownMenuOffset">
-    <a className="dropdown-item" href="#">Action</a>
+          <Link
+            className={`nav-link text-light ${current === "/user/dashboard" ? "active" : ""
+              }`}
+            href="/user/dashboard"
+            passHref
+          >
+            {state && state.user && state.user.name}
+          </Link>
     <a className="dropdown-item" href="#">Another action</a>
     <a className="dropdown-item" href="#">Something else here</a>
   </div>
