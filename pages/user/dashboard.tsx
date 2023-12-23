@@ -87,10 +87,10 @@ const Dashboard = () => {
             setLike(true);
             console.log("ger")
             const {data} = await axios.post(`/like-post/${post._id}`);
-            
+            console.log(data)
             
           } else {
-            console.log("dislike")
+            setLike(false)
             const {data} = await axios.post(`/dislike-post/${post._id}`)
           }
           // const {data} = await axios.post(`/like-post/${post._id}`)
@@ -144,7 +144,7 @@ const Dashboard = () => {
         return null;
       }
 
-      console.log(state)
+      console.log(posts)
     const { user} = state;
     
     return (

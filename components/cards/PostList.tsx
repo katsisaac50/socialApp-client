@@ -63,7 +63,7 @@ const PostList = ({posts, handleDelete, handleLikes}) => {
 
                         
                         <div className="d-flex pt-2">
-                        <span className="text-primary pt-2 h5 px-2"><HeartOutlined onClick={()=>handleLikes(p)} />{ " "} {p.likes && p.likes.length} likes</span>
+                        <span className="text-primary pt-2 h5 px-2"><HeartOutlined onClick={()=>handleLikes(p)} />{ " "} {p.likes && p.likes} likes</span>
                         <span className="text-primary pt-2 h5 px-2"><CommentOutlined />{ " "} {p.comments && p.comments.length} comments </span>
                           {state && state.user && state.user._id === p.user._id && (
                             <>
