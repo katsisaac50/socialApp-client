@@ -43,6 +43,17 @@ function NavBar(props: NavBarProps) {
       >
         Home
       </Link>
+      <div className="dropdown mr-1">
+  <button type="button" className="btn btn-secondary dropdown-toggle" id="dropdownMenuOffset" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="10,20">
+    Offset
+  </button>
+  <div className="dropdown-menu" aria-labelledby="dropdownMenuOffset">
+    <a className="dropdown-item" href="#">Action</a>
+    <a className="dropdown-item" href="#">Another action</a>
+    <a className="dropdown-item" href="#">Something else here</a>
+  </div>
+</div>
+
       {loading ? (
         // Show loading state or a placeholder while user data is being fetched
         <p>Loading...</p>
