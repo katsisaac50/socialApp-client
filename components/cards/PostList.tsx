@@ -29,12 +29,13 @@ const PostList = ({posts, handleDelete, handleLikes}) => {
                 <div key={p._id} className="card-body">
                     <div className="card-header">
                         <div>
-                            <Avatar src={p.image&&p.image.url} size={"large"}  alt={p.user.name}>
-                                {p.user.name[0]}
+                            <Avatar src={p.image&&p.image.url} size={"large"}  alt={p.user && p.user.name}>
+                                {p.user && p.user.name[0]}
+                                {console.log(p)}
                             </Avatar>{" "}
                         </div>
                         <span className="pt-2 ml-3">
-                            Posted by {p.user.name}
+                            Posted by {p.user && p.user.name}
                         </span>
                         <span>{" "}</span>
                         <span className="pt-2 ml-3">
@@ -65,7 +66,7 @@ const PostList = ({posts, handleDelete, handleLikes}) => {
                         <div className="d-flex pt-2">
                         <span className="text-primary pt-2 h5 px-2"><HeartOutlined onClick={()=>handleLikes(p)} />{ " "} {p.likes && p.likes} likes</span>
                         <span className="text-primary pt-2 h5 px-2"><CommentOutlined />{ " "} {p.comments && p.comments.length} comments </span>
-                          {state && state.user && state.user._id === p.user._id && (
+                          {state && state.user && state.user._id === p.user && p.user._id && (
                             <>
                             <EditOutlined onClick={()=>router.push(`/user/post/${p._id}`)} className="text-danger pt-2 h5 px-2 mx-auto"/>
                             <DeleteOutlined onClick={() => handleDelete(p)} className="text-danger pt-2 h5 px-2"/> 

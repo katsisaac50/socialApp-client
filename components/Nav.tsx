@@ -88,6 +88,14 @@ function NavBar(props: NavBarProps) {
                 Dashboard
               </Link>
               </li>
+              <li><Link
+                className="btn nav-link"
+                href="/user/profile/update"
+                passHref
+              >
+                Profile
+              </Link>
+              </li>
               <li><a className="btn nav-link" onClick={logout}>
                 Logout
               </a></li>
