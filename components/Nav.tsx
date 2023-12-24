@@ -43,23 +43,6 @@ function NavBar(props: NavBarProps) {
       >
         Home
       </Link>
-      <div className="dropdown mr-1">
-  <button type="button" className="btn btn-secondary dropdown-toggle" id="dropdownMenuOffset" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="10,20">
-    Offset
-  </button>
-  <div className="dropdown-menu" aria-labelledby="dropdownMenuOffset">
-          <Link
-            className={`nav-link text-light ${current === "/user/dashboard" ? "active" : ""
-              }`}
-            href="/user/dashboard"
-            passHref
-          >
-            {state && state.user && state.user.name}
-          </Link>
-    <a className="dropdown-item" href="#">Another action</a>
-    <a className="dropdown-item" href="#">Something else here</a>
-  </div>
-</div>
 
       {loading ? (
         // Show loading state or a placeholder while user data is being fetched
@@ -67,18 +50,16 @@ function NavBar(props: NavBarProps) {
       ) : state && state.user === null ? (
         <>
           <Link
-            className={`nav-link text-light ${
-              current === "/login" ? "active" : ""
-            }`}
+            className={`nav-link text-light ${current === "/login" ? "active" : ""
+              }`}
             href="/login"
             passHref
           >
             Login
           </Link>
           <Link
-            className={`nav-link text-light ${
-              current === "/register" ? "active" : ""
-            }`}
+            className={`nav-link text-light ${current === "/register" ? "active" : ""
+              }`}
             href="/register"
             passHref
           >
@@ -87,18 +68,31 @@ function NavBar(props: NavBarProps) {
         </>
       ) : (
         <>
-          <Link
-            className={`nav-link text-light ${
-              current === "/user/dashboard" ? "active" : ""
-            }`}
-            href="/user/dashboard"
-            passHref
-          >
-            {state && state.user && state.user.name}
-          </Link>
-          <a className="btn nav-link text-light " onClick={logout}>
-            Logout
-          </a>
+          <div className="dropdown">
+            <Link
+              className="btn dropdown-toggle"
+              type="button"
+              data-bs-toggle="dropdown"
+              href={"/#"}
+              aria-expanded="false"
+            >
+              {state && state.user && state.user.name}
+            </Link>
+            <ul className="dropdown-menu" aria-labelledby="dropdownMenuLink">
+              <li><Link
+                className={`nav-link ${current === "/user/dashboard" ? "active text-light" : ""
+                  }`}
+                href="/user/dashboard"
+                passHref
+              >
+                Dashboard
+              </Link>
+              </li>
+              <li><a className="btn nav-link" onClick={logout}>
+                Logout
+              </a></li>
+            </ul>
+          </div>
         </>
       )}
     </nav>
