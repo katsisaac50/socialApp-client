@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { Modal, Button } from 'antd';
@@ -21,6 +21,18 @@ const ProfileUpdate = () => {
   const [loading, setLoading] = useState(false);
   const [state] = useContext(UserContext);
   const router = useRouter();
+
+  useEffect(()=>{
+  // console.log(state.user)
+    if(state && state.user){
+      console.log("user from the state=>", state.user)
+      setAbout(state.user.about);
+      setUsername(state.user.userName);
+      setEmail(state.user.email);
+      setName(state.user.name);
+    }
+    
+  }, [state && state.user])
 
   const handleSubmit = async (e) => {
     e.preventDefault();
