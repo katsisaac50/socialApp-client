@@ -18,16 +18,19 @@ const Dashboard = () => {
     const [like, setLike] = useState(false);
     const router = useRouter();
 
+    
+
     useEffect(() => {
+      
         if(state && state.token) fetchPosts();
     }, [state && state.token]);
 
     const fetchPosts = async () => {
         try {
           const { data } = await axios.get(`${process.env.NEXT_PUBLIC_API}/user-posts`);
-          
+          // console.log(state)
           setPosts(data.posts);
-          console.log(data);
+          
         } catch (err) {
           console.log(err);
         }
@@ -81,17 +84,17 @@ const Dashboard = () => {
 
       const handleLikes = async(post)=>{
 
-        console.log("wawawa", like)
         try {
           if(!like){
             setLike(true);
             console.log("ger")
             const {data} = await axios.post(`/like-post/${post._id}`);
-            console.log(data)
-            
+            console.log("ge", data)
+            fetchPosts();
           } else {
             setLike(false)
             const {data} = await axios.post(`/dislike-post/${post._id}`)
+            fetchPosts();
           }
           // const {data} = await axios.post(`/like-post/${post._id}`)
         } catch (error) {
@@ -144,7 +147,7 @@ const Dashboard = () => {
         return null;
       }
 
-      console.log(posts)
+      // console.log(posts)
     const { user} = state;
     
     return (
@@ -161,7 +164,7 @@ const Dashboard = () => {
                 image={image}
             />
             <br />
-        <PostList posts={posts} handleDelete={handleDelete} handleLikes={handleLikes}/>    
+        <PostList posts={posts} like = {like} handleDelete={handleDelete} handleLikes={handleLikes}/>    
         </div>
         </div>
         

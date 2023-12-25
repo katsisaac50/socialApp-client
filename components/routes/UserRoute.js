@@ -9,7 +9,7 @@ function UserRoute({ children }) {
   const [state] = useContext(UserContext);
   const router = useRouter();
 
-  console.log(state)
+  // console.log(state)
   useEffect(() => {
     if(state && state.token) fetchUser();
   }, [state, state.token]);

@@ -11,7 +11,7 @@ import { useRouter } from "next/router";
 import axios from "axios";
 
 
-const PostList = ({posts, handleDelete, handleLikes}) => {
+const PostList = ({posts, like, handleDelete, handleLikes}) => {
 
     const [state] = useContext(UserContext);
     const router = useRouter()
@@ -19,11 +19,6 @@ const PostList = ({posts, handleDelete, handleLikes}) => {
 
     return (
         <div className="card">
-            {/* <div className="card-body">
-                <h5 className="card-title">Card title</h5>
-                <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <Link href="#" className="btn btn-primary">Go somewhere</Link>
-            </div> */}
         <div>
             {posts && posts.map((p) => (
                 <div key={p._id} className="card-body">
@@ -31,7 +26,6 @@ const PostList = ({posts, handleDelete, handleLikes}) => {
                         <div>
                             <Avatar src={p.image&&p.image.url} size={"large"}  alt={p.user && p.user.name}>
                                 {p.user && p.user.name[0]}
-                                {console.log(p)}
                             </Avatar>{" "}
                         </div>
                         <span className="pt-2 ml-3">
@@ -64,7 +58,8 @@ const PostList = ({posts, handleDelete, handleLikes}) => {
 
                         
                         <div className="d-flex pt-2">
-                        <span className="text-primary pt-2 h5 px-2"><HeartOutlined onClick={()=>handleLikes(p)} />{ " "} {p.likes && p.likes} likes</span>
+                            
+                        <span className="text-primary pt-2 h5 px-2"><HeartOutlined onClick={(e)=>handleLikes(p)} className={like === true ? 'bg-danger' : ''}/>{console.log(p)}{ " "} {p.likes && p.likes} likes</span>
                         <span className="text-primary pt-2 h5 px-2"><CommentOutlined />{ " "} {p.comments && p.comments.length} comments </span>
                           {state && state.user && state.user._id === p.user && p.user._id && (
                             <>
