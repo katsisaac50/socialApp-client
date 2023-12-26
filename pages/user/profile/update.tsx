@@ -44,12 +44,14 @@ const ProfileUpdate = () => {
       secretAnswer,
       password,
       repeatPassword,
+      about,
+      username
     };
 
     try {
       setLoading(true);
-      const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_API}/register`,
+      const response = await axios.put(
+        `${process.env.NEXT_PUBLIC_API}/profile-update`,
         postData,
         {
           headers: {
@@ -57,6 +59,7 @@ const ProfileUpdate = () => {
           },
         }
       );
+      console.log('greatness', response)
       toast.success(response.data.message, {
         theme: 'colored',
       });
@@ -68,19 +71,9 @@ const ProfileUpdate = () => {
       console.error('Error making request:', error);
     } finally {
       setLoading(false);
-      // Reset form fields
-      resetForm();
     }
   };
 
-  const resetForm = () => {
-    setName('');
-    setEmail('');
-    setSelectedQuestion('');
-    setSecretAnswer('');
-    setPassword('');
-    setRepeatPassword('');
-  };
 
   const handleSuccessClose = () => {
     setSuccess(false);
@@ -163,13 +156,9 @@ const ProfileUpdate = () => {
             title="Success"
             visible={success}
             onCancel={handleSuccessClose}
-            footer={[
-              <Link href="/login" key="login">
-                <Button>Go to Login</Button>
-              </Link>,
-            ]}
+            footer={null}
           >
-            <p>Account created successfully. Please login.</p>
+            <p>You have successfully updated your profile.</p>
           </Modal>
         </div>
       </div>

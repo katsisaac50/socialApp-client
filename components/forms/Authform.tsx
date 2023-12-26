@@ -84,6 +84,7 @@ const AuthForm = ({
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           autoComplete="email"
+          disabled ={page === "profile"}
         />
       </div>
 
