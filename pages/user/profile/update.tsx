@@ -19,7 +19,7 @@ const ProfileUpdate = () => {
   const [success, setSuccess] = useState(false);
   const [consent, setConsent] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [state] = useContext(UserContext);
+  const [state, setState] = useContext(UserContext);
   const router = useRouter();
 
   useEffect(()=>{
@@ -50,7 +50,7 @@ const ProfileUpdate = () => {
 
     try {
       setLoading(true);
-      const response = await axios.put(
+      const {data} = await axios.put(
         `${process.env.NEXT_PUBLIC_API}/profile-update`,
         postData,
         {
@@ -59,13 +59,24 @@ const ProfileUpdate = () => {
           },
         }
       );
-      console.log('greatness', response)
-      toast.success(response.data.message, {
+
+      // update local storage, update user, keep token
+      let auth = JSON.parse(localStorage.getItem("auth"));
+      auth.user = data;
+      localStorage.setItem("auth", JSON.stringify(auth));
+
+      setState({...state, user: data})
+      
+      toast.success(data.message, {
         theme: 'colored',
       });
-      setSuccess(response.data.success);
+      setSuccess(data.success);
+      
+      setLoading(false);
+
     } catch (error) {
-      toast.error(error.response.data.message, {
+      console.log('greatness', error)
+      toast.error(error.data.errors[0].message, {
         theme: 'colored',
       });
       console.error('Error making request:', error);
