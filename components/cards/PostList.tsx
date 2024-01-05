@@ -35,17 +35,11 @@ const PostList = ({posts, like, handleDelete, handleLikes}) => {
                         <span className="pt-2 ml-3">
                             {moment(p.createdAt).fromNow()}
                         </span>
-                        {/* {p.image&&p.image.url && <img src={p.image.url} alt="" />} */}
                     </div>
                     <div className="card-body">
                     {ReactHtmlParser(p.content)}
                     </div>
                     <div className="card-footer">
-                        {/* <img 
-                        className="card-img-top" 
-                        src={p.image&&p.image.url} 
-                        alt={p.user.name} 
-                        /> */}
                         <div style={{
                             backgroundImage: `url(${p.image&&p.image.url})`,
                             backgroundSize: "cover",
