@@ -14,8 +14,7 @@ import axios from "axios";
 const PostList = ({posts, like, handleDelete, handleLikes}) => {
 
     const [state] = useContext(UserContext);
-    const router = useRouter()
-    // const _id = router.query._id;
+    const router = useRouter();
 
     return (
         <div className="card">
