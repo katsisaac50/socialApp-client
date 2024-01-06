@@ -4,11 +4,11 @@ import { useRouter } from "next/router";
 import { UserContext } from "../../context";
 import UserRoute from "../../components/routes/UserRoute";
 import moment from "moment";
-import { Avatar } from "antd";
+import { Avatar, List } from "antd";
 
 interface Person {
   id: string;
-  avatar: string;
+  photo: string;
   name: string;
   createdAt: string; // You may want to use Date or another appropriate type
 }
@@ -26,19 +26,28 @@ const People: React.FC<PeopleProps> = ({ people }) => {
     <UserRoute>
       <div>
         <h1>People</h1>
-        {loading ? (
-          <p>Loading...</p>
-        ) : (
-          <ul>
-            {people.map((person) => (
-              <li key={person.id}>
-                <Avatar size={50} src={person.avatar} />
-                <p>{person.name}</p>
-                <p>{moment(person.createdAt).fromNow()}</p>
-              </li>
-            ))}
-          </ul>
-        )}
+        <List
+          loading={loading}
+          itemLayout="horizontal"
+          dataSource={people}
+          renderItem={(person) => (
+            <List.Item key={person.id}>
+              <List.Item.Meta
+                avatar={<Avatar src={person && person.photo && person.photo.data} />}
+                title={
+                <div className="d-flex justify-content-between align-items-center">
+                    <a href="#">
+                        {person.name}
+                    </a>
+                    <span>
+                        follow
+                    </span>
+                </div>}
+                description={moment(person.createdAt).fromNow()}
+              />
+            </List.Item>
+          )}
+        />
       </div>
     </UserRoute>
   );

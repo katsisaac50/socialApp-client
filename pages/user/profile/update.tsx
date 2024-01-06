@@ -48,13 +48,14 @@ const ProfileUpdate = () => {
       password,
       repeatPassword,
       about,
-      username
+      username,
+      image,
     };
 
     try {
       setLoading(true);
       const {data} = await axios.put(
-        `${process.env.NEXT_PUBLIC_API}/profile-update`,
+        `/profile-update`,
         postData,
         {
           headers: {
@@ -104,7 +105,7 @@ const ProfileUpdate = () => {
     setUploading(true);
 
     try {
-      const response = await axios.post(`${process.env.NEXT_PUBLIC_API}/upload-image`, formData);
+      const response = await axios.post(`/upload-image`, formData);
 
       setUploading(false);
 

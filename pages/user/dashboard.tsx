@@ -6,7 +6,7 @@ import PostForm from "../../components/forms/PostForm";
 import axios from "axios";
 import { toast } from "react-toastify";
 import PostList from "../../components/cards/PostList";
-import People from "../../components/cards/people";
+import People from "../../components/cards/People";
 
 const Dashboard = () => {
   const [state, setState] = useContext(UserContext);
@@ -35,7 +35,7 @@ const Dashboard = () => {
           },
         }
       );
-        console.log(data.people)
+       // console.log(data.people)
       setState({...state, people: data.people });
       
     } catch (err) {
