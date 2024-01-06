@@ -6,6 +6,7 @@ import PostForm from "../../components/forms/PostForm";
 import axios from "axios";
 import { toast } from "react-toastify";
 import PostList from "../../components/cards/PostList";
+import People from "../../components/cards/people";
 
 const Dashboard = () => {
   const [state, setState] = useContext(UserContext);
@@ -17,13 +18,35 @@ const Dashboard = () => {
   const router = useRouter();
 
   useEffect(() => {
-    if (state && state.token) fetchPosts();
+    if (state && state.token) {
+      fetchPosts();
+      findPeople();
+    }
   }, [state && state.token]);
+
+  const findPeople = async () => {
+    console.log("find people")
+    try {
+      const { data } = await axios.get(
+        `/find-people`,
+        {
+          headers: {
+            Authorization: `Bearer ${state.token}`,
+          },
+        }
+      );
+        console.log(data.people)
+      setState({...state, people: data.people });
+      
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   const fetchPosts = async () => {
     try {
       const { data } = await axios.get(
-        `${process.env.NEXT_PUBLIC_API}/user-posts`
+        `/user-posts`
       );
       // console.log(state)
       setPosts(data.posts);
@@ -42,8 +65,8 @@ const Dashboard = () => {
 
   const postSubmit = async () => {
     try {
-      const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_API}/create-post`,
+      const {data} = await axios.post(
+        `/create-post`,
         { content, image },
         {
           headers: {
@@ -52,15 +75,15 @@ const Dashboard = () => {
         }
       );
 
-      if (response.data.success) {
+      if (  data.success) {
         fetchPosts();
         setContent("");
         setImage({});
-        toast.success(response.data.message, {
+        toast.success(  data.message, {
           theme: "colored",
         });
       } else {
-        toast.error(response.data.message, {
+        toast.error(  data.message, {
           theme: "colored",
         });
       }
@@ -112,24 +135,24 @@ const Dashboard = () => {
     setUploading(true);
 
     try {
-      const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_API}/upload-image`,
+      const {data} = await axios.post(
+        `/upload-image`,
         formData
       );
 
       setUploading(false);
 
       setImage({
-        url: response.data.result.secure_url,
-        public_id: response.data.result.public_id,
+        url:   data.result.secure_url,
+        public_id:   data.result.public_id,
       });
 
-      if (response.data.success) {
-        toast.success(response.data.message, {
+      if (  data.success) {
+        toast.success(  data.message, {
           theme: "colored",
         });
       } else {
-        toast.error(response.data.message, {
+        toast.error(  data.message, {
           theme: "colored",
         });
       }
@@ -145,14 +168,13 @@ const Dashboard = () => {
   }
 
   // console.log(posts)
-  const { user } = state;
+  const { user, people } = state;
 
   return (
     <UserRoute>
-      <div className="row py-3">
-        <div className="col-md-8">
+      <div className="container-fluid">
           <div className="row py-5 text-light bg-default-image">
-            <div className="col text-center jumbotron">
+            <div className="col text-center">
               <h1 className="display-4">News feed</h1>
               <h2 className="">Hello {user && user.name}</h2>
             </div>
@@ -176,9 +198,11 @@ const Dashboard = () => {
                 handleLikes={handleLikes}
               />
             </div>
-          </div>
           {/* <div>{JSON.stringify(posts, null, 4)}</div> */}
-          <div className="col-md-4">Sidebar</div>
+          <div className="col-md-4">
+           {/* {<pre>{JSON.stringify(people, null, 4)}</pre>} */}
+           <People people={people} />
+          </div>
         </div>
       </div>
     </UserRoute>
