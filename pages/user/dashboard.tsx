@@ -35,7 +35,8 @@ const Dashboard = () => {
           },
         }
       );
-       // console.log(data.people)
+        console.log("data.people =>", data)
+
       setState({...state, people: data.people });
       
     } catch (err) {
