@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import Link from "next/link";
 import { UserContext } from "../context";
 import { useRouter } from "next/router";
+import {Avatar} from "antd";
 
 interface NavBarProps {
   // Define your props here
@@ -41,7 +42,8 @@ function NavBar(props: NavBarProps) {
         href="/"
         passHref
       >
-        Home
+        <Avatar size={40} src={<img src={"/images/favicon.png"} alt="avatar" />} />
+        <span className="ms-2">Home</span>
       </Link>
 
       {loading ? (

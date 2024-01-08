@@ -16,6 +16,7 @@ const Dashboard = () => {
   const [posts, setPosts] = useState([]);
   const [like, setLike] = useState(false);
   const router = useRouter();
+  const { user, people } = state;
 
   useEffect(() => {
     if (state && state.token) {
@@ -169,7 +170,10 @@ const Dashboard = () => {
   }
 
   // console.log(posts)
-  const { user, people } = state;
+  
+  const handlefollow = async (user) => {
+console.log(user)
+  };
 
   return (
     <UserRoute>
@@ -202,7 +206,7 @@ const Dashboard = () => {
           {/* <div>{JSON.stringify(posts, null, 4)}</div> */}
           <div className="col-md-4">
            {/* {<pre>{JSON.stringify(people, null, 4)}</pre>} */}
-           <People people={people} />
+           <People people={people} handlefollow={handlefollow} />
           </div>
         </div>
       </div>

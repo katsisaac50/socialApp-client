@@ -17,7 +17,7 @@ interface PeopleProps {
   people: Person[];
 }
 
-const People: React.FC<PeopleProps> = ({ people }) => {
+const People: React.FC<PeopleProps> = ({ people, handlefollow }) => {
   const router = useRouter();
   const [state, setState] = useContext(UserContext);
   const [loading, setLoading] = useState(false);
@@ -46,8 +46,9 @@ const People: React.FC<PeopleProps> = ({ people }) => {
                 <div className="d-flex justify-content-between align-items-center">
                     <a href="#">
                         {person.name}
+                        
                     </a>
-                    <span>
+                    <span onClick={() => handlefollow(person)}>
                         follow
                     </span>
                 </div>}

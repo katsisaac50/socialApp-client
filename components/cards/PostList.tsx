@@ -54,7 +54,7 @@ const PostList = ({posts, like, handleDelete, handleLikes}) => {
                             
                         <span className="text-primary pt-2 h5 px-2"><HeartOutlined onClick={(e)=>handleLikes(p)} className={like === true ? 'bg-danger' : ''}/>{console.log(p)}{ " "} {p.likes && p.likes} likes</span>
                         <span className="text-primary pt-2 h5 px-2"><CommentOutlined />{ " "} {p.comments && p.comments.length} comments </span>
-                          {state && state.user && state.user._id === p.user && p.user._id && (
+                          {(
                             <>
                             <EditOutlined onClick={()=>router.push(`/user/post/${p._id}`)} className="text-danger pt-2 h5 px-2 mx-auto"/>
                             <DeleteOutlined onClick={() => handleDelete(p)} className="text-danger pt-2 h5 px-2"/> 
