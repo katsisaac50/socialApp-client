@@ -22,6 +22,14 @@ const People: React.FC<PeopleProps> = ({ people }) => {
   const [state, setState] = useContext(UserContext);
   const [loading, setLoading] = useState(false);
 
+  const imageSource = (person: Person) => {
+    if (person.photo) {
+      return person.photo.data;
+    } else {
+      return "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png";
+    }
+  };
+
   return (
     <UserRoute>
       <div>
@@ -33,7 +41,7 @@ const People: React.FC<PeopleProps> = ({ people }) => {
           renderItem={(person) => (
             <List.Item key={person.id}>
               <List.Item.Meta
-                avatar={<Avatar src={person && person.photo && person.photo.data} />}
+                avatar={<Avatar src={imageSource(person)} />}
                 title={
                 <div className="d-flex justify-content-between align-items-center">
                     <a href="#">
