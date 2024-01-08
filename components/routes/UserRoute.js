@@ -9,16 +9,15 @@ function UserRoute({ children }) {
   const [state] = useContext(UserContext);
   const router = useRouter();
 
-  // console.log(state)
   useEffect(() => {
     if(state && state.token) fetchUser();
   }, [state, state.token]);
 
+  // Fetch user data from server
   async function fetchUser() {
     try {
       const { data } = await axios.get(`/current-user`);
 
-      console.log(data.success);
       if (data.success) setOk(true);
     } catch (err) {
       console.log(err);

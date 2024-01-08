@@ -52,7 +52,7 @@ const PostList = ({posts, like, handleDelete, handleLikes}) => {
                         
                         <div className="d-flex pt-2">
                             
-                        <span className="text-primary pt-2 h5 px-2"><HeartOutlined onClick={(e)=>handleLikes(p)} className={like === true ? 'bg-danger' : ''}/>{console.log(p)}{ " "} {p.likes && p.likes} likes</span>
+                        <span className="text-primary pt-2 h5 px-2"><HeartOutlined onClick={(e)=>handleLikes(p)} className={like === true ? 'bg-danger' : ''}/>{/*console.log(p)*/}{ " "} {p.likes && p.likes} likes</span>
                         <span className="text-primary pt-2 h5 px-2"><CommentOutlined />{ " "} {p.comments && p.comments.length} comments </span>
                           {(
                             <>

@@ -172,7 +172,24 @@ const Dashboard = () => {
   // console.log(posts)
   
   const handlefollow = async (user) => {
-console.log(user)
+    try {
+      const { data } = await axios.put(
+        `/follow-user`,
+        {_id: user._id},
+        {
+          headers: {
+            Authorization: `Bearer ${state.token}`,
+          },
+        }
+      );
+      console.log(data);
+      setState({...state, user: data.user });
+      toast.success(data.message, {
+        theme: "colored",
+      });
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
