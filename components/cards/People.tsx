@@ -46,9 +46,8 @@ const People: React.FC<PeopleProps> = ({ people, handlefollow }) => {
                 <div className="d-flex justify-content-between align-items-center">
                     <a href="#">
                         {person.name}
-                        
                     </a>
-                    <span onClick={() => handlefollow(person)}>
+                    <span className="text-primary pointer" onClick={() => handlefollow(person)}>
                         follow
                     </span>
                 </div>}

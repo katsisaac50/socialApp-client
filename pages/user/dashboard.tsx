@@ -20,7 +20,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     if (state && state.token) {
-      fetchPosts();
+      newsFeed();
       findPeople();
     }
   }, [state && state.token]);
@@ -45,11 +45,12 @@ const Dashboard = () => {
     }
   };
 
-  const fetchPosts = async () => {
+  const newsFeed = async () => {
     try {
-      const { data } = await axios.get(
-        `/user-posts`
-      );
+      // const { data } = await axios.get(
+      //   `/user-posts`
+      // );
+      const { data } = await axios.get('/news-feed');
       // console.log(state)
       setPosts(data.posts);
     } catch (err) {
@@ -78,7 +79,7 @@ const Dashboard = () => {
       );
 
       if (  data.success) {
-        fetchPosts();
+        newsFeed();
         setContent("");
         setImage({});
         toast.success(  data.message, {
@@ -101,7 +102,7 @@ const Dashboard = () => {
       if (!answer) return;
       const { data } = await axios.delete(`/delete-post/${post._id}`);
       toast.error("Post deleted");
-      fetchPosts();
+      newsFeed();
     } catch (error) {
       console.log(error);
     }
@@ -114,11 +115,11 @@ const Dashboard = () => {
         console.log("ger");
         const { data } = await axios.post(`/like-post/${post._id}`);
         console.log("ge", data);
-        fetchPosts();
+        newsFeed();
       } else {
         setLike(false);
         const { data } = await axios.post(`/dislike-post/${post._id}`);
-        fetchPosts();
+        newsFeed();
       }
       // const {data} = await axios.post(`/like-post/${post._id}`)
     } catch (error) {
@@ -182,8 +183,20 @@ const Dashboard = () => {
           },
         }
       );
-      console.log(data);
+
+      let auth = JSON.parse(localStorage.getItem("auth"));
+      auth.user = data.user;
+      localStorage.setItem("auth", JSON.stringify(auth));
+
       setState({...state, user: data.user });
+
+      //update people state
+      let filtered = people.filter((person) => person._id!== user._id);
+
+      setState({...state, people: filtered });
+      // rerender the posts in newsfeed
+      newsFeed();
+
       toast.success(data.message, {
         theme: "colored",
       });

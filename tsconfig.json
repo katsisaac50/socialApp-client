@@ -21,7 +21,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx"
-  ],
+, "context/index.js", "components/routes/UserRoute.js"  ],
   "exclude": [
     "node_modules"
   ]
