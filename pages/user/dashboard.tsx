@@ -237,8 +237,8 @@ const Dashboard = () => {
           {/* <div>{JSON.stringify(posts, null, 4)}</div> */}
           <div className="col-md-4">
            {/* {<pre>{JSON.stringify(people, null, 4)}</pre>} */}
-           {state.state.user && (
-            <Link href ={`/user/following`}>
+           {state && state.user && (
+            <Link href ={`/user/following`} legacyBehavior>
               <a className="h6">{state.user.following.length} Following</a>
             </Link>
             )}
