@@ -5,6 +5,7 @@ import { UserContext } from "../../context";
 import UserRoute from "../../components/routes/UserRoute";
 import moment from "moment";
 import { Avatar, List } from "antd";
+import axios from "axios";
 
 interface Person {
   id: string;
@@ -26,8 +27,27 @@ const Following: React.FC<PeopleProps> = ({ handleFollow, handleUnfollow }) => {
   const [people, setPeople] = useState([]);
 
   useEffect(() => {
-
+    if (state && state.token) fetchFollowing();
   }, [state && state.token]);
+
+  const fetchFollowing = async () => {
+    try {
+
+      setLoading(true);
+      const {data} = await axios.get(`/find-people`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${state.token}`
+        }
+      });
+      console.log(data);
+      setPeople(data.people);
+      setLoading(false);
+      
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const imageSource = (person: Person) => {
     if (person.photo) {
