@@ -6,6 +6,8 @@ import UserRoute from "../../components/routes/UserRoute";
 import moment from "moment";
 import { Avatar, List } from "antd";
 import axios from "axios";
+import { toast } from "react-toastify";
+
 
 interface Person {
   id: string;
@@ -20,7 +22,7 @@ interface PeopleProps {
   handleUnfollow: (person: Person) => void;
 }
 
-const Following: React.FC<PeopleProps> = ({ handleFollow, handleUnfollow }) => {
+const Following: React.FC<PeopleProps> = ({ handleFollow}) => {
   const router = useRouter();
   const [state, setState] = useContext(UserContext);
   const [loading, setLoading] = useState(false);
@@ -34,14 +36,14 @@ const Following: React.FC<PeopleProps> = ({ handleFollow, handleUnfollow }) => {
     try {
 
       setLoading(true);
-      const {data} = await axios.get(`/find-people`, {
+      const {data} = await axios.get(`/user-following`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${state.token}`
         }
       });
       console.log(data);
-      setPeople(data.people);
+      setPeople(data.followingUsers);
       setLoading(false);
       
     } catch (error) {
@@ -55,6 +57,41 @@ const Following: React.FC<PeopleProps> = ({ handleFollow, handleUnfollow }) => {
     } else {
       return "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png";
     }
+  };
+
+  const handleUnfollow = async (person: Person) => {
+  console.log( person);
+  try {
+  setLoading(true);
+  // const {data} = await axios.delete(`/user-unfollow`, { 
+  // headers: { "Content-Type": "application/json", 
+  // Authorization: `Bearer ${state.token}` }, 
+  // data: { personId: person.id } 
+  // });
+
+  const {data} = await axios.put(`/unfollow-user`, {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${state.token}`
+    },
+    data: { personId: person._id }
+  });
+
+  let auth = JSON.parse(localStorage.getItem("auth") || "");
+  auth.user = data;
+  localStorage.setItem("auth", JSON.stringify(auth));
+  setState({...state, user: data });
+  let filtered = people.filter((p) => p._id!== person._id);
+  console.log(data);
+  setPeople(filtered);
+  
+  setLoading(false);
+  //  fetchFollowing();
+   toast.success(data.message, { theme: "colored" });
+  // console.log(data);
+} catch (error) {
+  console.log(error);
+  }
   };
 
   return (

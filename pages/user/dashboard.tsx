@@ -196,6 +196,7 @@ const Dashboard = () => {
 
       setState({...state, people: filtered });
       // rerender the posts in newsfeed
+      findPeople();
       newsFeed();
 
       toast.success(data.message, {
