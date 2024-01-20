@@ -5,7 +5,7 @@ import { renderToHTML } from "react-render-html";
 import ReactHtmlParser from 'react-html-parser';     
 import moment from "moment";
 import { Avatar } from "antd";
-import { HeartOutlined, CommentOutlined, EditOutlined, DeleteOutlined} from "@ant-design/icons";
+import { HeartOutlined, CommentOutlined, EditOutlined, DeleteOutlined, HeartFilled} from "@ant-design/icons";
 import { UserContext } from "../../context";
 import { useRouter } from "next/router";
 import axios from "axios";
@@ -51,7 +51,13 @@ const PostList = ({posts, like, handleDelete, handleLikes}) => {
 
                         
                         <div className="d-flex pt-2">
+                        {like === true ? (
+                            <span className="text-primary pt-2 h5 px-2"><HeartFilled onClick={(e)=>handleLikes(p)} />{/*console.log(p)*/}{ " "} {p.likes && p.likes} likes</span>
+                        ) : (<> 
+                        <span className="text-primary pt-2 h5 px-2"><HeartOutlined onClick={(e)=>handleLikes(p)} />{/*console.log(p)*/}{ " "} {p.likes && p.likes} likes</span>
+                        </>
                             
+                        )}
                         <span className="text-primary pt-2 h5 px-2"><HeartOutlined onClick={(e)=>handleLikes(p)} className={like === true ? 'bg-danger' : ''}/>{/*console.log(p)*/}{ " "} {p.likes && p.likes} likes</span>
                         <span className="text-primary pt-2 h5 px-2"><CommentOutlined />{ " "} {p.comments && p.comments.length} comments </span>
                           {(
