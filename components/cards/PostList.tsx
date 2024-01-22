@@ -15,7 +15,7 @@ const PostList = ({posts, like, handleDelete, handleLikes}) => {
 
     const [state] = useContext(UserContext);
     const router = useRouter();
-
+console.log("posts ->",posts, "state->", state)
     return (
         <div className="card">
         <div>
@@ -51,14 +51,13 @@ const PostList = ({posts, like, handleDelete, handleLikes}) => {
 
                         
                         <div className="d-flex pt-2">
-                        {like === true ? (
-                            <span className="text-primary pt-2 h5 px-2"><HeartFilled onClick={(e)=>handleLikes(p)} />{/*console.log(p)*/}{ " "} {p.likes && p.likes} likes</span>
+                        {p.likes.includes(state.user._id) ? (
+                            <span className="text-primary pt-2 h5 px-2"><HeartFilled onClick={(e)=>handleLikes(p)} />{/*console.log(p)*/}{ " "} {p.likes.length} likes</span>
                         ) : (<> 
-                        <span className="text-primary pt-2 h5 px-2"><HeartOutlined onClick={(e)=>handleLikes(p)} />{/*console.log(p)*/}{ " "} {p.likes && p.likes} likes</span>
+                        <span className="text-primary pt-2 h5 px-2"><HeartOutlined onClick={(e)=>handleLikes(p)} />{/*console.log(p)*/}{ " "} {p.likes.length} likes</span>
                         </>
                             
                         )}
-                        <span className="text-primary pt-2 h5 px-2"><HeartOutlined onClick={(e)=>handleLikes(p)} className={like === true ? 'bg-danger' : ''}/>{/*console.log(p)*/}{ " "} {p.likes && p.likes} likes</span>
                         <span className="text-primary pt-2 h5 px-2"><CommentOutlined />{ " "} {p.comments && p.comments.length} comments </span>
                           {(
                             <>
