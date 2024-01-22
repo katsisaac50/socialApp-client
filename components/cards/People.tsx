@@ -5,6 +5,7 @@ import { UserContext } from "../../context";
 import UserRoute from "../../components/routes/UserRoute";
 import moment from "moment";
 import { Avatar, List } from "antd";
+import {imageSource} from "../../functions/index";
 
 interface Person {
   id: string;
@@ -17,18 +18,18 @@ interface PeopleProps {
   people: Person[];
 }
 
-const People: React.FC<PeopleProps> = ({ people, handlefollow }) => {
+const People: React.FC<PeopleProps> = ({ people, handleFollow }) => {
   const router = useRouter();
   const [state, setState] = useContext(UserContext);
   const [loading, setLoading] = useState(false);
 
-  const imageSource = (person: Person) => {
-    if (person.photo) {
-      return person.photo.data;
-    } else {
-      return "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png";
-    }
-  };
+  // const imageSource = (person: Person) => {
+  //   if (person.photo) {
+  //     return person.photo.data;
+  //   } else {
+  //     return "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png";
+  //   }
+  // };
 
   return (
     <UserRoute>
@@ -47,7 +48,7 @@ const People: React.FC<PeopleProps> = ({ people, handlefollow }) => {
                     <a href="#">
                         {person.name}
                     </a>
-                    <span className="text-primary pointer" onClick={() => handlefollow(person)}>
+                    <span className="text-primary pointer" onClick={() => handleFollow(person)}>
                         follow
                     </span>
                 </div>}

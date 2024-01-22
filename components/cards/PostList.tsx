@@ -9,6 +9,7 @@ import { HeartOutlined, CommentOutlined, EditOutlined, DeleteOutlined, HeartFill
 import { UserContext } from "../../context";
 import { useRouter } from "next/router";
 import axios from "axios";
+import {imageSource} from "../../functions/index";
 
 
 const PostList = ({posts, like, handleDelete, handleLikes}) => {
@@ -23,7 +24,7 @@ console.log("posts ->",posts, "state->", state)
                 <div key={p._id} className="card-body">
                     <div className="card-header">
                         <div>
-                            <Avatar src={p.image&&p.image.url} size={"large"}  alt={p.user && p.user.name}>
+                            <Avatar src={imageSource(p)} size={"large"}  alt={p.user && p.user.name}>
                                 {p.user && p.user.name[0]}
                             </Avatar>{" "}
                         </div>

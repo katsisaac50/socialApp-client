@@ -243,7 +243,7 @@ const Dashboard = () => {
               <a className="h6">{state.user.following.length} Following</a>
             </Link>
             )}
-           <People people={people} handlefollow={handlefollow} />
+           <People people={people} handleFollow={handlefollow} />
           </div>
         </div>
       </div>
