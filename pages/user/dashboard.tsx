@@ -16,6 +16,8 @@ const Dashboard = () => {
   const [image, setImage] = useState({});
   const [posts, setPosts] = useState([]);
   const [like, setLike] = useState(false);
+  const [comment, setComment] = useState('');
+  const [visible, setVisible] = useState(false);
   const router = useRouter();
   const { user, people } = state;
 
