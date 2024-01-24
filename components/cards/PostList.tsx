@@ -12,7 +12,7 @@ import axios from "axios";
 import {imageSource} from "../../functions/index";
 
 
-const PostList = ({posts, like, handleDelete, handleLikes}) => {
+const PostList = ({posts, like, handleDelete, handleLikes, handleComment}) => {
 
     const [state] = useContext(UserContext);
     const router = useRouter();
@@ -59,7 +59,7 @@ console.log("posts ->",posts, "state->", state)
                         </>
                             
                         )}
-                        <span className="text-primary pt-2 h5 px-2"><CommentOutlined />{ " "} {p.comments && p.comments.length} comments </span>
+                        <span className="text-primary pt-2 h5 px-2"><CommentOutlined onclick = {()=>handleComment(p)} />{ " "} {p.comments && p.comments.length} comments </span>
                           {(
                             <>
                             <EditOutlined onClick={()=>router.push(`/user/post/${p._id}`)} className="text-danger pt-2 h5 px-2 mx-auto"/>

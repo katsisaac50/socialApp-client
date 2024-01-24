@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 import PostList from "../../components/cards/PostList";
 import People from "../../components/cards/People";
 import Link from "next/link";
+import {Modal} from "antd"
 
 const Dashboard = () => {
   const [state, setState] = useContext(UserContext);
@@ -18,6 +19,7 @@ const Dashboard = () => {
   const [like, setLike] = useState(false);
   const [comment, setComment] = useState('');
   const [visible, setVisible] = useState(false);
+  const [currentPost, setCurrentPost] = useState({})
   const router = useRouter();
   const { user, people } = state;
 
@@ -209,6 +211,43 @@ const Dashboard = () => {
     }
   };
 
+  const handleComment = async (post) => {
+    // try {
+    //   const { data } = await axios.post(
+    //     `/create-comment`,
+    //     {
+    //       content: comment,
+    //       postId: post._id,
+    //     },
+    //     {
+    //       headers: {
+    //         Authorization: `Bearer ${state.token}`,
+    //       },
+    //     }
+    //   );
+    //   console.log(data);
+    //   setComment('');
+    //   newsFeed();
+    //   toast.success(data.message, {
+    //     theme: "colored",
+    //   }); 
+    // }
+    // catch (err) {
+    //   console.log(err);
+    // }
+    setCurrentPost(post);
+    setVisible(true);
+
+    };
+
+    const addComment = async () => {
+      // 
+    };
+
+    const removeComment = async () => {
+      // 
+    };
+
   return (
     <UserRoute>
       <div className="container-fluid">
@@ -235,6 +274,9 @@ const Dashboard = () => {
                 like={like}
                 handleDelete={handleDelete}
                 handleLikes={handleLikes}
+                handleComment = {handleComment}
+                addComment = {addComment}
+                removeComment = {removeComment}
               />
             </div>
           {/* <div>{JSON.stringify(posts, null, 4)}</div> */}
@@ -248,6 +290,8 @@ const Dashboard = () => {
            <People people={people} handleFollow={handlefollow} />
           </div>
         </div>
+        <Modal visible = {visible} onCancel = {()=>setVisible(false)} title = "Comment" footer = {null}>
+        </Modal>
       </div>
     </UserRoute>
   );
