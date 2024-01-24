@@ -291,6 +291,7 @@ const Dashboard = () => {
           </div>
         </div>
         <Modal visible = {visible} onCancel = {()=>setVisible(false)} title = "Comment" footer = {null}>
+        Here are your comments
         </Modal>
       </div>
     </UserRoute>
