@@ -240,8 +240,31 @@ const Dashboard = () => {
 
     };
 
-    const addComment = async () => {
-      // 
+    const addComment = async (e) => {
+      e.preventDefault();
+      try {
+        const { data } = await axios.post(
+          `/create-comment`,
+          {
+            content: comment,
+            postId: currentPost._id,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${state.token}`,
+            },
+          }
+        );
+        console.log(data);
+        setComment('');
+        newsFeed();
+        toast.success(data.message, {
+          theme: "colored",
+        });
+      }
+      catch (err) {
+        console.log(err);
+      }
     };
 
     const removeComment = async () => {
@@ -291,7 +314,16 @@ const Dashboard = () => {
           </div>
         </div>
         <Modal visible = {visible} onCancel = {()=>setVisible(false)} title = "Comment" footer = {null}>
-        Here are your comments
+        <form onSubmit = {addComment}>
+          <input 
+          type = "text" 
+          className = "form-control" 
+          placeholder = "Add a comment" 
+          value={comment} 
+          onChange = {(e)=>setComment(e.target.value)} 
+          />
+          <button type = "submit" className = "btn btn-primary btn-block mt-2">Add Comment</button>
+        </form>
         </Modal>
       </div>
     </UserRoute>
