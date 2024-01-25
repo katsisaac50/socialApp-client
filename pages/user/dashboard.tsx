@@ -7,6 +7,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import PostList from "../../components/cards/PostList";
 import People from "../../components/cards/People";
+import CommentForm from "../../components/forms/CommentForm"
 import Link from "next/link";
 import {Modal} from "antd"
 
@@ -257,6 +258,7 @@ const Dashboard = () => {
         );
         console.log(data);
         setComment('');
+        setVisible(false);
         newsFeed();
         toast.success(data.message, {
           theme: "colored",
@@ -314,16 +316,7 @@ const Dashboard = () => {
           </div>
         </div>
         <Modal visible = {visible} onCancel = {()=>setVisible(false)} title = "Comment" footer = {null}>
-        <form onSubmit = {addComment}>
-          <input 
-          type = "text" 
-          className = "form-control" 
-          placeholder = "Add a comment" 
-          value={comment} 
-          onChange = {(e)=>setComment(e.target.value)} 
-          />
-          <button type = "submit" className = "btn btn-primary btn-block mt-2">Add Comment</button>
-        </form>
+        <CommentForm addComment={addComment} comment={comment} setComment={setComment}/>
         </Modal>
       </div>
     </UserRoute>
