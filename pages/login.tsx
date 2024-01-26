@@ -37,7 +37,7 @@ const LoginPage = () => {
       // save user and token in local storage and redirect
       localStorage.setItem('auth', JSON.stringify(response.data));
       console.log(state);
-      router.push('/');
+      router.push('/user/dashboard');
 
       // console.log(response.data);
     } catch (error) {
@@ -50,7 +50,7 @@ const LoginPage = () => {
   };
 
   if (state && state.token) {
-    router.push('/');
+    router.push('/user/dashboard');
   }
 
   return (
