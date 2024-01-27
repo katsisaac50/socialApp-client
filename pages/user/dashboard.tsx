@@ -276,47 +276,45 @@ const Dashboard = () => {
   return (
     <UserRoute>
       <div className="container-fluid">
-          <div className="row py-5 text-light bg-default-image">
-            <div className="col text-center">
-              <h1 className="display-4">News feed</h1>
-              <h2 className="">Hello {user && user.name}</h2>
-            </div>
-          </div>
-
-          <div className="row py-3">
-            <div className="col-md-8">
-              <PostForm
-                content={content}
-                handleQuillChange={handleQuillChange}
-                postSubmit={postSubmit}
-                handleImageUpload={handleImageUpload}
-                uploading={uploading}
-                image={image}
-              />
-              <br />
-              <PostList
-                posts={posts}
-                like={like}
-                handleDelete={handleDelete}
-                handleLikes={handleLikes}
-                handleComment = {handleComment}
-                addComment = {addComment}
-                removeComment = {removeComment}
-              />
-            </div>
-          {/* <div>{JSON.stringify(posts, null, 4)}</div> */}
-          <div className="col-md-4">
-           {/* {<pre>{JSON.stringify(people, null, 4)}</pre>} */}
-           {state && state.user && (
-            <Link href ={`/user/following`} legacyBehavior>
-              <a className="h6">{state.user.following.length} Following</a>
-            </Link>
-            )}
-           <People people={people} handleFollow={handlefollow} />
+        <div className="row py-5 text-light bg-default-image">
+          <div className="col text-center">
+            <h1 className="display-4">News feed</h1>
+            <h2 className="">Hello {state.user && state.user.name}</h2>
           </div>
         </div>
-        <Modal visible = {visible} onCancel = {()=>setVisible(false)} title = "Comment" footer = {null}>
-        <CommentForm addComment={addComment} comment={comment} setComment={setComment}/>
+
+        <div className="row py-3">
+          <div className="col-md-8">
+            <PostForm
+              content={content}
+              handleQuillChange={handleQuillChange}
+              postSubmit={postSubmit}
+              handleImageUpload={handleImageUpload}
+              uploading={uploading}
+              image={image}
+            />
+            <br />
+            <PostList
+              posts={posts}
+              like={like}
+              handleDelete={handleDelete}
+              handleLikes={handleLikes}
+              handleComment={handleComment}
+              addComment={addComment}
+              removeComment={removeComment}
+            />
+          </div>
+          <div className="col-md-4">
+            {state && state.user && (
+              <Link href={`/user/following`} legacyBehavior>
+                <a className="h6">{state.user.following.length} Following</a>
+              </Link>
+            )}
+            <People people={state.people} handleFollow={handlefollow} />
+          </div>
+        </div>
+        <Modal visible={visible} onCancel={() => setVisible(false)} title="Comment" footer={null}>
+          <CommentForm addComment={addComment} comment={comment} setComment={setComment}/>
         </Modal>
       </div>
     </UserRoute>
