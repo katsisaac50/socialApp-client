@@ -4,6 +4,8 @@ import { Avatar } from "antd";
 import axios from "axios";
 import { UserContext } from "../../context";
 import Post from "../../components/cards/Post";
+import Link from "next/link";
+import { RollbackOutlined } from "@ant-design/icons";
 
 const PostComment = ({ post }) => {
   const [posts, setPosts] = useState(post);
@@ -27,10 +29,18 @@ const PostComment = ({ post }) => {
 
   return (
     <div className="post-comment">
+      <div className="row py-5 text-center">
+        <div className="col text-center">
+          <h1>SocialApp</h1>
+        </div>
+      </div>
       <div className="post-comment-header">
         <Post p={posts} />
       </div>
-    </div>
+      <Link href="/user/dashboard">
+        <RollbackOutlined/>
+      </Link>    
+      </div>
   );
 };
 

@@ -116,7 +116,6 @@ const Post = ({
                           {p.user && p.user.name}
                           <div className="ms-2 me-auto">
                             {c.text}
-                            {console.log(c)}
                           </div>
                         </div>
                         <span className="badge badge-primary rounded-pill text-muted">
