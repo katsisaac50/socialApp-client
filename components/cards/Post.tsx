@@ -18,7 +18,7 @@ import { imageSource } from "../../functions/index";
 import Link from "next/link";
 
 const Post = ({
-  commentsCount = 2,
+  commentsCount = 4,
   removeComment,
   handleDelete,
   handleLikes,
@@ -100,7 +100,9 @@ const Post = ({
                 </div>
               </div>
               {p.comments && p.comments.length > 0 && (
-                <ol className="list-group">
+                <ol className="list-group"
+                style={{maxHeight: "125px", overflowY: "scroll"}}
+                >
                   {p.comments.slice(0, commentsCount).map((c) => {
                     return (
                       <li className="list-group-item d-flex list-group-item-action justify-content-between align-items-start">
@@ -120,7 +122,8 @@ const Post = ({
                         </div>
                         <span className="badge badge-primary rounded-pill text-muted">
                           {moment(c.created).fromNow()}
-                          {state&&state.user&&state.user._id===p.user._id&&(
+                          {/* {console.log("Palestine", c, "number two", state)} */}
+                          {state&&state.user&&state.user._id===c.user||c.user._id&&(
                           <div className="ml-auto mt-1">
                             <DeleteOutlined onClick={() => removeComment(p._id, c)} className="text-danger pt-2 h5 px-2" />
                           </div>)}

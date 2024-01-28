@@ -28,16 +28,18 @@ const PostComment = ({ post }) => {
   };
 
   const removeComment = async (postId, comment) => {
-    console.log(postId, comment);
-    // try {
-    //   const { data } = await axios.delete(
-    //     `/user/post/${postId}/comment/${comment._id}`
-    //   );
-    //   console.log(data);
-    //   fetchPost();
-    // } catch (error) {
-    //   console.error("Error deleting comment:", error);
-    // }
+    // console.log(postId, comment);
+    let confirm = window.confirm("Are you sure you want to delete this comment?");
+    if (!confirm) return;
+    try {
+      const { data } = await axios.delete(
+        `/user/post/${postId}/comment/${comment._id}`
+      );
+      console.log(data);
+      fetchPost();
+    } catch (error) {
+      console.error("Error deleting comment:", error);
+    }
   };
 
   return (
