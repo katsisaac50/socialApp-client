@@ -35,9 +35,9 @@ const PostComment = ({ post }) => {
         </div>
       </div>
       <div className="post-comment-header">
-        <Post p={posts} />
+        <Post p={posts} commentsCount={100} />
       </div>
-      <Link href="/user/dashboard">
+      <Link href="/user/dashboard" className="d-flex justify-content-center p-5">
         <RollbackOutlined/>
       </Link>    
       </div>

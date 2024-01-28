@@ -18,7 +18,7 @@ import { imageSource } from "../../functions/index";
 import Link from "next/link";
 
 const Post = ({
-  posts,
+  commentsCount = 2,
   like,
   handleDelete,
   handleLikes,
@@ -101,7 +101,7 @@ const Post = ({
               </div>
               {p.comments && p.comments.length > 0 && (
                 <ol className="list-group">
-                  {p.comments.map((c) => {
+                  {p.comments.slice(0, commentsCount).map((c) => {
                     return (
                       <li className="list-group-item d-flex list-group-item-action justify-content-between align-items-start">
                         <div className="ms-2 me-auto">
