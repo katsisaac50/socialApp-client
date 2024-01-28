@@ -27,6 +27,19 @@ const PostComment = ({ post }) => {
     }
   };
 
+  const removeComment = async (postId, comment) => {
+    console.log(postId, comment);
+    // try {
+    //   const { data } = await axios.delete(
+    //     `/user/post/${postId}/comment/${comment._id}`
+    //   );
+    //   console.log(data);
+    //   fetchPost();
+    // } catch (error) {
+    //   console.error("Error deleting comment:", error);
+    // }
+  };
+
   return (
     <div className="post-comment">
       <div className="row py-5 text-center">
@@ -35,7 +48,7 @@ const PostComment = ({ post }) => {
         </div>
       </div>
       <div className="post-comment-header">
-        <Post p={posts} commentsCount={100} />
+        <Post p={posts} commentsCount={100} removeComment={removeComment} />
       </div>
       <Link href="/user/dashboard" className="d-flex justify-content-center p-5">
         <RollbackOutlined/>

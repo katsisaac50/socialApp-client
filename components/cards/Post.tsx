@@ -19,7 +19,7 @@ import Link from "next/link";
 
 const Post = ({
   commentsCount = 2,
-  like,
+  removeComment,
   handleDelete,
   handleLikes,
   handleComment,
@@ -120,6 +120,10 @@ const Post = ({
                         </div>
                         <span className="badge badge-primary rounded-pill text-muted">
                           {moment(c.created).fromNow()}
+                          {state&&state.user&&state.user._id===p.user._id&&(
+                          <div className="ml-auto mt-1">
+                            <DeleteOutlined onClick={() => removeComment(p._id, c)} className="text-danger pt-2 h5 px-2" />
+                          </div>)}
                         </span>
                       </li>
                     );
