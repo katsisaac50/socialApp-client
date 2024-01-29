@@ -30,7 +30,8 @@ const PostList = ({
       <div>
         {posts &&
           posts.map((p) => (
-            <Post 
+            <Post
+            key={p._id} 
             p={p} 
             like ={like}
             handleDelete={handleDelete}

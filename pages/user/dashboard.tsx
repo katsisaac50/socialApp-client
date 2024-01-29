@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect } from "react";
+import { useContext, useState, useEffect, use } from "react";
 import { useRouter } from "next/router";
 import { UserContext } from "../../context";
 import UserRoute from "../../components/routes/UserRoute";
@@ -23,6 +23,7 @@ const Dashboard = () => {
   const [currentPost, setCurrentPost] = useState({})
   const router = useRouter();
   const { user, people } = state;
+  const [totalPosts, setTotalPosts] = useState(0);
 
   useEffect(() => {
     if (state && state.token) {
@@ -30,6 +31,18 @@ const Dashboard = () => {
       findPeople();
     }
   }, [state && state.token]);
+
+  useEffect(() => {
+    try {
+      axios.get("/total-posts").then(({data}) => {
+        console.log(data)
+        setTotalPosts(data.total)
+      })
+      
+    } catch (error) {
+      console.log(error);
+    }
+  });
 
   const findPeople = async () => {
     console.log("find people")
@@ -282,7 +295,7 @@ const Dashboard = () => {
             <h2 className="">Hello {state.user && state.user.name}</h2>
           </div>
         </div>
-
+        {total}
         <div className="row py-3">
           <div className="col-md-8">
             <PostForm
