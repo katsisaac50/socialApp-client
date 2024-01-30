@@ -9,7 +9,8 @@ import PostList from "../../components/cards/PostList";
 import People from "../../components/cards/People";
 import CommentForm from "../../components/forms/CommentForm"
 import Link from "next/link";
-import {Modal, Pagination} from "antd"
+import {Modal, Pagination} from "antd";
+import Search from "../../components/search";
 
 const Dashboard = () => {
   const [state, setState] = useContext(UserContext);
@@ -333,6 +334,8 @@ const Dashboard = () => {
             <Pagination current={currentPage} total={(totalPosts/3)*10} onChange={(value)=>setCurrentPage(value)} />
           </div>
           <div className="col-md-4">
+            <Search />
+            <h3 className="text-center">People you may know</h3>
             {state && state.user && (
               <Link href={`/user/following`} legacyBehavior>
                 <a className="h6">{state.user.following.length} Following</a>
