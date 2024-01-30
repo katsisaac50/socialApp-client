@@ -9,7 +9,7 @@ import PostList from "../../components/cards/PostList";
 import People from "../../components/cards/People";
 import CommentForm from "../../components/forms/CommentForm"
 import Link from "next/link";
-import {Modal} from "antd"
+import {Modal, Pagination} from "antd"
 
 const Dashboard = () => {
   const [state, setState] = useContext(UserContext);
@@ -23,14 +23,17 @@ const Dashboard = () => {
   const [currentPost, setCurrentPost] = useState({})
   const router = useRouter();
   const { user, people } = state;
+
+  //pagination
   const [totalPosts, setTotalPosts] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
     if (state && state.token) {
       newsFeed();
       findPeople();
     }
-  }, [state && state.token]);
+  }, [state && state.token, currentPage]);
 
   useEffect(() => {
     try {
@@ -69,7 +72,7 @@ const Dashboard = () => {
       // const { data } = await axios.get(
       //   `/user-posts`
       // );
-      const { data } = await axios.get('/news-feed');
+      const { data } = await axios.get(`/news-feed/${currentPage}`);
       // console.log(state)
       setPosts(data.posts);
     } catch (err) {
@@ -282,8 +285,19 @@ const Dashboard = () => {
       }
     };
 
-    const removeComment = async () => {
-      // 
+    const removeComment = async (postId, comment) => {
+      // console.log(postId, comment);
+      let confirm = window.confirm("Are you sure you want to delete this comment?");
+      if (!confirm) return;
+      try {
+        const { data } = await axios.delete(
+          `/user/post/${postId}/comment/${comment._id}`
+        );
+        console.log(data);
+        newsFeed();
+      } catch (error) {
+        console.error("Error deleting comment:", error);
+      }
     };
 
   return (
@@ -295,7 +309,7 @@ const Dashboard = () => {
             <h2 className="">Hello {state.user && state.user.name}</h2>
           </div>
         </div>
-        {total}
+        {totalPosts}
         <div className="row py-3">
           <div className="col-md-8">
             <PostForm
@@ -316,6 +330,7 @@ const Dashboard = () => {
               addComment={addComment}
               removeComment={removeComment}
             />
+            <Pagination current={currentPage} total={(totalPosts/3)*10} onChange={(value)=>setCurrentPage(value)} />
           </div>
           <div className="col-md-4">
             {state && state.user && (

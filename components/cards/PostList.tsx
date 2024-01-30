@@ -24,6 +24,7 @@ const PostList = ({
   handleDelete,
   handleLikes,
   handleComment,
+  removeComment,
 }) => {
   return (
     <div className="card">
@@ -37,6 +38,7 @@ const PostList = ({
             handleDelete={handleDelete}
             handleLikes={handleLikes}
             handleComment={handleComment}
+            removeComment={removeComment}
             />
           ))}
       </div>
