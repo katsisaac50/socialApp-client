@@ -33,8 +33,6 @@ function NavBar(props: NavBarProps) {
     router.push("/login");
   };
 
-  console.log(state);
-
   return (
     <nav className="nav bg-primary d-flex justify-content-between">
       <Link

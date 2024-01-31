@@ -12,6 +12,7 @@ const Search = () => {
                     query: query
                 }
             });
+            console.log(data);
             setState({
                ...state,
                 people: data.people
@@ -22,15 +23,17 @@ const Search = () => {
     };
     return (
         <div>
-            <form onSubmit={searchUser} >
+            <form onSubmit={searchUser} className="form-inline row">
                 <input
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder="Search"
-                className="form-control mr-sm-2 col"
+                className="form-control"
                 value={query}
                 type="search"
                 />
-                <button type="submit" className="btn btn-outline-primary my-2 my-sm-0 mr-2" >Search</button>
+                <button type="submit" className="btn btn-outline-primary col-12" >
+                    Search
+                </button>
             </form>
         </div>
     )

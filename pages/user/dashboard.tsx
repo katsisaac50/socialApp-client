@@ -49,7 +49,6 @@ const Dashboard = () => {
   });
 
   const findPeople = async () => {
-    console.log("find people")
     try {
       const { data } = await axios.get(
         `/find-people`,
@@ -59,7 +58,6 @@ const Dashboard = () => {
           },
         }
       );
-        console.log("data.people =>", data)
 
       setState({...state, people: data.people });
       
@@ -74,7 +72,6 @@ const Dashboard = () => {
       //   `/user-posts`
       // );
       const { data } = await axios.get(`/news-feed/${currentPage}`);
-      // console.log(state)
       setPosts(data.posts);
     } catch (err) {
       console.log(err);
@@ -119,7 +116,7 @@ const Dashboard = () => {
   };
 
   const handleDelete = async (post) => {
-    console.log(post);
+    // console.log(post);
     try {
       const answer = window.confirm("Are you sure?");
       if (!answer) return;
@@ -192,8 +189,6 @@ const Dashboard = () => {
     router.push("/login");
     return null;
   }
-
-  // console.log(posts)
   
   const handlefollow = async (user) => {
     try {
@@ -273,7 +268,6 @@ const Dashboard = () => {
             },
           }
         );
-        console.log(data);
         setComment('');
         setVisible(false);
         newsFeed();
@@ -287,14 +281,12 @@ const Dashboard = () => {
     };
 
     const removeComment = async (postId, comment) => {
-      // console.log(postId, comment);
       let confirm = window.confirm("Are you sure you want to delete this comment?");
       if (!confirm) return;
       try {
         const { data } = await axios.delete(
           `/user/post/${postId}/comment/${comment._id}`
         );
-        console.log(data);
         newsFeed();
       } catch (error) {
         console.error("Error deleting comment:", error);
@@ -310,7 +302,6 @@ const Dashboard = () => {
             <h2 className="">Hello {state.user && state.user.name}</h2>
           </div>
         </div>
-        {totalPosts}
         <div className="row py-3">
           <div className="col-md-8">
             <PostForm

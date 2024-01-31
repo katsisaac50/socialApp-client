@@ -27,9 +27,7 @@ const Post = ({
 }) => {
   const [state] = useContext(UserContext);
   const router = useRouter();
-//   let {post}= p;
-//   p = post;
-//   console.log(p)
+
   return (
     <>  
     {p&&(<div className="card">
@@ -42,7 +40,6 @@ const Post = ({
                     size={"large"}
                     alt={p.user && p.user.name}
                   >
-                    {p.user && p.user.name[0]}
                   </Avatar>{" "}
                 </div>
                 <span className="pt-2 ml-3">

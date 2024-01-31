@@ -1,9 +1,5 @@
 import { Avatar } from "antd";
 import dynamic from "next/dynamic";
-import { useContext, useState } from "react";
-import { UserContext } from "../../context";
-import { renderToHTML } from "react-render-html";
-import moment from "moment";
 
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 import { CameraOutlined, LoadingOutlined } from "@ant-design/icons";
@@ -17,9 +13,6 @@ const PostForm = ({
                         uploading,
                         image
                         }) => {
-    // const [state] = useContext(UserContext);
-    // const [content, setContent] = useState("");
-    // const [title, setTitle] = useState("");
 
     return (
         <div className="card">
@@ -34,8 +27,6 @@ const PostForm = ({
                     />
                 </form>
             </div>
-
-            
 
             <div className="card-footer d-flex justify-content-between text-muted">
                 <button
