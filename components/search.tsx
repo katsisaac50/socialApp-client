@@ -5,7 +5,8 @@ import axios from "axios";
 const Search = () => {
     const [state, setState] = useContext(UserContext);
     const [query, setQuery] = useState("");
-    const searchUser = async () => {
+    const searchUser = async (e) => {
+        e.preventDefault();
         try {
             const {data} = await axios.get("/user/search", {
                 params: {

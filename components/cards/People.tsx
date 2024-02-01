@@ -1,7 +1,5 @@
 import React from "react";
-import { useContext, useState, useEffect } from "react";
-import { useRouter } from "next/router";
-import { UserContext } from "../../context";
+import { useState} from "react";
 import UserRoute from "../../components/routes/UserRoute";
 import moment from "moment";
 import { Avatar, List } from "antd";
@@ -16,11 +14,10 @@ interface Person {
 
 interface PeopleProps {
   people: Person[];
+  handleFollow: (user: Person) => Promise<void>;
 }
 
 const People: React.FC<PeopleProps> = ({ people, handleFollow }) => {
-  const router = useRouter();
-  const [state, setState] = useContext(UserContext);
   const [loading, setLoading] = useState(false);
 
   // const imageSource = (person: Person) => {

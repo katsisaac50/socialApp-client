@@ -6,16 +6,56 @@ import { UserContext } from "../../context";
 import Post from "../../components/cards/Post";
 import Link from "next/link";
 import { RollbackOutlined } from "@ant-design/icons";
+import { Modal } from "antd";
+import CommentForm from "../../components/forms/CommentForm";
+import {toast} from "react-toastify";
 
 const PostComment = ({ post }) => {
   const [posts, setPosts] = useState(post);
   const router = useRouter();
-  const { user } = useContext(UserContext);
   const _id = router.query._id;
+  const [state] = useContext(UserContext);
+  const [comment, setComment] = useState('');
+  const [visible, setVisible] = useState(false);
+  const [currentPost, setCurrentPost] = useState({})
 
   useEffect(() => {
     if (_id) fetchPost();
   }, [_id]);
+
+  const handleComment = async (post) => {
+    console.log(post);
+    setCurrentPost(post);
+    setVisible(true);
+
+    };
+
+  const addComment = async (e) => {
+    e.preventDefault();
+    try {
+      console.log("hdhdls")
+      const { data } = await axios.post(
+        `/create-comment`,
+        {
+          content: comment,
+          postId: currentPost._id,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${state.token}`,
+          },
+        }
+      );
+      setComment("");
+      setVisible(false);
+      fetchPost();
+      toast.success(data.message, {
+        theme: "colored",
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   const fetchPost = async () => {
     try {
@@ -29,7 +69,9 @@ const PostComment = ({ post }) => {
 
   const removeComment = async (postId, comment) => {
     // console.log(postId, comment);
-    let confirm = window.confirm("Are you sure you want to delete this comment?");
+    let confirm = window.confirm(
+      "Are you sure you want to delete this comment?"
+      );
     if (!confirm) return;
     try {
       const { data } = await axios.delete(
@@ -50,11 +92,14 @@ const PostComment = ({ post }) => {
         </div>
       </div>
       <div className="post-comment-header">
-        <Post p={posts} commentsCount={100} removeComment={removeComment} />
+        <Post p={posts} commentsCount={100} removeComment={removeComment} handleComment={handleComment} />
       </div>
       <Link href="/user/dashboard" className="d-flex justify-content-center p-5">
         <RollbackOutlined/>
-      </Link>    
+      </Link> 
+      <Modal visible={visible} onCancel={() => setVisible(false)} title="Comment" footer={null}>
+          <CommentForm addComment={addComment} comment={comment} setComment={setComment}/>
+      </Modal>
       </div>
   );
 };

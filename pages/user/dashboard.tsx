@@ -39,7 +39,6 @@ const Dashboard = () => {
   useEffect(() => {
     try {
       axios.get("/total-posts").then(({data}) => {
-        console.log(data)
         setTotalPosts(data.total)
       })
       
@@ -253,32 +252,32 @@ const Dashboard = () => {
 
     };
 
-    const addComment = async (e) => {
-      e.preventDefault();
-      try {
-        const { data } = await axios.post(
-          `/create-comment`,
-          {
-            content: comment,
-            postId: currentPost._id,
+  const addComment = async (e) => {
+    e.preventDefault();
+    try {
+      const { data } = await axios.post(
+        `/create-comment`,
+        {
+          content: comment,
+          postId: currentPost._id,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${state.token}`,
           },
-          {
-            headers: {
-              Authorization: `Bearer ${state.token}`,
-            },
-          }
-        );
-        setComment('');
-        setVisible(false);
-        newsFeed();
-        toast.success(data.message, {
-          theme: "colored",
-        });
-      }
-      catch (err) {
-        console.log(err);
-      }
-    };
+        }
+      );
+      setComment("");
+      setVisible(false);
+      newsFeed();
+      toast.success(data.message, {
+        theme: "colored",
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
 
     const removeComment = async (postId, comment) => {
       let confirm = window.confirm("Are you sure you want to delete this comment?");
@@ -293,7 +292,7 @@ const Dashboard = () => {
       }
     };
 
-  return (
+    return (
     <UserRoute>
       <div className="container-fluid">
         <div className="row py-5 text-light bg-default-image">
@@ -319,10 +318,13 @@ const Dashboard = () => {
               handleDelete={handleDelete}
               handleLikes={handleLikes}
               handleComment={handleComment}
-              addComment={addComment}
               removeComment={removeComment}
             />
-            <Pagination current={currentPage} total={(totalPosts/3)*10} onChange={(value)=>setCurrentPage(value)} />
+            <Pagination 
+            current={currentPage} 
+            total={(totalPosts/3)*10} 
+            onChange={(value)=>setCurrentPage(value)} 
+            />
           </div>
           <div className="col-md-4">
             <Search />

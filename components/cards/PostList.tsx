@@ -25,6 +25,7 @@ const PostList = ({
   handleLikes,
   handleComment,
   removeComment,
+  addComment,
 }) => {
   return (
     <div className="card">
