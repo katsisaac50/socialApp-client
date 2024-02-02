@@ -5,6 +5,9 @@ import axios from "axios";
 const Search = () => {
     const [state, setState] = useContext(UserContext);
     const [query, setQuery] = useState("");
+    const [result, setResult] = useState([]);
+
+
     const searchUser = async (e) => {
         e.preventDefault();
         try {
@@ -14,10 +17,11 @@ const Search = () => {
                 }
             });
             console.log(data);
-            setState({
-               ...state,
-                people: data.people
-            });
+            setResult(data.users);
+            // setState({
+            //    ...state,
+            //     people: data.people
+            // });
         } catch (error) {
             console.log(error);
         }
@@ -36,6 +40,22 @@ const Search = () => {
                     Search
                 </button>
             </form>
+            {result && result.map((person) => {
+                return (
+                    <div key={person._id} className="container">
+                        <div className="row">
+                            {/* <div className="col-2">
+                                <img src={person.profilePicture} className="img-fluid rounded-circle" />
+                            </div> */}
+                            <div className="col-10">
+                                <h1>{person.name}</h1>
+                                <p>{person.email}</p>
+                                <p>{person.userName}</p>
+                            </div>
+                        </div>
+                    </div>
+                )
+            })}
         </div>
     )
 }
