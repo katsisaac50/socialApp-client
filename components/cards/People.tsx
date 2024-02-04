@@ -20,6 +20,8 @@ interface PeopleProps {
 const People: React.FC<PeopleProps> = ({ people, handleFollow }) => {
   const [loading, setLoading] = useState(false);
 
+  console.log(people);
+
   // const imageSource = (person: Person) => {
   //   if (person.photo) {
   //     return person.photo.data;
@@ -31,7 +33,6 @@ const People: React.FC<PeopleProps> = ({ people, handleFollow }) => {
   return (
     <UserRoute>
       <div>
-        <h1>People</h1>
         <List
           loading={loading}
           itemLayout="horizontal"

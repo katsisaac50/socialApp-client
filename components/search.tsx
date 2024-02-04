@@ -1,6 +1,7 @@
 import {useContext, useState} from "react";
 import {UserContext} from "../context";
 import axios from "axios";
+import People from "../components/cards/People"
 
 const Search = () => {
     const [state, setState] = useContext(UserContext);
@@ -30,7 +31,10 @@ const Search = () => {
         <div>
             <form onSubmit={searchUser} className="form-inline row">
                 <input
-                onChange={(e) => setQuery(e.target.value)}
+                onChange={(e) => {
+                    setQuery(e.target.value);
+                    setResult([]);
+                }}
                 placeholder="Search"
                 className="form-control"
                 value={query}
@@ -40,22 +44,7 @@ const Search = () => {
                     Search
                 </button>
             </form>
-            {result && result.map((person) => {
-                return (
-                    <div key={person._id} className="container">
-                        <div className="row">
-                            {/* <div className="col-2">
-                                <img src={person.profilePicture} className="img-fluid rounded-circle" />
-                            </div> */}
-                            <div className="col-10">
-                                <h1>{person.name}</h1>
-                                <p>{person.email}</p>
-                                <p>{person.userName}</p>
-                            </div>
-                        </div>
-                    </div>
-                )
-            })}
+            {result && <People people={result} />}
         </div>
     )
 }
