@@ -27,6 +27,52 @@ const Search = () => {
             console.log(error);
         }
     };
+
+    const handleFollow = async (person) => {
+        try {
+            const { data } = await axios.post(
+                "/user/follow",
+                {
+                    username: person.username
+                },
+                {
+                    headers: {
+                        Authorization: `Bearer ${state.token}`
+                    }
+                }
+            );
+            console.log(data);
+            setState({
+               ...state,
+                people: data.people
+            });
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    const handleUnfollow = async (person) => {
+        try {
+            const { data } = await axios.post(
+                "/user/unfollow",
+                {
+                    username: person.username
+                },
+                {
+                    headers: {
+                        Authorization: `Bearer ${state.token}`
+                    }
+                }
+            );
+            console.log(data);
+            setState({
+               ...state,
+                people: data.people
+            });
+        } catch (error) {
+            console.log(error);
+        }
+    };
     return (
         <div>
             <form onSubmit={searchUser} className="form-inline row">
@@ -44,7 +90,7 @@ const Search = () => {
                     Search
                 </button>
             </form>
-            {result && <People people={result} />}
+            {result && <People handleUnfollow = {handleUnfollow} handleFollow={handleFollow} people={result} />}
         </div>
     )
 }
