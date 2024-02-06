@@ -87,7 +87,7 @@ const Search = () => {
                 type="search"
                 />
                 <button type="submit" className="btn btn-outline-primary col-12" >
-                    Search
+                    Searchable
                 </button>
             </form>
             {result && <People handleUnfollow = {handleUnfollow} handleFollow={handleFollow} people={result} />}
