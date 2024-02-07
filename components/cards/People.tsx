@@ -17,7 +17,7 @@ interface PeopleProps {
   handleFollow: (user: Person) => Promise<void>;
 }
 
-const People: React.FC<PeopleProps> = ({ people, handleFollow }) => {
+const People: React.FC<PeopleProps> = ({ people, handleFollow, handleUnfollow }) => {
   const [loading, setLoading] = useState(false);
 
   console.log(people);
@@ -46,9 +46,15 @@ const People: React.FC<PeopleProps> = ({ people, handleFollow }) => {
                     <a href="#">
                         {person.name}
                     </a>
-                    <span className="text-primary pointer" onClick={() => handleFollow(person)}>
+                    {person.followrs.includes(state.user._id)?(
+                      <span className="text-primary pointer" onClick={() => handleUnfollow(person)}>
+                      unfollow
+                  </span>
+                    ):(
+                      <span className="text-primary pointer" onClick={() => handleFollow(person)}>
                         follow
                     </span>
+                    )}
                 </div>}
                 description={moment(person.createdAt).fromNow()}
               />
