@@ -46,7 +46,8 @@ const People: React.FC<PeopleProps> = ({ people, handleFollow, handleUnfollow })
                     <a href="#">
                         {person.name}
                     </a>
-                    {person.followrs.includes(state.user._id)?(
+                    {console.log(person)}
+                    {/* {person.followrs.includes(state.user._id)?(
                       <span className="text-primary pointer" onClick={() => handleUnfollow(person)}>
                       unfollow
                   </span>
@@ -54,7 +55,7 @@ const People: React.FC<PeopleProps> = ({ people, handleFollow, handleUnfollow })
                       <span className="text-primary pointer" onClick={() => handleFollow(person)}>
                         follow
                     </span>
-                    )}
+                    )} */}
                 </div>}
                 description={moment(person.createdAt).fromNow()}
               />
