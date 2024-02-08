@@ -1,9 +1,10 @@
 import React from "react";
-import { useState} from "react";
+import { useState, useContext} from "react";
 import UserRoute from "../../components/routes/UserRoute";
 import moment from "moment";
 import { Avatar, List } from "antd";
 import {imageSource} from "../../functions/index";
+import { UserContext } from "../../context";
 
 interface Person {
   id: string;
@@ -19,8 +20,8 @@ interface PeopleProps {
 
 const People: React.FC<PeopleProps> = ({ people, handleFollow, handleUnfollow }) => {
   const [loading, setLoading] = useState(false);
-
-  console.log(people);
+  const [state] = useContext(UserContext);
+  // console.log(people);
 
   // const imageSource = (person: Person) => {
   //   if (person.photo) {
@@ -46,16 +47,16 @@ const People: React.FC<PeopleProps> = ({ people, handleFollow, handleUnfollow })
                     <a href="#">
                         {person.name}
                     </a>
-                    {console.log(person)}
-                    {/* {person.followrs.includes(state.user._id)?(
+                    
+                    {person.followers.includes(state.user._id)?(
                       <span className="text-primary pointer" onClick={() => handleUnfollow(person)}>
-                      unfollow
-                  </span>
+                          unfollow
+                      </span>
                     ):(
                       <span className="text-primary pointer" onClick={() => handleFollow(person)}>
-                        follow
-                    </span>
-                    )} */}
+                          follow
+                      </span>
+                    )}
                 </div>}
                 description={moment(person.createdAt).fromNow()}
               />

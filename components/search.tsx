@@ -29,11 +29,12 @@ const Search = () => {
     };
 
     const handleFollow = async (person) => {
+        console.log(person);
         try {
-            const { data } = await axios.post(
-                "/user/follow",
+            const { data } = await axios.put(
+                "/follow-user",
                 {
-                    username: person.username
+                    person
                 },
                 {
                     headers: {
