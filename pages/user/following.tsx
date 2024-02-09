@@ -60,14 +60,8 @@ const Following: React.FC<PeopleProps> = ({ handleFollow}) => {
   };
 
   const handleUnfollow = async (person: Person) => {
-  console.log( person);
   try {
   setLoading(true);
-  // const {data} = await axios.delete(`/user-unfollow`, { 
-  // headers: { "Content-Type": "application/json", 
-  // Authorization: `Bearer ${state.token}` }, 
-  // data: { personId: person.id } 
-  // });
 
   const {data} = await axios.put(`/unfollow-user`, {
     headers: {

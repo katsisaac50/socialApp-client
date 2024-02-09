@@ -17,12 +17,7 @@ const Search = () => {
                     query: query
                 }
             });
-            console.log(data);
             setResult(data.users);
-            // setState({
-            //    ...state,
-            //     people: data.people
-            // });
         } catch (error) {
             console.log(error);
         }
@@ -34,7 +29,7 @@ const Search = () => {
             const { data } = await axios.put(
                 "/follow-user",
                 {
-                    person
+                    _id: person._id
                 },
                 {
                     headers: {
@@ -42,7 +37,7 @@ const Search = () => {
                     }
                 }
             );
-            console.log(data);
+            // console.log(data);
             setState({
                ...state,
                 people: data.people
@@ -54,18 +49,18 @@ const Search = () => {
 
     const handleUnfollow = async (person) => {
         try {
-            const { data } = await axios.post(
-                "/user/unfollow",
-                {
-                    username: person.username
-                },
+            const { data } = await axios.put(
+                "/unfollow-user",
                 {
                     headers: {
                         Authorization: `Bearer ${state.token}`
+                    },
+                    data: { 
+                        personId: person._id 
                     }
                 }
             );
-            console.log(data);
+            // console.log(data);
             setState({
                ...state,
                 people: data.people
