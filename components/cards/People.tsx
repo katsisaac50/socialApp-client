@@ -21,15 +21,6 @@ interface PeopleProps {
 const People: React.FC<PeopleProps> = ({ people, handleFollow, handleUnfollow }) => {
   const [loading, setLoading] = useState(false);
   const [state] = useContext(UserContext);
-  // console.log(people);
-
-  // const imageSource = (person: Person) => {
-  //   if (person.photo) {
-  //     return person.photo.data;
-  //   } else {
-  //     return "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png";
-  //   }
-  // };
 
   return (
     <UserRoute>
