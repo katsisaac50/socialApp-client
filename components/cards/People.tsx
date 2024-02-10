@@ -38,6 +38,7 @@ const People: React.FC<PeopleProps> = ({ people, handleFollow, handleUnfollow })
                     <a href="#">
                         {person.name}
                     </a>
+                    {console.log("hello=>",state.user, "greatness=>", person)}
                     {state.user.following.includes(person._id)?(
                       <span className="text-primary pointer" onClick={() => handleUnfollow(person)}>
                           unfollow

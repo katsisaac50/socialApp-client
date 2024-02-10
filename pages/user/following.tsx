@@ -74,13 +74,14 @@ const Following: React.FC<PeopleProps> = ({ handleFollow}) => {
   let auth = JSON.parse(localStorage.getItem("auth") || "");
   auth.user = data;
   localStorage.setItem("auth", JSON.stringify(auth));
-  setState({...state, user: data });
+  // setState({...state, user: data });
   let filtered = people.filter((p) => p._id!== person._id);
   console.log(data);
   setPeople(filtered);
   
   setLoading(false);
-  //  fetchFollowing();
+
+  // fetchFollowing();
    toast.success(data.message, { theme: "colored" });
   // console.log(data);
 } catch (error) {
