@@ -67,9 +67,6 @@ const Dashboard = () => {
 
   const newsFeed = async () => {
     try {
-      // const { data } = await axios.get(
-      //   `/user-posts`
-      // );
       const { data } = await axios.get(`/news-feed/${currentPage}`);
       setPosts(data.posts);
     } catch (err) {
