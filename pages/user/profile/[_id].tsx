@@ -2,27 +2,33 @@ import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
+interface Friend {
+  id: string;
+  name: string;
+  email: string;
+  location: string;
+  // Add more properties as needed
+}
+
 const Profile = () => {
   const router = useRouter();
   const { id } = router.query;
 
-  const [friend, setFriend] = useState(null);
+  const [friend, setFriend] = useState<Friend | null>(null);
 
   useEffect(() => {
-    if (id) {
-      // Fetch friend details from the backend when the component mounts
-      const fetchFriendDetails = async () => {
+    const fetchFriendDetails = async () => {
+      if (id) {
         try {
-          const response = await axios.get(`/api/friends/${id}`); // Assuming the backend API endpoint for fetching friend details
-
+          const response = await axios.get<Friend>(`/api/friends/${id}`); // Assuming the backend API endpoint for fetching friend details
           setFriend(response.data);
         } catch (error) {
           console.error('Error fetching friend details:', error);
         }
-      };
+      }
+    };
 
-      fetchFriendDetails();
-    }
+    fetchFriendDetails();
   }, [id]);
 
   if (!friend) {
