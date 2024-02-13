@@ -27,7 +27,6 @@ const EditPost = ()=> {
         try {
             
             const {data} = await axios.put(`/update-post/${_id}`, {content, image});
-            console.log(data)
             
             if(data.error){
                 toast.error("Post creation failed");
