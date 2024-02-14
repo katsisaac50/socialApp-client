@@ -5,9 +5,10 @@ import moment from "moment";
 import { Avatar, List } from "antd";
 import {imageSource} from "../../functions/index";
 import { UserContext } from "../../context";
+import { useRouter } from "next/router";
 
 interface Person {
-  id: string;
+  _id: string;
   photo: string;
   name: string;
   createdAt: string; // You may want to use Date or another appropriate type
@@ -21,6 +22,7 @@ interface PeopleProps {
 const People: React.FC<PeopleProps> = ({ people, handleFollow, handleUnfollow }) => {
   const [loading, setLoading] = useState(false);
   const [state] = useContext(UserContext);
+  const router = useRouter();
 
   return (
     <UserRoute>
@@ -30,12 +32,12 @@ const People: React.FC<PeopleProps> = ({ people, handleFollow, handleUnfollow })
           itemLayout="horizontal"
           dataSource={people}
           renderItem={(person) => (
-            <List.Item key={person.id}>
+            <List.Item key={person._id}>
               <List.Item.Meta
                 avatar={<Avatar src={imageSource(person)} />}
                 title={
                 <div className="d-flex justify-content-between align-items-center">
-                    <a href="#">
+                    <a onClick={() => router.push(`/user/profile/${person._id}`)}>
                         {person.name}
                     </a>
                     {console.log("hello=>",state.user, "greatness=>", person)}
