@@ -11,15 +11,16 @@ interface User {
 
 const Profile = () => {
   const router = useRouter();
-  const { id } = router.query;
+  const { _id } = router.query;
 
   const [user, setUser] = useState<User | null>(null);
+  console.log(router.query);
 
   useEffect(() => {
     const fetchUserDetails = async () => {
-      if (id) {
+      if (_id) {
         try {
-            console.log('showing user details for id:', id);
+            console.log('showing user details for id:', _id);
         //   const response = await axios.get<User>(`/api/users/${id}`); // Assuming the backend API endpoint for fetching user details
         //   setUser(response.data);
         } catch (error) {
@@ -29,7 +30,7 @@ const Profile = () => {
     };
 
     fetchUserDetails();
-  }, [id]);
+  }, [_id]);
 
   if (!user) {
     return <div>Loading...</div>;
