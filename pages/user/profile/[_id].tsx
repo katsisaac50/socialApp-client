@@ -6,13 +6,19 @@ import axios from 'axios';
 import Image from 'next/image';
 import Link from 'next/link';
 import { RollbackOutlined } from '@ant-design/icons';
+import { Avatar, Card } from 'antd';
 
+const { Meta } = Card;
 interface User {
   _id: string;
   name: string;
   email: string;
   user: any;
   photo: any;
+  about: string;
+  createdAt: string;
+  following: Array<string>;
+  followers: Array<string>;
   // Add more properties as needed
 }
 
@@ -54,26 +60,34 @@ const Profile = () => {
   }
 
   return (
-    <div className="container">
-      <h2 className="mt-3">{user.name}'s Profile</h2>
-      <div className="card mt-3">
-        <div className="card-body">
-          <p className="card-text">Email: {user.email}</p>
-        </div>
-      </div>
-      {/* Add more user details as needed */}
-      <div className="mt-3">
-        <Image
-          src={imageSource(user)}
-          width={500}
-          height={500}
-          alt="Picture of the author"
-          className="img-fluid"
+    <div className="row col-md-6 offset-md-4 mt-5">
+      <div className="pt-5 pb-5">
+
+      
+      <Card hoverable style={{ width: 500 }} cover={<Image src={imageSource(user)} width={500} height={500} alt="Picture of the author" className="img-fluid" />}>
+        <Meta
+          avatar={<Avatar src={imageSource(user)} />}
+          title={user.name}
+          description={user.about}
         />
-      </div>
-      <Link href="/user/dashboard" className='d-flex justify-content-center pt-5'>
+        <p className="text-muted pt-2">
+          Joined on {new Date(user.createdAt).toLocaleDateString()}
+        </p>
+        <div className="d-flex justify-content-center">
+          <span className='btn btn-sm'>
+            {user.followers && user.followers.length} Followers
+          </span>
+        </div>
+        <div className="d-flex justify-content-center">
+          <span className='btn btn-sm'>
+            {user.following && user.following.length} Followering
+          </span>
+        </div>
+      </Card>
+      <Link href="/user/dashboard" className='d-flex justify-content-center pt-3'>
         <RollbackOutlined />
       </Link>
+      </div>
     </div>
   );
 };
