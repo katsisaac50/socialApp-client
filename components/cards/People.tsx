@@ -40,8 +40,8 @@ const People: React.FC<PeopleProps> = ({ people, handleFollow, handleUnfollow })
                     <a onClick={() => router.push(`/user/profile/${person._id}`)}>
                         {person.name}
                     </a>
-                    {console.log("hello=>",state.user, "greatness=>", person)}
-                    {state && state.user && people.followers && people.followers.includes(state.user._id)?(
+                    {console.log("hello=>",state.user, "greatness=>", person, "id=>", person.followers)}
+                    {state && state.user && person.followers && person.followers.includes(state.user._id)?(
                       <span className="text-primary pointer" onClick={() => handleUnfollow(person)}>
                           unfollow
                       </span>

@@ -4,6 +4,8 @@ import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Image from 'next/image';
+import Link from 'next/link';
+import { RollbackOutlined } from '@ant-design/icons';
 
 interface User {
   _id: string;
@@ -29,7 +31,9 @@ const Profile = () => {
           const { data } = await axios.get<User>(`/api/users/${_id}`); // Assuming the backend API endpoint for fetching user details
           setUser(data.user);
         } catch (error) {
+
           console.error('Error fetching user details:', error);
+
         }
       }
     };
@@ -41,8 +45,8 @@ const Profile = () => {
     return <div>Loading...</div>;
   }
 
-  const image = () => {
-    if(!user.photo || !user.photo.data){
+  const imageSource = ({photo}) => {
+    if(!photo || !photo.data){
       return "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
     } else {
       return user.photo.data
@@ -60,13 +64,16 @@ const Profile = () => {
       {/* Add more user details as needed */}
       <div className="mt-3">
         <Image
-          src={image()}
+          src={imageSource(user)}
           width={500}
           height={500}
           alt="Picture of the author"
           className="img-fluid"
         />
       </div>
+      <Link href="/user/dashboard" className='d-flex justify-content-center pt-5'>
+        <RollbackOutlined />
+      </Link>
     </div>
   );
 };
