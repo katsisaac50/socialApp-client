@@ -2,6 +2,7 @@ import {useContext, useState} from "react";
 import {UserContext} from "../context";
 import axios from "axios";
 import People from "../components/cards/People"
+import {toast} from "react-toastify";
 
 const Search = () => {
     const [state, setState] = useContext(UserContext);
@@ -37,11 +38,24 @@ const Search = () => {
                     }
                 }
             );
+            let auth =  JSON.parse(localStorage.getItem("auth"));
+            auth.user = data;
             // console.log(data);
             setState({
                ...state,
                 people: data.people
             });
+            // update people state
+            let filtered = result.filter((p) => p._id!== person._id);
+            
+            setResult(filtered);
+
+            toast.success(data.message, { theme: "colored" });
+            
+            // setState({
+            //    ...state,
+            //     people: filtered
+            // });
         } catch (error) {
             console.log(error);
         }
@@ -65,6 +79,12 @@ const Search = () => {
                ...state,
                 people: data.people
             });
+
+            // update people state
+            let filtered = result.filter((p) => p._id!== person._id);
+            setResult(filtered);
+            toast.error(`Unfollowed ${person.name}`, { theme: "colored" });
+
         } catch (error) {
             console.log(error);
         }

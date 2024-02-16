@@ -10,6 +10,7 @@ interface User {
   name: string;
   email: string;
   user: any;
+  photo: any;
   // Add more properties as needed
 }
 
@@ -40,6 +41,14 @@ const Profile = () => {
     return <div>Loading...</div>;
   }
 
+  const image = () => {
+    if(!user.photo || !user.photo.data){
+      return "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+    } else {
+      return user.photo.data
+    }
+  }
+
   return (
     <div className="container">
       <h2 className="mt-3">{user.name}'s Profile</h2>
@@ -51,7 +60,7 @@ const Profile = () => {
       {/* Add more user details as needed */}
       <div className="mt-3">
         <Image
-          src={user.photo.data}
+          src={image()}
           width={500}
           height={500}
           alt="Picture of the author"
