@@ -171,8 +171,6 @@ const ProfileUpdate = () => {
                         ): (
                         <Avatar size={30} icon={<CameraOutlined />} />
                         )}
-                    {/* <LoadingOutlined className="text-primary me-2 mb-1" style={{display: uploading ? "inline-block" : "none"}}/> */}
-                    {/* <CameraOutlined className="text-primary me-2 mb-1"/> */}
                     <input  onChange={handleImageUpload} type="file" accept="image/*" hidden/>
                 </label>
                     <AuthForm
