@@ -7,6 +7,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { RollbackOutlined } from '@ant-design/icons';
 import { Avatar, Card } from 'antd';
+import moment from 'moment';
 
 const { Meta } = Card;
 interface User {
@@ -62,8 +63,6 @@ const Profile = () => {
   return (
     <div className="row col-md-6 offset-md-4 mt-5">
       <div className="pt-5 pb-5">
-
-      
       <Card hoverable style={{ width: 500 }} cover={<Image src={imageSource(user)} width={500} height={500} alt="Picture of the author" className="img-fluid" />}>
         <Meta
           avatar={<Avatar src={imageSource(user)} />}
@@ -71,7 +70,7 @@ const Profile = () => {
           description={user.about}
         />
         <p className="text-muted pt-2">
-          Joined on {new Date(user.createdAt).toLocaleDateString()}
+          Joined {moment(user.createdAt).fromNow()}
         </p>
         <div className="d-flex justify-content-center">
           <span className='btn btn-sm'>
