@@ -15,8 +15,23 @@ const UserProvider = ({ children }) => {
     useEffect(() => {
         setState(prevState => ({ ...prevState, ...JSON.parse(window.localStorage.getItem('auth')) }));
 
+        // Define the interceptor
+        const myInterceptor = axios.interceptors.response.use((response) => {
+            console.log("Response:", response);
+            return response;
+        }, (error) => {
+            let res = error.response;
+            if(res && res.status === 401 && res.config && !res.config.__isRetryRequest){
+                setState(null);
+                window.localStorage.removeItem('auth');
+                router.push('/login');
+            }
+            return Promise.reject(error);
+        });
+
         // Cleanup interceptors
         return () => {
+            console.log("Interceptors:", myInterceptor);
             // Remove the interceptor when the component is unmounted
             axios.interceptors.response.eject(myInterceptor);
         };

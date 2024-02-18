@@ -3,13 +3,17 @@ import { useContext } from 'react';
 import { UserContext } from '../context';
 import ParallaxBG from '../components/cards/ParallaxBG';
 import axios from 'axios';
+import Post from '../components/cards/Post';
 function HomePage(props) {
-
+  const {posts} = props.posts
   const [ state, setState ] = useContext(UserContext);
   return (
     <>
     <ParallaxBG url="/images/default.jpeg"/>
-    <pre>{JSON.stringify(props, null, 4)}</pre>
+    {/* <pre>{JSON.stringify(posts, null, 4)}</pre> */}
+    {posts.map((post) => (
+      <Post key={post._id} p={post} />
+    ))}
     </>
   );
 };
