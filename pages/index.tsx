@@ -12,7 +12,10 @@ function HomePage(props) {
     <ParallaxBG url="/images/default.jpeg"/>
     {/* <pre>{JSON.stringify(posts, null, 4)}</pre> */}
     {posts.map((post) => (
-      <Post key={post._id} p={post} />
+      <div className="col-md-4">
+        <Post key={post._id} p={post} />
+      </div>
+      
     ))}
     </>
   );
