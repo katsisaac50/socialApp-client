@@ -19,10 +19,6 @@ import Link from "next/link";
 
 const PostPublic = ({
   commentsCount = 4,
-  removeComment,
-  handleDelete,
-  handleLikes,
-  handleComment,
   p
 }) => {
   const [state] = useContext(UserContext);

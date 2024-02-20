@@ -1,11 +1,11 @@
 import React from 'react';
-import ParallaxBG from '../components/cards/ParallaxBG';
+import ParallaxBG from '../../../components/cards/ParallaxBG';
 import axios from 'axios';
-import PostPublic from '../components/cards/PostPublic';
+import PostPublic from '../../../components/cards/PostPublic';
 import Head from 'next/head';
-import Link from 'next/link';
-function HomePage(props) {
-  const {posts} = props.posts
+
+function singlePost(props) {
+  const {post} = props.post
   const head = () => (
     <Head>
       <title>My socialApp - A social network by devs for devs</title>
@@ -54,26 +54,22 @@ function HomePage(props) {
     {head()}
     <ParallaxBG url="/images/default.jpeg"/>
     {/* <pre>{JSON.stringify(posts, null, 4)}</pre> */}
-    {posts.map((post) => (
-      <div className="col-md-4">
-        <Link href={`/post/view/${post._id}`} key={post._id}>
+      <div className="col-md-4 offset-md-4">
           <PostPublic key={post._id} p={post} />
-        </Link>
       </div>
-      
-    ))}
     </>
   );
 };
 
-export async function getServerSideProps() {
-  const { data } = await axios.get("/posts");
+export async function getServerSideProps( context ) {
+  console.log("context =>", context)
+  const { data } = await axios.get(`/post/view/${context.params._id}`);
   // console.log("data =>", data)
   return {
     props: {
-      posts: data,
+      post: data,
     },
   };
 }
 
-export default HomePage;
+export default singlePost;
