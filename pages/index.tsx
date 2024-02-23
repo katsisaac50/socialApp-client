@@ -1,11 +1,20 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import ParallaxBG from '../components/cards/ParallaxBG';
 import axios from 'axios';
 import PostPublic from '../components/cards/PostPublic';
 import Head from 'next/head';
 import Link from 'next/link';
+import io from'socket.io-client';
+
+const socket = io(process.env.NEXT_PUBLIC_SOCKET_URL, {
+  reconnection: true,
+});
+
 function HomePage(props) {
   const {posts} = props.posts
+  useEffect(() => {
+console.log("socket io", socket);
+  }, [])
   const head = () => (
     <Head>
       <title>My socialApp - A social network by devs for devs</title>
