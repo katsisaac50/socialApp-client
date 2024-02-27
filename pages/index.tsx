@@ -66,6 +66,11 @@ function HomePage(props) {
     {head()}
     <ParallaxBG url="/images/default.jpeg"/>
     <div className="container">
+      <button 
+      onClick = {() => socket.emit('send-message', 'test message')} 
+      className="btn btn-primary btn-block mt-2">
+        send message
+      </button>
       <div className="row pt-5">
         {/* <pre>{JSON.stringify(posts, null, 4)}</pre> */}
     {posts.map((post) => (
