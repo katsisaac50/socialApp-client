@@ -40,6 +40,7 @@ const Post = ({
                     size={"large"}
                     alt={p.user && p.user.name}
                   >
+                    one love
                   </Avatar>{" "}
                 </div>
                 <span className="pt-2 ml-3">

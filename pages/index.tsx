@@ -13,7 +13,10 @@ const socket = io(process.env.NEXT_PUBLIC_SOCKET_URL, {
 function HomePage(props) {
   const {posts} = props.posts
   useEffect(() => {
-console.log("socket io", socket);
+// console.log("socket io", socket);
+    socket.on('recieve-message', (message) => {
+      console.log(message)
+    })
   }, [])
   const head = () => (
     <Head>
@@ -52,7 +55,7 @@ console.log("socket io", socket);
       />
       <meta 
       property='og:url' 
-      content='http://localhost:3000/' 
+      content='http://localhost:3000' 
       />
       <link rel="stylesheet" href="/globalcss/styles.css" />
       <link rel="icon" href="/images/favicon.png"  />
@@ -62,15 +65,19 @@ console.log("socket io", socket);
     <>
     {head()}
     <ParallaxBG url="/images/default.jpeg"/>
-    {/* <pre>{JSON.stringify(posts, null, 4)}</pre> */}
+    <div className="container">
+      <div className="row pt-5">
+        {/* <pre>{JSON.stringify(posts, null, 4)}</pre> */}
     {posts.map((post) => (
-      <div className="col-md-4">
+      <div key = {post._id} className="col-md-4">
         <Link href={`/post/view/${post._id}`} key={post._id}>
           <PostPublic key={post._id} p={post} />
         </Link>
       </div>
       
     ))}
+      </div>
+    </div>
     </>
   );
 };
