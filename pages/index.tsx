@@ -12,12 +12,23 @@ const socket = io(process.env.NEXT_PUBLIC_SOCKET_URL, {
 
 function HomePage(props) {
   const {posts} = props.posts
+  const [newsFeed, setNewsFeed] = React.useState([]);
+//   useEffect(() => {
+// // console.log("socket io", socket);
+//     socket.on('recieve-message', (message) => {
+//       console.log(message)
+//     })
+//   }, [])
+
   useEffect(() => {
-// console.log("socket io", socket);
     socket.on('recieve-message', (message) => {
-      console.log(message)
+      setNewsFeed([message, ...posts])
     })
   }, [])
+
+  const collection = newsFeed.length > 0 ? newsFeed : posts
+
+
   const head = () => (
     <Head>
       <title>My socialApp - A social network by devs for devs</title>
@@ -66,14 +77,15 @@ function HomePage(props) {
     {head()}
     <ParallaxBG url="/images/default.jpeg"/>
     <div className="container">
-      <button 
+      {/* <button 
       onClick = {() => socket.emit('send-message', 'test message')} 
       className="btn btn-primary btn-block mt-2">
         send message
-      </button>
+      </button> */}
       <div className="row pt-5">
         {/* <pre>{JSON.stringify(posts, null, 4)}</pre> */}
-    {posts.map((post) => (
+    {collection.map((post) => (
+     
       <div key = {post._id} className="col-md-4">
         <Link href={`/post/view/${post._id}`} key={post._id}>
           <PostPublic key={post._id} p={post} />

@@ -11,6 +11,11 @@ import CommentForm from "../../components/forms/CommentForm"
 import Link from "next/link";
 import {Modal, Pagination} from "antd";
 import Search from "../../components/search";
+import io from'socket.io-client';
+
+const socket = io(process.env.NEXT_PUBLIC_SOCKET_URL, {
+  reconnection: true,
+});
 
 const Dashboard = () => {
   const [state, setState] = useContext(UserContext);
@@ -101,6 +106,10 @@ const Dashboard = () => {
         toast.success(  data.message, {
           theme: "colored",
         });
+
+        if (  data.success) {
+          socket.emit("new-post", data.postWithUser);
+        }
       } else {
         toast.error(  data.message, {
           theme: "colored",
