@@ -74,9 +74,12 @@ const PostPublic = ({
                   )}
                     <CommentOutlined className="text-primary pt-2 h5 px-2"/>{" "}
                     <div className="pt-2 pl-3">
-                        <Link  href={`/post/${p._id}`} passHref legacyBehavior>
-                            <a className="text-decoration-none">{p.comments && p.comments.length} comments{" "}</a>
+                      <div>
+                        <Link  href={`/post/${p._id}`} className="text-decoration-none" >
+                            {p.comments && p.comments.length} comments{" "}
                         </Link>
+                      </div>
+                        
                     </div>
                 </div>
               </div>

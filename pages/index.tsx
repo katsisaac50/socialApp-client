@@ -28,7 +28,7 @@ function HomePage(props) {
 
   const collection = newsFeed.length > 0 ? newsFeed : posts
 
-
+console.log("collection =>", collection)
   const head = () => (
     <Head>
       <title>My socialApp - A social network by devs for devs</title>
@@ -84,13 +84,16 @@ function HomePage(props) {
       </button> */}
       <div className="row pt-5">
         {/* <pre>{JSON.stringify(posts, null, 4)}</pre> */}
-    {collection.map((post) => (
+    {collection && collection.map((post) => (
      
-      <div key = {post._id} className="col-md-4">
-        <Link href={`/post/view/${post._id}`} key={post._id}>
-          <PostPublic key={post._id} p={post} />
-        </Link>
-      </div>
+     <div key={post._id} className="col-md-4">
+     <div>
+      {console.log("post =>", post)}
+       <Link href={`/post/view/${post._id}`} key={post._id}>
+         <PostPublic key={post._id} p={post} />
+       </Link>
+     </div>
+   </div>
       
     ))}
       </div>
