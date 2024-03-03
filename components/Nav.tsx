@@ -96,6 +96,16 @@ function NavBar(props: NavBarProps) {
                 Profile
               </Link>
               </li>
+              {state && state.user && state.user.role === "Admin" && (
+                <li><Link
+                  className={`btn nav-link  ${current === "/admin" ? "active" : ""}`}
+                  href="/admin"
+                  passHref
+                >
+                  Admin
+                </Link>
+                </li>
+              )}
               <li><a className="btn nav-link" onClick={logout}>
                 Logout
               </a></li>

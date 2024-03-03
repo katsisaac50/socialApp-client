@@ -10,23 +10,23 @@ function AdminRoute({ children }) {
   const router = useRouter();
 
   useEffect(() => {
-    if(state && state.token) fetchUser();
+    if(state && state.token) getCurrentAdmin();
   }, [state, state.token]);
 
-  // Fetch user data from server
-  async function fetchUser() {
+  // Fetch Admin data from server
+  async function getCurrentAdmin() {
     try {
-      const { data } = await axios.get(`/current-user`);
+      const { data } = await axios.get(`/current-admin`);
 
       if (data.success) setOk(true);
     } catch (err) {
       console.log(err);
       setOk(false);
-      router.push('/login');
+      router.push('/');
     }
   };
 
-  typeof window !== 'undefined' && state === null && setTimeout(() => fetchUser(), 1000);
+  typeof window !== 'undefined' && state === null && setTimeout(() => getCurrentAdmin(), 1000);
 
   return !ok ? (
     <SyncOutlined spin className="d-flex justify-content-center display-1 text-primary p-5" />

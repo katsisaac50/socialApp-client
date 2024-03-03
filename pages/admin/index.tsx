@@ -4,6 +4,7 @@ import { UserContext } from "../../context";
 import UserRoute from "../../components/routes/UserRoute";
 import axios from "axios";
 import { toast } from "react-toastify";
+import renderHTML from "react-render-html";
 
 const Admin = () => {
   const [state, setState] = useContext(UserContext);
@@ -48,9 +49,27 @@ const Admin = () => {
       <div className="container-fluid">
         <div className="row py-5 text-light bg-default-image">
           <div className="col text-center">
-            <h1 className="display-4">News feed</h1>
+            <h1 className="display-4">Admin</h1>
             <h2 className="">Hello {state.user && state.user.name}</h2>
           </div>
+        </div>
+        <div className="row py-4">
+            <div className="col-md-8 offset-md-2">
+                {posts.map((post) => (
+                    <div key={post._id} className="mt-5 d-flex justify-content-between">
+                    <div>
+                       {renderHTML(post.content)} 
+                    </div>
+                    <div 
+                    onClick={() => handleDelete(post)} 
+                    className="text-danger float-right pointer"
+                    >
+                        <i className="fa fa-trash"></i>
+                        delete
+                    </div>
+                    </div>
+                ))}
+            </div>
         </div>
       </div>
     </UserRoute>
