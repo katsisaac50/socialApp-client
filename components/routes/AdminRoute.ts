@@ -27,7 +27,7 @@ function AdminRoute({ children }) {
   };
 
   typeof window !== 'undefined' && state === null && setTimeout(() => getCurrentAdmin(), 1000);
-
+console.log("ok =>", ok)
   return !ok ? (
     <SyncOutlined spin className="d-flex justify-content-center display-1 text-primary p-5" />
   ) : (

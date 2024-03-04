@@ -1,7 +1,7 @@
 import { useContext, useState, useEffect, use } from "react";
 import { useRouter } from "next/router";
 import { UserContext } from "../../context";
-import UserRoute from "../../components/routes/UserRoute";
+import AdminRoute from "../../components/routes/UserRoute";
 import axios from "axios";
 import { toast } from "react-toastify";
 import renderHTML from "react-render-html";
@@ -45,7 +45,7 @@ const Admin = () => {
   };
 
     return (
-    <UserRoute>
+    <AdminRoute>
       <div className="container-fluid">
         <div className="row py-5 text-light bg-default-image">
           <div className="col text-center">
@@ -72,7 +72,7 @@ const Admin = () => {
             </div>
         </div>
       </div>
-    </UserRoute>
+    </AdminRoute>
   );
 };
 
