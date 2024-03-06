@@ -17,6 +17,7 @@ interface Person {
 interface PeopleProps {
   people: Person[];
   handleFollow: (user: Person) => Promise<void>;
+  handleUnfollow: (id: string) => void;
 }
 
 const People: React.FC<PeopleProps> = ({ people, handleFollow, handleUnfollow }) => {
@@ -40,7 +41,6 @@ const People: React.FC<PeopleProps> = ({ people, handleFollow, handleUnfollow })
                     <a onClick={() => router.push(`/user/profile/${person._id}`)}>
                         {person.name}
                     </a>
-                    {console.log("hello=>",state.user, "greatness=>", person, "id=>", person.followers)}
                     {state && state.user && person.followers && person.followers.includes(state.user._id)?(
                       <span className="text-primary pointer" onClick={() => handleUnfollow(person)}>
                           unfollow
