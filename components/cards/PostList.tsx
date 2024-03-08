@@ -1,21 +1,4 @@
 import React from "react";
-import { useContext } from "react";
-import { renderToHTML } from "react-render-html";
-import ReactHtmlParser from "react-html-parser";
-import moment from "moment";
-import { Avatar } from "antd";
-import {
-  HeartOutlined,
-  CommentOutlined,
-  EditOutlined,
-  DeleteOutlined,
-  HeartFilled,
-} from "@ant-design/icons";
-import { UserContext } from "../../context";
-import { useRouter } from "next/router";
-import axios from "axios";
-import { imageSource } from "../../functions/index";
-import Link from "next/link";
 import Post from "./Post";
 
 const PostList = ({
@@ -25,7 +8,6 @@ const PostList = ({
   handleLikes,
   handleComment,
   removeComment,
-  addComment,
 }) => {
   return (
     <div className="card">
