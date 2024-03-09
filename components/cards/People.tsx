@@ -11,13 +11,15 @@ interface Person {
   _id: string;
   photo: string;
   name: string;
-  createdAt: string; // You may want to use Date or another appropriate type
+  createdAt: string;
+  followers: string[];
 }
 
 interface PeopleProps {
   people: Person[];
   handleFollow: (user: Person) => Promise<void>;
-  handleUnfollow: (id: string) => void;
+  handleUnfollow: (person: Person) => void;
+  followers: string[];
 }
 
 const People: React.FC<PeopleProps> = ({ people, handleFollow, handleUnfollow }) => {

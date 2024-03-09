@@ -1,9 +1,16 @@
 import React from "react";
 import Post from "./Post";
 
-const PostList = ({
+interface PostListProps {
+  posts: any[]; // Define the type of your posts array
+  handleDelete: (postId: string) => void;
+  handleLikes: (postId: string) => void;
+  handleComment: (postId: string, comment: string) => void;
+  removeComment: (postId: string, commentId: string) => void;
+}
+
+const PostList: React.FC<PostListProps> = ({
   posts,
-  like,
   handleDelete,
   handleLikes,
   handleComment,
@@ -15,13 +22,12 @@ const PostList = ({
         {posts &&
           posts.map((p) => (
             <Post
-            key={p._id} 
-            p={p} 
-            like ={like}
-            handleDelete={handleDelete}
-            handleLikes={handleLikes}
-            handleComment={handleComment}
-            removeComment={removeComment}
+              key={p._id}
+              p={p}
+              handleDelete={handleDelete}
+              handleLikes={handleLikes}
+              handleComment={handleComment}
+              removeComment={removeComment}
             />
           ))}
       </div>

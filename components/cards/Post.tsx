@@ -67,13 +67,13 @@ const Post = ({
                   {state && state.user && p.likes.includes(state.user._id) ? (
                     <span className="text-primary pt-2 h5 px-2">
                       <HeartFilled onClick={(e) => handleLikes(p)} />
-                      {/*console.log(p)*/} {p.likes.length} likes
+                      {p.likes.length} likes
                     </span>
                   ) : (
                     <>
                       <span className="text-primary pt-2 h5 px-2">
                         <HeartOutlined onClick={(e) => handleLikes(p)} />
-                        {/*console.log(p)*/} {p.likes.length} likes
+                        {p.likes.length} likes
                       </span>
                     </>
                   )}

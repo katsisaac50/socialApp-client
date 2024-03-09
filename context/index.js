@@ -5,6 +5,7 @@ import {useRouter} from 'next/router';
 const UserContext = createContext();
 
 const UserProvider = ({ children }) => {
+    
     const [state, setState] = useState({
         existingUser: {},
         token: '',
@@ -17,7 +18,7 @@ const UserProvider = ({ children }) => {
 
         // Define the interceptor
         const myInterceptor = axios.interceptors.response.use((response) => {
-            console.log("Response:", response);
+            
             return response;
         }, (error) => {
             let res = error.response;
@@ -31,15 +32,12 @@ const UserProvider = ({ children }) => {
 
         // Cleanup interceptors
         return () => {
-            console.log("Interceptors:", myInterceptor);
             // Remove the interceptor when the component is unmounted
             axios.interceptors.response.eject(myInterceptor);
         };
     }, []);
 
     const token = state && state.token ? state.token : '';
-
-    // console.log('Token:', token);
 
     axios.defaults.baseURL = process.env.NEXT_PUBLIC_API;
     axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
