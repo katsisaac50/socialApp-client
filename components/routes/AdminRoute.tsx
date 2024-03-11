@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { useRouter } from 'next/router';
 import axios from 'axios';
+import { SyncOutlined } from '@ant-design/icons';
 import { UserContext } from '../../context';
-import { SyncOutlined as SyncOutlinedType } from '@ant-design/icons';
 
 function AdminRoute({ children }) {
   const [ok, setOk] = useState(false);
@@ -10,7 +10,7 @@ function AdminRoute({ children }) {
   const router = useRouter();
 
   useEffect(() => {
-    if (state && state.token) getCurrentAdmin();
+    if(state && state.token) getCurrentAdmin();
   }, [state, state.token]);
 
   // Fetch Admin data from server
@@ -24,12 +24,12 @@ function AdminRoute({ children }) {
       setOk(false);
       router.push('/');
     }
-  }
+  };
 
   typeof window !== 'undefined' && state === null && setTimeout(() => getCurrentAdmin(), 1000);
 
   return !ok ? (
-    <SyncOutlinedType spin className="d-flex justify-content-center display-1 text-primary p-5" />
+    <SyncOutlined spin className="d-flex justify-content-center display-1 text-primary p-5" />
   ) : (
     <>{children}</>
   );

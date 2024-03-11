@@ -7,12 +7,15 @@ import {imageSource} from "../../functions/index";
 import { UserContext } from "../../context";
 import { useRouter } from "next/router";
 
-interface Person {
+export interface Person {
   _id: string;
   photo: string;
   name: string;
   createdAt: string;
   followers: string[];
+  email: string;
+  message: string;
+  image: string;
 }
 
 interface PeopleProps {
@@ -64,3 +67,4 @@ const People: React.FC<PeopleProps> = ({ people, handleFollow, handleUnfollow })
 };
 
 export default People;
+
