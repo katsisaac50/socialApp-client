@@ -13,6 +13,7 @@ export interface Person {
   name: string;
   createdAt: string;
   followers: string[];
+  people: string[];
   email: string;
   message: string;
   image: string;
@@ -40,7 +41,8 @@ const People: React.FC<PeopleProps> = ({ people, handleFollow, handleUnfollow })
           renderItem={(person) => (
             <List.Item key={person._id}>
               <List.Item.Meta
-                avatar={<Avatar src={imageSource(person)} />}
+                avatar={<Avatar src={imageSource(person as Person) as string} />
+              }
                 title={
                 <div className="d-flex justify-content-between align-items-center">
                     <a onClick={() => router.push(`/user/profile/${person._id}`)}>

@@ -7,6 +7,7 @@ import People from "../components/cards/People";
 interface Person {
   _id: string;
   name: string;
+  image: string;
   email: string;
   people: string[];
   message: string;
