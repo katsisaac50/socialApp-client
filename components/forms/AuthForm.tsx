@@ -1,3 +1,4 @@
+import React from 'react';
 import { SyncOutlined } from '@ant-design/icons';
 
 const AuthForm = ({
@@ -25,37 +26,37 @@ const AuthForm = ({
 }) => {
   return (
     <form onSubmit={handleSubmit}>
-      {page == 'profile' && (
-      <>
-      <div className="form-outline mb-4">
-          <label htmlFor="name" className="form-label">
-            Username
-          </label>
-          <input
-            type="text"
-            id="username"
-            className="form-control form-control-lg"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            autoComplete="username"
-            placeholder='Username'
-          />
-        </div>
-        <div className="form-outline mb-4">
-        <label htmlFor="name" className="form-label">
-          About
-        </label>
-        <input
-          type="text"
-          id="about"
-          className="form-control form-control-lg"
-          value={about}
-          onChange={(e) => setAbout(e.target.value)}
-          autoComplete="about"
-          placeholder='Write about yourself'
-        />
-      </div>
-      </>
+      {page === 'profile' && (
+        <>
+          <div className="form-outline mb-4">
+            <label htmlFor="username" className="form-label">
+              Username
+            </label>
+            <input
+              type="text"
+              id="username"
+              className="form-control form-control-lg"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              autoComplete="username"
+              placeholder='Username'
+            />
+          </div>
+          <div className="form-outline mb-4">
+            <label htmlFor="about" className="form-label">
+              About
+            </label>
+            <input
+              type="text"
+              id="about"
+              className="form-control form-control-lg"
+              value={about}
+              onChange={(e) => setAbout(e.target.value)}
+              autoComplete="about"
+              placeholder='Write about yourself'
+            />
+          </div>
+        </>
       )}
       {page !== 'login' && (
         <div className="form-outline mb-4">
@@ -84,7 +85,7 @@ const AuthForm = ({
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           autoComplete="email"
-          disabled ={page === "profile"}
+          disabled={page === "profile"}
         />
       </div>
 

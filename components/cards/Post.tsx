@@ -17,7 +17,16 @@ import axios from "axios";
 import { imageSource } from "../../functions/index";
 import Link from "next/link";
 
-const Post = ({
+interface PostProps {
+  commentsCount?: number;
+  removeComment: (postId: string, comment: any) => Promise<void>;
+  handleDelete: (postId: string) => void;
+  handleLikes: (postId: string) => void;
+  handleComment: (post: any) => void;
+  p?: any;
+}
+
+const Post: React.FC<PostProps> = ({
   commentsCount = 4,
   removeComment,
   handleDelete,
@@ -35,13 +44,13 @@ const Post = ({
             <div key={p._id} className="card-body">
               <div className="card-header">
                 <div>
-                  <Avatar
-                    src={imageSource(p)}
-                    size={"large"}
-                    alt={p.user && p.user.name}
-                  >
-                    one love
-                  </Avatar>{" "}
+                <Avatar
+  src={imageSource(p) as string} // Explicitly cast to string
+  size={"large"}
+  alt={p.user && p.user.name}
+>
+  one love
+</Avatar>{" "}
                 </div>
                 <span className="pt-2 ml-3">
                   Posted by {p.user && p.user.name}
@@ -107,7 +116,7 @@ const Post = ({
                         <div className="ms-2 me-auto">
                           <div className="ms-2 me-auto">
                             <Avatar
-                              src={imageSource(p)}
+                              src={imageSource(p) as string}
                               size={20}
                               className="mb-1 mr-3"
                               alt={p.user && p.user.name}

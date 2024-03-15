@@ -17,7 +17,7 @@ const PostComment = ({ post }) => {
   const [state] = useContext(UserContext);
   const [comment, setComment] = useState('');
   const [visible, setVisible] = useState(false);
-  const [currentPost, setCurrentPost] = useState({})
+  const [currentPost, setCurrentPost] = useState<{ _id: string } | null>(null);
 
   useEffect(() => {
     if (_id) fetchPost();
@@ -33,7 +33,8 @@ const PostComment = ({ post }) => {
   const addComment = async (e) => {
     e.preventDefault();
     try {
-      console.log("hdhdls")
+      console.log("hdhdls=>", currentPost)
+      
       const { data } = await axios.post(
         `/create-comment`,
         {

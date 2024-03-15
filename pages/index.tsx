@@ -88,7 +88,6 @@ console.log("collection =>", collection)
      
      <div key={post._id} className="col-md-4">
      <div>
-      {console.log("post =>", post)}
        <Link href={`/post/view/${post._id}`} key={post._id}>
          <PostPublic key={post._id} p={post} />
        </Link>

@@ -5,7 +5,7 @@ interface PostListProps {
   posts: any[]; // Define the type of your posts array
   handleDelete: (postId: string) => void;
   handleLikes: (postId: string) => void;
-  handleComment: (postId: string, comment: string) => void;
+  handleComment: (postId: string) => void;
   removeComment: (postId: string, commentId: string) => void;
 }
 
@@ -27,7 +27,7 @@ const PostList: React.FC<PostListProps> = ({
               handleDelete={handleDelete}
               handleLikes={handleLikes}
               handleComment={handleComment}
-              removeComment={removeComment}
+              removeComment={(postId, commentId) => removeComment(postId, commentId)}
             />
           ))}
       </div>

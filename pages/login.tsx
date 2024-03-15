@@ -1,19 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import Link from 'next/link';
-import AuthForm from '../components/forms/Authform';
+import AuthForm from '../components/forms/AuthForm'; 
 import { useRouter } from 'next/router';
-import { useContext } from 'react';
 import { UserContext } from '../context';
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
+  const [state, setState] = useContext(UserContext); // Moved the declaration here
 
   const router = useRouter();
-  const [state, setState] = useContext(UserContext);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -32,24 +31,25 @@ const LoginPage = () => {
           'Content-Type': 'application/x-www-form-urlencoded',
         },
       });
+      
+      // Update user context
       setState({ ...state, user: response.data.existingUser, token: response.data.token });
 
-      // save user and token in local storage and redirect
+      // Save user and token in local storage and redirect
       localStorage.setItem('auth', JSON.stringify(response.data));
-      console.log(state);
       router.push('/user/dashboard');
 
-      // console.log(response.data);
     } catch (error) {
-      console.log(error);
-      toast.error(error.response.data.message, {
+      console.error('Error making request:', error);
+      toast.error(error.response?.data?.message || 'An error occurred', {
         theme: 'colored',
       });
-      console.error('Error making request:', error);
+    } finally {
       setLoading(false);
     }
   };
 
+  // Redirect if user is already logged in
   if (state && state.token) {
     router.push('/user/dashboard');
   }
@@ -74,14 +74,29 @@ const LoginPage = () => {
                     <h2 className="text-uppercase text-center mb-5">Login to account</h2>
 
                     <AuthForm
-                      handleSubmit={handleSubmit}
-                      email={email}
-                      setEmail={setEmail}
-                      password={password}
-                      setPassword={setPassword}
-                      loading={loading}
-                      page="login"
-                    />
+  handleSubmit={handleSubmit}
+  email={email}
+  setEmail={setEmail}
+  password={password}
+  setPassword={setPassword}
+  loading={loading}
+  page="login"
+  name=""
+  setName={() => {}}
+  selectedQuestion=""
+  setSelectedQuestion={() => {}}
+  secretAnswer=""
+  setSecretAnswer={() => {}}
+  repeatPassword=""
+  setRepeatPassword={() => {}}
+  consent={false}
+  setConsent={() => {}}
+  about=""
+  setAbout={() => {}}
+  username=""
+  setUsername={() => {}}
+/>
+
                     <div className="row">
                       <div className="col">
                         <p className="text-center text-muted mt-5 mb-0">

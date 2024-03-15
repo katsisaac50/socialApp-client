@@ -32,7 +32,7 @@ const PostPublic = ({
               <div className="card-header">
                 <div>
                   <Avatar
-                    src={imageSource(p)}
+                    src={imageSource(p) as string} // Explicitly cast to string
                     size={"large"}
                     alt={p.user && p.user.name}
                   >
@@ -93,7 +93,7 @@ const PostPublic = ({
                         <div className="ms-2 me-auto">
                           <div className="ms-2 me-auto">
                             <Avatar
-                              src={imageSource(p)}
+                              src={imageSource(p) as string}
                               size={20}
                               className="mb-1 mr-3"
                               alt={p.user && p.user.name}

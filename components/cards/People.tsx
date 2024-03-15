@@ -16,7 +16,7 @@ export interface Person {
   people: string[];
   email: string;
   message: string;
-  image: string;
+  image: { url: string };
 }
 
 interface PeopleProps {

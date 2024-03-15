@@ -3,7 +3,7 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import { Modal, Button, Avatar } from 'antd';
 import Link from 'next/link';
-import AuthForm from '../../../components/forms/Authform';
+import AuthForm from '../../../components/forms/AuthForm';
 import { UserContext } from '../../../context';
 import { useRouter } from 'next/router';
 import { LoadingOutlined, CameraOutlined } from '@ant-design/icons';
