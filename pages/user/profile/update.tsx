@@ -1,16 +1,20 @@
 import React, { useState, useContext, useEffect } from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
-import { Modal, Button, Avatar } from 'antd';
+import { Modal, Avatar } from 'antd';
 import Link from 'next/link';
 import AuthForm from '../../../components/forms/AuthForm';
 import { UserContext } from '../../../context';
 import { useRouter } from 'next/router';
 import { LoadingOutlined, CameraOutlined } from '@ant-design/icons';
 
+interface Image {
+  url: string;
+}
+
 const ProfileUpdate = () => {
-    const [username, setUsername] = useState("");
-    const [about, setAbout] = useState("");
+  const [username, setUsername] = useState("");
+  const [about, setAbout] = useState("");
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [selectedQuestion, setSelectedQuestion] = useState('');
@@ -22,20 +26,18 @@ const ProfileUpdate = () => {
   const [loading, setLoading] = useState(false);
   const [state, setState] = useContext(UserContext);
   const router = useRouter();
-  const [image, setImage] = useState({});
+  const [image, setImage] = useState<Image | null>(null); // Specify the type of 'image' as Image | null
   const [uploading, setUploading] = useState(false);
 
-  useEffect(()=>{
-  // console.log(state.user)
-    if(state && state.user){
+  useEffect(() => {
+    if (state && state.user) {
       console.log("user from the state=>", state.user)
       setAbout(state.user.about);
       setUsername(state.user.userName);
       setEmail(state.user.email);
       setName(state.user.name);
     }
-    
-  }, [state && state.user])
+  }, [state && state.user]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -54,7 +56,7 @@ const ProfileUpdate = () => {
 
     try {
       setLoading(true);
-      const {data} = await axios.put(
+      const { data } = await axios.put(
         `/profile-update`,
         postData,
         {
@@ -69,8 +71,8 @@ const ProfileUpdate = () => {
       auth.user = data;
       localStorage.setItem("auth", JSON.stringify(auth));
 
-      setState({...state, user: data})
-      
+      setState({ ...state, user: data });
+
       toast.success(data.message, {
         theme: 'colored',
       });
@@ -84,11 +86,9 @@ const ProfileUpdate = () => {
         theme: 'colored',
       });
       console.error('Error making request:', error);
-    } finally {
       setLoading(false);
     }
   };
-
 
   const handleSuccessClose = () => {
     setSuccess(false);
@@ -96,7 +96,7 @@ const ProfileUpdate = () => {
 
   const handleImageUpload = async (e) => {
     e.preventDefault();
-    
+
     const file = e.target.files[0];
 
     const formData = new FormData();
@@ -111,10 +111,9 @@ const ProfileUpdate = () => {
 
       setImage({
         url: response.data.result.secure_url,
-        public_id: response.data.result.public_id
       });
 
-      if(response.data.success) {
+      if (response.data.success) {
         toast.success(response.data.message, {
           theme: 'colored',
         });
@@ -130,12 +129,7 @@ const ProfileUpdate = () => {
       setUploading(false);
 
     }
-    
   }
-
-//   if(state && state.token) {
-//     router.push('/');
-//   };
 
   return (
     <div className="container-fluid p-0">
@@ -164,15 +158,15 @@ const ProfileUpdate = () => {
                       Update account
                     </h2>
                     <label className="form-label d-flex justify-content-center h5">
-                    {image&&image.url ? (
-                    <Avatar size={30} src={image.url} />
-                    ) : uploading ? (
-                        <LoadingOutlined className="text-primary me-2 mb-1" style={{display: uploading ? "inline-block" : "none"}}/> 
-                        ): (
+                      {image && image.url ? (
+                        <Avatar size={30} src={image.url} />
+                      ) : uploading ? (
+                        <LoadingOutlined className="text-primary me-2 mb-1" style={{ display: uploading ? "inline-block" : "none" }} />
+                      ) : (
                         <Avatar size={30} icon={<CameraOutlined />} />
-                        )}
-                    <input  onChange={handleImageUpload} type="file" accept="image/*" hidden/>
-                </label>
+                      )}
+                      <input onChange={handleImageUpload} type="file" accept="image/*" hidden />
+                    </label>
                     <AuthForm
                       handleSubmit={handleSubmit}
                       name={name}

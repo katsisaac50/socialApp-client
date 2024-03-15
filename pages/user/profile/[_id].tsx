@@ -6,12 +6,10 @@ import axios from 'axios';
 import Image from 'next/image';
 import Link from 'next/link';
 import { RollbackOutlined } from '@ant-design/icons';
-// import { Avatar, Card } from 'antd';
 import moment from 'moment';
 import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
 
-const { Meta } = Card;
 interface User {
   _id: string;
   name: string;
@@ -22,12 +20,25 @@ interface User {
   createdAt: string;
   following: Array<string>;
   followers: Array<string>;
+  userName: string;
   // Add more properties as needed
 }
+
+const cardStyle = {
+  width: '500px',
+  transition: 'transform 0.2s, box-shadow 0.2s', // Include box-shadow in transition
+  boxShadow: 'none', // Initially no shadow
+};
+
+const hoverStyle = {
+  transform: 'scale(1.05)',
+  boxShadow: '0 0 10px rgba(0, 0, 0, 0.3)', // Add shadow effect on hover
+};
 
 const Profile = () => {
   const router = useRouter();
   const { _id } = router.query;
+  const [isHovered, setIsHovered] = useState(false);
 
   const [user, setUser] = useState<User | null>(null);
 
@@ -56,8 +67,10 @@ const Profile = () => {
 
   const imageSource = ({photo}) => {
     if(!photo || !photo.data){
+      console.log('photo1', photo)
       return "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
     } else {
+      console.log('photo', photo.data)
       return user.photo.data
     }
   }
@@ -67,36 +80,35 @@ const Profile = () => {
       <div className="pt-5 pb-5">
         
       <Col>
-      <Card hoverable style={{ width: 500 }} cover={<Image src={imageSource(user)} width={500} height={500} alt="Picture of the author" className="img-fluid" />}>
-            <Card.Img variant="top" src="holder.js/100px160" />
+      <Card
+      style={{ ...cardStyle, ...(isHovered ? hoverStyle : null) }}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      >
+            <Card.Img src={imageSource(user)} alt="Picture of the author" className="img-fluid" />
             <Card.Body>
-              <Card.Title>Card title</Card.Title>
+              <Card.Title>{user.name}</Card.Title>
               <Card.Text>
-                This is a longer card with supporting text below as a natural
-                lead-in to additional content. This content is a little bit
-                longer.
+                {user.about}
+              </Card.Text>
+              <Card.Text>
+                {user.email}
+              </Card.Text>
+              <Card.Text>
+                {user.userName}
+              </Card.Text>
+              <Card.Text>
+                {user.following && user.following.length} Following
+              </Card.Text>
+              <Card.Text>
+                {user.followers && user.followers.length} Followers
+              </Card.Text>
+              <Card.Text>
+                Created {user.createdAt && moment(user.createdAt).fromNow()}
               </Card.Text>
             </Card.Body>
           </Card>
         </Col>
-        {/* <Meta
-          avatar={<Avatar src={imageSource(user)} />}
-          title={user.name}
-          description={user.about}
-        />
-        <p className="text-muted pt-2">
-          Joined {moment(user.createdAt).fromNow()}
-        </p>
-        <div className="d-flex justify-content-center">
-          <span className='btn btn-sm'>
-            {user.followers && user.followers.length} Followers
-          </span>
-        </div>
-        <div className="d-flex justify-content-center">
-          <span className='btn btn-sm'>
-            {user.following && user.following.length} Followering
-          </span>
-        </div> */}
       <Link href="/user/dashboard" className='d-flex justify-content-center pt-3'>
         <RollbackOutlined />
       </Link>
