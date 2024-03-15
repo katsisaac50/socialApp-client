@@ -17,16 +17,17 @@ import axios from "axios";
 import { imageSource } from "../../functions/index";
 import Link from "next/link";
 
-interface PostProps {
-  commentsCount?: number;
-  removeComment: (postId: string, comment: any) => Promise<void>;
-  handleDelete: (postId: string) => void;
-  handleLikes: (postId: string) => void;
-  handleComment: (post: any) => void;
-  p?: any;
-}
+// interface PostProps {
+//   commentsCount?: number;
+//   removeComment: (postId: string, comment: any) => Promise<void>;
+//   handleDelete: (postId: string) => void;
+//   handleLikes: (postId: string) => void;
+//   handleComment: (post: any) => void;
+//   p?: any;
+// }
 
-const Post: React.FC<PostProps> = ({
+// const Post: React.FC<PostProps> = ({
+const Post = ({
   commentsCount = 4,
   removeComment,
   handleDelete,

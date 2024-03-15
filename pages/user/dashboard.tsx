@@ -17,6 +17,11 @@ const socket = io(process.env.NEXT_PUBLIC_SOCKET_URL, {
   reconnection: true,
 });
 
+interface Post {
+  _id: string;
+  // Other properties...
+}
+
 const Dashboard = () => {
   const [state, setState] = useContext(UserContext);
   const [content, setContent] = useState("");
@@ -26,7 +31,8 @@ const Dashboard = () => {
   const [like, setLike] = useState(false);
   const [comment, setComment] = useState('');
   const [visible, setVisible] = useState(false);
-  const [currentPost, setCurrentPost] = useState({})
+  // Initialize currentPost with the expected shape
+const [currentPost, setCurrentPost] = useState<Post | null>(null);
   const router = useRouter();
   const { user, people } = state;
 
@@ -340,7 +346,7 @@ const Dashboard = () => {
                 <a className="h6">{state.user.following.length} Following</a>
               </Link>
             )}
-            <People people={state.people} handleFollow={handlefollow} />
+            <People people={state.people} handleFollow={handlefollow} handleUnfollow={() => {}} followers= {state.user && state.user.followers}/>
           </div>
         </div>
         <Modal visible={visible} onCancel={() => setVisible(false)} title="Comment" footer={null}>

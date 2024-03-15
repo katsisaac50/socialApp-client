@@ -106,6 +106,7 @@ const Register = () => {
                     <AuthForm
                       handleSubmit={handleSubmit}
                       name={name}
+                      page={"register"}
                       setName={setName}
                       email={email}
                       setEmail={setEmail}
@@ -120,7 +121,12 @@ const Register = () => {
                       consent={consent}
                       setConsent={setConsent}
                       loading={loading}
+                      about=""
+                      setAbout={() => {}}
+                      username=""
+                      setUsername={() => {}}
                     />
+                    
                     <div className="row">
                       <div className="col">
                         <p className="text-center text-muted mt-5 mb-0">

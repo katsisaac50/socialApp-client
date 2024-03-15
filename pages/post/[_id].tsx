@@ -85,6 +85,10 @@ const PostComment = ({ post }) => {
     }
   };
 
+  // Dummy functions for handleDelete and handleLikes
+  const handleDelete = () => {};
+  const handleLikes = () => {};
+
   return (
     <div className="post-comment">
       <div className="row py-5 text-center">
@@ -93,7 +97,7 @@ const PostComment = ({ post }) => {
         </div>
       </div>
       <div className="post-comment-header">
-        <Post p={posts} commentsCount={100} removeComment={removeComment} handleComment={handleComment} />
+      <Post p={posts} commentsCount={100} removeComment={removeComment} handleComment={handleComment} handleDelete={handleDelete} handleLikes={handleLikes} />
       </div>
       <Link href="/user/dashboard" className="d-flex justify-content-center p-5">
         <RollbackOutlined/>

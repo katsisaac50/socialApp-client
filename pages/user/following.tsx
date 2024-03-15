@@ -10,8 +10,8 @@ import { toast } from "react-toastify";
 
 
 interface Person {
-  id: string;
-  photo: string;
+  _id: string;
+  photo: { data: string };
   name: string;
   createdAt: string; // You may want to use Date or another appropriate type
 }

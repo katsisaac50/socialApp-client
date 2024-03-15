@@ -6,7 +6,7 @@ import axios from 'axios';
 import Image from 'next/image';
 import Link from 'next/link';
 import { RollbackOutlined } from '@ant-design/icons';
-import { Avatar, Card } from 'antd';
+// import { Avatar, Card } from 'antd';
 import moment from 'moment';
 import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';

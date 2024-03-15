@@ -7,6 +7,7 @@ interface PostListProps {
   handleLikes: (postId: string) => void;
   handleComment: (postId: string) => void;
   removeComment: (postId: string, commentId: string) => void;
+  like: boolean;
 }
 
 const PostList: React.FC<PostListProps> = ({
